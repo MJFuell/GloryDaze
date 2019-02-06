@@ -17,30 +17,79 @@ import util
 DELAY = 0.01
 MAXLEN = 80
 
+class RoomBuilder:
+    '''
+    Builds the rooms of the game
+    '''
+    def __init__(self):
+        pass
+
+    def load_room_files(self, dir="./data/rooms/*.json"):
+        files = glob.glob(dir)
+        list = []
+        for file in files:
+            with open(file) as room:
+                room_props = json.load(room)
+                new_room = Room(room_props)
+                util.scroll(DELAY, MAXLEN, "Building Room '{}'".format(new_room.get_name()))
+                list.append(new_room)
+        return list
+
 class Room:
-    def __init__(self, name, long_desc, short_desc):
-        self.name = name
-        self.long_desc = long_desc
-        self.short_desc = short_desc
-        util.scroll(DELAY, MAXLEN, "constructed a room")
+    def __init__(self, props):
+        self.name        = props["name"]         # name of room like Cafeteria
+        self.altnames    = props["altnames"]     # alternate name(s) like Cafe or Lunchroom
+        self.long        = props["long"]         # long description
+        self.short       = props["short"]        # short description
+        self.addl        = props["addl"]         # additional something that happens when in the room
+        self.exits       = props["exits"]        # dictionary of exit directions and name of the room
+        self.visited     = props["visited"]      # STATE - True/False - has player visited the room
+        self.save()                              # save the new item object just initialized
+
+    def save(self):
+        util.save(self)
+
+    def print_me(self):
+        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "Room Info")
+        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "Name:    {}".format(self.get_name()))
+        for altname in self.get_altnames():
+            util.scroll3(DELAY, MAXLEN, "AltName: {}".format(altname))
+        util.scroll3(DELAY, MAXLEN, "Long:    {}".format(self.get_long()))
+        util.scroll3(DELAY, MAXLEN, "Short:   {}".format(self.get_short()))
+        util.scroll3(DELAY, MAXLEN, "Addl:    {}".format(self.get_addl()))
+        exits = self.get_exits()
+        for exit, room in exits.items():
+            util.scroll3(DELAY, MAXLEN, "Exit Direction : {}".format(exit))
+            util.scroll3(DELAY, MAXLEN, "Exit Next Room : {}".format(room))
+            util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, exits[exit]))
+            util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, room))
+        util.scroll3(DELAY, MAXLEN, "Visited:  {}".format(self.get_visited()))
 
     def get_name(self):
         return self.name
 
-    def get_long_desc(self):
-        return self.long_desc
+    def get_altnames(self):
+        return self.altnames
 
-    def get_short_desc(self):
-        return self.short_desc
+    def get_long(self):
+        return self.long
 
-    def print_stats(self):
-        util.scroll(DELAY, MAXLEN, "Room Info")
-        util.scroll(DELAY, MAXLEN, "Name: {}".format(self.name))
-        util.scroll(DELAY, MAXLEN, "Long: {}".format(self.long_desc))
-        util.scroll(DELAY, MAXLEN, "Short: {}".format(self.short_desc))
+    def get_short(self):
+        return self.short
 
-    def save(self):
-        util.save(self)
+    def get_addl(self):
+        return self.addl
+
+    def get_exitdirs(self):
+        return self.exitdirs
+
+    def get_exits(self):
+        return self.exits
+
+    def get_visited(self):
+        return self.visited
 
 class Character:
     def __init__(self, name):
@@ -149,6 +198,17 @@ class Item:
         return self.drop
 
 def main():
+    # util.scroll/3 used here in main() and in RoomBuilder and Room.print_me()
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "RoomBuilder")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    room_builder = RoomBuilder()
+    room_list = RoomBuilder.load_room_files(room_builder)
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "for rooms in room list room.print_me()")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    for room in room_list:
+        room.print_me()
     # util.scroll/3 used here in main() and in ItemBuilder and Item.print_me()
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "ItemBuilder")
