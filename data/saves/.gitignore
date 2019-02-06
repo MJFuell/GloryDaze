@@ -1,0 +1,11 @@
+#
+# a .gitignore to save an empty directory
+# or keep a directory (mostly) empty
+#
+
+# filter everything
+*
+
+# except .gitignore
+!.gitignore
+

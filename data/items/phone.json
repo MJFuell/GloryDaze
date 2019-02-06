@@ -1,0 +1,14 @@
+{
+    "name"          : "phone",
+    "altnames"      : ["cell", "cellphone", "cell phone"],
+    "long"          : "A cell phone with a locked screen. It lacks any branding and gives no clue about its owner.",
+    "short"         : "A locked cell phone.",
+    "start"         : "Main Office",
+    "current"       : "Main Office",
+    "have"          : "You have a cell phone.",
+    "havenot"       : "You don't have a cell phone.",
+    "available"     : "There is a cell phone here.",
+    "take"          : "You take the cell phone because it may be useful later.",
+    "unavailable"   : "You don't see a cell phone here to take.",
+    "drop"          : "You drop the cell phone. I hope it didn't break!"
+}
