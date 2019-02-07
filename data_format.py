@@ -1,12 +1,46 @@
 '''
-data.py
-Description: Data structure classes
-Principal author per project plan: Richard Ratliff
+data_format.py
+Data format development for GloryDaze Text Adventure
+by: Richard Ratliff
 
 CS467
 Winter 2019
 Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
-GloryDaze Text Adventure
+
+class RoomBuilder:
+    Build rooms of the game.
+    Read json files in rooms data directory and create a Room object from each.
+class Room:
+    Room object model. Attributes and methods for each room.
+    Room data attributes are:
+        # name of room like Cafeteria
+        # alternate name(s) like Cafe or Lunchroom
+        # long description
+        # short description
+        # additional something that happens when in the room
+        # dictionary of exit directions and name of the room
+        # STATE - True/False - has player visited the room
+class ItemBuilder:
+    Build items of the game.
+    Read json files in items data directory and create an Item object from each.
+class Item:
+    Item object model. Attributes and methods for each item.
+    Item data attributes are:
+        # name of item like phone
+        # alternate name(s) like cell and cellphone
+        # long description
+        # short description
+        # location (room) at the start of a new game
+        # text to print when player acquires item
+        # text to print when player looks and item is available
+        # text to print when player takes the item
+        # text to print when player drops the item
+        # STATE - current location is start unless moved by player
+        # ERROR - player tried to use item they do not have
+        # ERROR - player tried to take item when unavailable
+main() contains test code printing out the objects created.
+    when imported into another python module main() will not execute.
+    main() illustrates how to use the classes and some util functions.
 '''
 
 import glob
@@ -14,16 +48,19 @@ import json
 
 import util
 
-DELAY = 0.01
+DELAY = 0.005
 MAXLEN = 80
 
 class RoomBuilder:
     '''
-    Builds the rooms of the game
+    Build rooms of the game
     '''
     def __init__(self):
         pass
 
+    '''
+    Read json files in rooms data directory and create a Room object from each.
+    '''
     def load_room_files(self, dir="./data/rooms/*.json"):
         files = glob.glob(dir)
         list = []
@@ -31,7 +68,7 @@ class RoomBuilder:
             with open(file) as room:
                 room_props = json.load(room)
                 new_room = Room(room_props)
-                util.scroll(DELAY, MAXLEN, "Building Room '{}'".format(new_room.get_name()))
+                util.scroll(DELAY, MAXLEN, "Building Room '{}' from {}".format(new_room.get_name(), file))
                 list.append(new_room)
         return list
 
@@ -63,7 +100,7 @@ class Room:
         for exit, room in exits.items():
             util.scroll3(DELAY, MAXLEN, "Exit Direction : {}".format(exit))
             util.scroll3(DELAY, MAXLEN, "Exit Next Room : {}".format(room))
-            util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, exits[exit]))
+            # util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, exits[exit])) # ok but ugly syntax
             util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, room))
         util.scroll3(DELAY, MAXLEN, "Visited:  {}".format(self.get_visited()))
 
@@ -91,28 +128,16 @@ class Room:
     def get_visited(self):
         return self.visited
 
-class Character:
-    def __init__(self, name):
-        self.name = name
-        util.scroll(DELAY, MAXLEN, "constructed a character")
-
-    def get_name(self):
-        return self.name
-
-    def print_stats(self):
-        util.scroll(DELAY, MAXLEN, "Character Info")
-        util.scroll(DELAY, MAXLEN, "Name: {}".format(self.name))
-
-    def save(self):
-        util.save(self)
-
 class ItemBuilder:
     '''
-    Builds the items that have an effect on game outcome
+    Build items that have an effect on game outcome
     '''
     def __init__(self):
         pass
 
+    '''
+    Read all json files in the items data directory and create Item objects
+    '''
     def load_item_files(self, dir="./data/items/*.json"):
         files = glob.glob(dir)
         list = []
@@ -120,7 +145,7 @@ class ItemBuilder:
             with open(file) as item:
                 item_props = json.load(item)
                 new_item = Item(item_props)
-                util.scroll(DELAY, MAXLEN, "Building Item '{}'".format(new_item.get_name()))
+                util.scroll(DELAY, MAXLEN, "Building Item '{}' from {}".format(new_item.get_name(), file))
                 list.append(new_item)
         return list
 
@@ -198,32 +223,71 @@ class Item:
         return self.drop
 
 def main():
-    # util.scroll/3 used here in main() and in RoomBuilder and Room.print_me()
+    '''
+    main() handles the following test code printing out the objects created.
+    when imported into another python module main() will not execute.
+    main() illustrates how to use the classes and some util functions.
+    '''
+
+    # util.scroll() and util.scroll3() used here in main() and in RoomBuilder and Room.print_me()
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "RoomBuilder")
     util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    ''' Make a RoomBuilder object and use it to load json data files to get a list of Room objects '''
     room_builder = RoomBuilder()
     room_list = RoomBuilder.load_room_files(room_builder)
+
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "for rooms in room list room.print_me()")
     util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    ''' Loop through all the rooms to do things like print_me() '''
     for room in room_list:
         room.print_me()
-    # util.scroll/3 used here in main() and in ItemBuilder and Item.print_me()
+
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "for rooms in room list print room.get_stuff() ..................................")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    # just print instead of scroll to speed things up
+    ''' Loop through all the rooms and use get methods '''
+    for room in room_list:
+        print("printing ... room info ...")
+        print("Name:   ", room.get_name())
+        print("Long:   ", room.get_long())
+        print("Short:  ", room.get_short())
+        print("Addl:   ", room.get_addl())
+        exits = room.get_exits()
+        for exit, nextroom in exits.items():
+            print("Exit Direction : {}".format(exit))
+            print("Exit Next Room : {}".format(nextroom))
+            print("{} : {}".format(exit, nextroom))
+        print("Visited: ", room.get_visited())
+
+    # util.scroll() and util.scroll3() used here in main() and in ItemBuilder and Item.print_me()
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "ItemBuilder")
     util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    ''' Make an ItemBuilder object and use it to load json data files to get a list of Item objects '''
     ib = ItemBuilder()
     item_list = ItemBuilder.load_item_files(ib)
+
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "for items in item list item.print_me()")
     util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    ''' Loop through all the items to do things like print_me() '''
     for item in item_list:
         item.print_me()
+
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "for items in item list print item.get_stuff() ..................................")
     util.scroll(DELAY, MAXLEN, "-" * 80)
-    # just print the reset to speed things up
+
+    # just print instead of scroll to speed things up
+    ''' Loop through all the items and use get methods '''
     for item in item_list:
         print("printing ... item info ...")
         print("Name:   ", item.get_name())
