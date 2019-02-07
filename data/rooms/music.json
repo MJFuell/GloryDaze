@@ -1,0 +1,10 @@
+{
+    "name"     : "Music Room",
+    "altnames" : ["music", "band room"],
+    "long"     : "Music room full of musical instruments.",
+    "short"    : "Music room.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "south"      : "Hallway 2"
+                 },
+    "visited"  : false
+}

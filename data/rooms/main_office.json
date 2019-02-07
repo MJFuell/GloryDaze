@@ -1,10 +1,9 @@
 {
     "name"     : "Main Office",
-    "altnames" : ["main", "office"],
-    "long"     : "You have entered the very tidy and large principal office.  There are diplomas, certifications, and academic awards earned by the schools covering the walls.  There are many recent and older class pictures on the wall and on shelves.  There is a big, well organized desk with a big comfy executive chair behind it.  There are two large, black, plush chairs facing the desk.  There is the inevitable computer and phone on the desk, along with one box of Kleenex.",
-    "short"    : "The large and tidy principal office with awards and pictures on the wall.",
+    "altnames" : ["main", "the office"],
+    "long"     : "You have entered the large main office room.  The main entry/exit doors of the school are on the north.  To the east is Hallway 1.  Separating those from the office area is a big L shaped counter that is four foot tall.  There are desks and computers visible behind the counter.  There is a notebook to sign in and to sign out.  There is a phone behind the counter.  The principal office is to northwest and the counselor office to the southwest.",
+    "short"    : "The main office with a big L shaped counter.",
     "addl"     : "A train whistle sounds across the lonely field",
-    "exitdirs" : ["east","north","northwest","southwest"],
     "exits"    : {  "east"      : "Hallway 1",
                     "north"     : "Exit",
                     "northwest" : "Principal Office",

@@ -1,0 +1,13 @@
+{
+    "name"     : "Hallway 1",
+    "altnames" : ["hall 1", "north hall"],
+    "long"     : "You are in a wide, brightly lit hallway.  At the north end is the detention room.  On the west is the main office.  Next to it are the trophy cases with many awards and pictures.  Across on the east side is the janitor office, also known as the broom closet.  The library is to the south.  There is a banner here about an upcoming event.",
+    "short"    : "A wide bright hall with trophies and banners.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "north"     : "Detention",
+                    "south"     : "Library",
+                    "east"      : "Janitor Office",
+                    "west"      : "Main Office"
+                 },
+    "visited"  : false
+}

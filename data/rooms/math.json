@@ -1,0 +1,10 @@
+{
+    "name"     : "Math Room",
+    "altnames" : ["math"],
+    "long"     : "The math classroom with calculators and slide rules.",
+    "short"    : "A math classroom.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "north"     : "Hallway 2"
+                 },
+    "visited"  : false
+}

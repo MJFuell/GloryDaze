@@ -1,0 +1,10 @@
+{
+    "name"     : "Chemistry",
+    "altnames" : ["chem"],
+    "long"     : "Chemistry room with desks and lab stations with chemicals, beakers, and bunsen burners.",
+    "short"    : "Chemistry room.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "north"     : "Hallway 2"
+                 },
+    "visited"  : false
+}

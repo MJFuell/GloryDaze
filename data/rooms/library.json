@@ -1,0 +1,12 @@
+{
+    "name"     : "Library",
+    "altnames" : ["study hall"],
+    "long"     : "The library with wall shelves full of books and quiet tables in the center.",
+    "short"    : "The library.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "north"     : "Hallway 1",
+                    "west"      : "Hallway 2",
+                    "east"      : "Hallway 3"
+                 },
+    "visited"  : false
+}
