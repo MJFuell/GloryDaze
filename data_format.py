@@ -7,37 +7,56 @@ CS467
 Winter 2019
 Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 
+class Player:
+    Player object and methods. There is only one player object.
+    Data attributes are:
+        name # name of the player starting with Player1
+        location # location of the player on the map starting in Detention.
+        items # items collected in inventory
+class CharacterBuilder:
+    Build Character objects for the game from JSON files found in a directory.
+    Read all json files in the chars data directory and create Character objects.
+    Returns a list of Character objects.
+class Character:
+    Character object model. Attributes and methods for each character.
+    Data attributes are:
+        name # name of item like phone
+        long # long description
+        short # short description
+        hint # hint to share with player
 class RoomBuilder:
-    Build rooms of the game.
+    Build Room objects for the game from JSON files found in a directory.
     Read json files in rooms data directory and create a Room object from each.
+    Returns a list of Room objects.
 class Room:
     Room object model. Attributes and methods for each room.
-    Room data attributes are:
-        # name of room like Cafeteria
-        # alternate name(s) like Cafe or Lunchroom
-        # long description
-        # short description
-        # additional something that happens when in the room
-        # dictionary of exit directions and name of the room
-        # STATE - True/False - has player visited the room
+    Data attributes are:
+        name # name of room like Cafeteria
+        altnames # alternate name(s) like Cafe or Lunchroom
+        long # long description
+        short # short description
+        addl # additional something that happens when in the room
+        exits # dictionary of exit directions and name of the room
+        visited # STATE - True/False - has player visited the room
 class ItemBuilder:
-    Build items of the game.
+    Build Item objects for the game from JSON files found in a directory.
     Read json files in items data directory and create an Item object from each.
+    Returns a list of Item objects.
 class Item:
     Item object model. Attributes and methods for each item.
-    Item data attributes are:
-        # name of item like phone
-        # alternate name(s) like cell and cellphone
-        # long description
-        # short description
-        # location (room) at the start of a new game
-        # text to print when player acquires item
-        # text to print when player looks and item is available
-        # text to print when player takes the item
-        # text to print when player drops the item
-        # STATE - current location is start unless moved by player
-        # ERROR - player tried to use item they do not have
-        # ERROR - player tried to take item when unavailable
+    Data attributes are:
+        name # name of item like phone
+        altnames # alternate name(s) like cell and cellphone
+        long # long description
+        short # short description
+        start # location (room) at the start of a new game
+        have # text to print when player acquires item
+        available # text to print when player looks and item is available
+        take # text to print when player takes the item
+        drop # text to print when player drops the item
+        current # STATE - current location of item, will be start unless moved by player
+        havenot # ERROR - player tried to use item they do not have
+        unavailable # ERROR - player tried to take item when unavailable
 main() contains test code printing out the objects created.
     when imported into another python module main() will not execute.
     main() illustrates how to use the classes and some util functions.
@@ -53,13 +72,14 @@ MAXLEN = 80
 
 class RoomBuilder:
     '''
-    Build rooms of the game
+    Build Room objects for the game from JSON files found in a directory.
     '''
     def __init__(self):
         pass
 
     '''
     Read json files in rooms data directory and create a Room object from each.
+    Returns a list of Room objects.
     '''
     def load_room_files(self, dir="./data/rooms/*.json"):
         files = glob.glob(dir)
@@ -130,13 +150,14 @@ class Room:
 
 class ItemBuilder:
     '''
-    Build items that have an effect on game outcome
+    Build Item objects for the game from JSON files found in a directory.
     '''
     def __init__(self):
         pass
 
     '''
-    Read all json files in the items data directory and create Item objects
+    Read all json files in the items data directory and create Item objects.
+    Returns a list of Item objects.
     '''
     def load_item_files(self, dir="./data/items/*.json"):
         files = glob.glob(dir)
@@ -222,6 +243,102 @@ class Item:
     def get_drop(self):
         return self.drop
 
+class CharacterBuilder:
+    '''
+    Build Character objects for the game from JSON files found in a directory.
+    '''
+    def __init__(self):
+        pass
+
+    '''
+    Read all json files in the chars data directory and create Character objects.
+    Returns a list of Character objects.
+    '''
+    def load_char_files(self, dir="./data/chars/*.json"):
+        files = glob.glob(dir)
+        list = []
+        for file in files:
+            with open(file) as char:
+                char_props = json.load(char)
+                new_char = Character(char_props)
+                util.scroll(DELAY, MAXLEN, "Building Character '{}' from {}".format(new_char.get_name(), file))
+                list.append(new_char)
+        return list
+
+class Character:
+    def __init__(self, props):
+        self.name        = props["name"]         # name of item like phone
+        self.long        = props["long"]         # long description
+        self.short       = props["short"]        # short description
+        self.hint        = props["hint"]         # hint to share with player
+        self.save()                              # save the new object just initialized
+
+    def save(self):
+        util.save(self)
+
+    def print_me(self):
+        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "Character Info")
+        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "Name:  {}".format(self.get_name()))
+        util.scroll3(DELAY, MAXLEN, "Long:  {}".format(self.get_long()))
+        util.scroll3(DELAY, MAXLEN, "Short: {}".format(self.get_short()))
+        util.scroll3(DELAY, MAXLEN, "Hint:  {}".format(self.get_hint()))
+
+    def get_name(self):
+        return self.name
+
+    def get_long(self):
+        return self.long
+
+    def get_short(self):
+        return self.short
+
+    def get_hint(self):
+        return self.hint
+
+class Player:
+    def __init__(self):
+        self.name        = "Player1"
+        self.location    = "Detention"
+        self.items       = []
+        # self.timeleft    = props["timeleft"]
+        self.save()                              # save the new object just initialized
+
+    def save(self):
+        util.save(self)
+
+    def print_me(self):
+        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "Player Info")
+        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "Name:     {}".format(self.get_name()))
+        util.scroll3(DELAY, MAXLEN, "Location: {}".format(self.get_location()))
+        for item in self.get_items():
+            util.scroll3(DELAY, MAXLEN, "Item:     {}".format(item))
+
+    def get_name(self):
+        return self.name
+
+    def set_name(self, value):
+        self.name = value
+
+    def get_location(self):
+        return self.location
+
+    def set_location(self, value):
+        self.location = value
+
+    def get_items(self):
+        return self.items
+
+    def add_item(self, value):
+        self.items.append(value)
+
+    #TODO def drop_item(self, value):
+    #    self.items.append(value)
+
+
 def main():
     '''
     main() handles the following test code printing out the objects created.
@@ -229,7 +346,62 @@ def main():
     main() illustrates how to use the classes and some util functions.
     '''
 
-    # util.scroll() and util.scroll3() used here in main() and in RoomBuilder and Room.print_me()
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "Player defaults")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    player = Player()
+    player.print_me()
+
+    print("---- ")
+    print("---- Player sets and adds")
+    print("---- ")
+
+    player.set_name("Pat")
+    player.set_location("Main Office")
+    player.add_item("metronome")
+    player.add_item("calculator")
+    player.add_item("master key")
+
+    player.print_me()
+
+    print("---- ")
+    print("---- printing ... player info ...")
+    print("---- ")
+    print("Name:    ", player.get_name())
+    print("Location:", player.get_location())
+    for item in player.get_items():
+        print("Item:    ", item)
+
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "CharacterBuilder")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    ''' Make a CharacterBuilder object and use it to load json data files to get a list of Character objects '''
+    char_builder = CharacterBuilder()
+    character_list = CharacterBuilder.load_char_files(char_builder)
+
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "for characters in character list character.print_me()")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    ''' Loop through all the characters to do things like print_me() '''
+    for character in character_list:
+        character.print_me()
+
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+    util.scroll(DELAY, MAXLEN, "for chars in char list print char.get_stuff() ..................................")
+    util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    # just print instead of scroll to speed things up
+    ''' Loop through all the characters and use get methods '''
+    for char in character_list:
+        print("printing ... character info ...")
+        print("Name:   ", char.get_name())
+        print("Long:   ", char.get_long())
+        print("Short:  ", char.get_short())
+        print("Hint:   ", char.get_hint())
+
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "RoomBuilder")
     util.scroll(DELAY, MAXLEN, "-" * 80)
@@ -265,14 +437,13 @@ def main():
             print("{} : {}".format(exit, nextroom))
         print("Visited: ", room.get_visited())
 
-    # util.scroll() and util.scroll3() used here in main() and in ItemBuilder and Item.print_me()
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "ItemBuilder")
     util.scroll(DELAY, MAXLEN, "-" * 80)
 
     ''' Make an ItemBuilder object and use it to load json data files to get a list of Item objects '''
-    ib = ItemBuilder()
-    item_list = ItemBuilder.load_item_files(ib)
+    item_builder = ItemBuilder()
+    item_list = ItemBuilder.load_item_files(item_builder)
 
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "for items in item list item.print_me()")
