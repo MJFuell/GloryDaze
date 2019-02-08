@@ -1,0 +1,10 @@
+{
+    "name"     : "Computer Lab",
+    "altnames" : ["Lab"],
+    "long"     : "Lab room with computers on desks throughout.",
+    "short"    : "Computer lab with computers.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "north"     : "Library"
+                 },
+    "visited"  : false
+}

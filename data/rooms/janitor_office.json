@@ -1,0 +1,13 @@
+{
+    "name"     : "Janitor Office",
+    "altnames" : ["custodian", "cleaning"],
+    "long"     : "Janitor Office of Sanitary Science.",
+    "short"    : "Custodial Arts.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "east"      : "Hallway 1",
+                    "north"     : "Exit",
+                    "northwest" : "Principal Office",
+                    "southwest" : "Counselor Office"
+                 },
+    "visited"  : false
+}

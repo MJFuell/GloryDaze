@@ -1,0 +1,13 @@
+{
+    "name"     : "Main Office",
+    "altnames" : ["main", "the office"],
+    "long"     : "You have entered the large main office room.  The main entry/exit doors of the school are on the north.  To the east is Hallway 1.  Separating those from the office area is a big L shaped counter that is four foot tall.  There are desks and computers visible behind the counter.  There is a notebook to sign in and to sign out.  There is a phone behind the counter.  The principal office is to northwest and the counselor office to the southwest.",
+    "short"    : "The main office with a big L shaped counter.",
+    "addl"     : "A train whistle sounds across the lonely field",
+    "exits"    : {  "east"      : "Hallway 1",
+                    "north"     : "Exit",
+                    "northwest" : "Principal Office",
+                    "southwest" : "Counselor Office"
+                 },
+    "visited"  : false
+}
