@@ -7,54 +7,53 @@ import data_format as DF
 
 
 class GameState:
-    #Player
-    player = 0
+	#Player
+	player = 0
 
-    #Map
-    room_list = None
-    current_room = None
+	#Map
+	room_list = None
+	current_room = None
 
-    #conditions
-    win = 0
-    lose = 0
-    turnCount = 0
+	#conditions
+	win = 0
+	lose = 0
+	turnCount = 0
 
-    #Initializer
-    def __init__(self):
-        pass
+	#Initializer
+	def __init__(self):
+		pass
 
 
 def GameLoop(GS):
-    """
-    "Gaming Loop" which loops for user input and attempts to execute it.  
-    """
-    
-    uInput = 0
-    while uInput != 'q':
-        uInput = raw_input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
+	"""
+	"Gaming Loop" which loops for user input and attempts to execute it.  
+	"""
+	uInput = 0
+	while uInput != 'q':
+		uInput = input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
 
 
-        # ---------------------------------------------------------------------------------------------------------------------------------------
-        #PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
-        for x in GS.room_list:
-            if uInput == x.name:
-                GS.current_room = x
-                print('Moved to ' + GS.current_room.get_name())
-        
-	if uInput == 'view':
-		print(GS.current_room.get_exits())
+        	# ---------------------------------------------------------------------------------------------------------------------------------------
+        	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
+		for x in GS.room_list:
+			if uInput == x.name:
+				GS.current_room = x
+				print('Moved to ' + GS.current_room.get_name())
+
+		if uInput == 'view':
+			print(GS.current_room.get_exits())
 	
             
-        # ---------------------------------------------------------------------------------------------------------------------------------------
+        	# ---------------------------------------------------------------------------------------------------------------------------------------
 
-        #End of turn maintenance
-        if GS.win == 1:
-            pass
-        elif GS.lose == 1:
-            pass
-        GS.turnCount += GS.turnCount
+		#End of turn maintenance
+		if GS.win == 1:
+			pass
+		elif GS.lose == 1:
+			pass
+		GS.turnCount += GS.turnCount
         
-        print('End of turn.')
+		print('End of turn.')
 
 
 def RunGame(type):
@@ -124,7 +123,7 @@ def RunGame(type):
         time.sleep(delay + 1)
         
         print('My... My name?  Its....')
-        name = raw_input('>')
+        name = input('>')
         gamestate.player.set_name(name)
         time.sleep(delay)
         
