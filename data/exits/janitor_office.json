@@ -1,11 +1,5 @@
 {
     "name"     : "Janitor Office",
-    "altnames" : ["custodian", "cleaning"],
     "long"     : "A neat and tidy office, you feel a little cramped in it because it is very small. There is a desk with a chair behind it. There is a coat rack with overalls hanging on it. The desk has lots of papers in nice neat organized piles, there is a picture frame on the desk of a woman holding two kids smiling. There is a calendar on the wall with the days that have already past crossed out.",
-    "short"    : "A small, neat, and tidy office. This clearly belongs to someone who loves his family.",
-    "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "west"      : "Hallway 1",
-                    "east"      : "Supply Room"
-                 },
-    "visited"  : false
+    "short"    : "A small, neat, and tidy office. This clearly belongs to someone who loves his family."
 }
