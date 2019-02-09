@@ -6,8 +6,8 @@
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "east"      : "Library",
                     "south"     : "Chemistry",
-                    "southwest" : "Music Room",
-                    "northwest" : "Math Room"
+                    "southwest" : "Music",
+                    "northwest" : "Math"
                  },
     "visited"  : false
 }
