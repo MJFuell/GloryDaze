@@ -1,3 +1,18 @@
+'''
+util.py
+utility functions generally helpful for GloryDaze Text Adventure.
+started during data format development debug and test.
+by: Richard Ratliff
+
+CS467
+Winter 2019
+Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+
+main() contains some test code for some of the utility functions.
+    when imported into another python module main() will not execute.
+    main() illustrates how to use the utility functions.
+'''
+
 import pickle
 import sys
 import textwrap
@@ -6,13 +21,18 @@ import time
 DELAY = 0.01
 MAXLEN = 80
 
+''' accepts text especially large text and will textwrap up to max_length. '''
+''' wraps scroll2() to eliminate its awkward syntax '''
 def scroll3(delay, max_length, printout):
     scroll2(DELAY, MAXLEN, textwrap.wrap(printout, MAXLEN))
 
+''' expects list of pre-wrapped text of max_length or less. '''
+''' wraps scroll() to aid textwrap but resulted in awkward syntax. '''
 def scroll2(delay, max_length, printout):
     for wrapped_text in printout:
         scroll(DELAY, MAXLEN, wrapped_text)
 
+''' accepts text to brute force wrap at max_length on white space. '''
 def scroll(delay, max_length, printout):
     count = 0
     for character in printout:
@@ -27,6 +47,7 @@ def scroll(delay, max_length, printout):
     sys.stdout.write('\n')
     sys.stdout.flush()
 
+''' save objects in order to save the game to restart later '''
 def save(object):
     filename = "./data/saves/" + object.get_name() + ".pkl"
     #print("object = ", object.get_name())
@@ -34,6 +55,7 @@ def save(object):
     with open(filename, 'wb') as output:
         pickle.dump(object, output, pickle.HIGHEST_PROTOCOL)
 
+''' load objects in order to resume game '''
 def load(object):
     filename = "./data/saves/" + object.get_name() + ".pkl"
     #print("object = ", object.get_name())
