@@ -5,61 +5,7 @@ by: Richard Ratliff
 
 CS467
 Winter 2019
-Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
-
-class Player:
-    Player object and methods. There is only one player object.
-    Data attributes are:
-        name # name of the player starting with Player1
-        location # location of the player on the map starting in Detention.
-        items # items collected in inventory
-class CharacterBuilder:
-    Build Character objects for the game from JSON files found in a directory.
-    Read all json files in the chars data directory and create Character objects.
-    Returns a list of Character objects.
-class Character:
-    Character object model. Attributes and methods for each character.
-    Data attributes are:
-        name # name of item like phone
-        long # long description
-        short # short description
-        hint # hint to share with player
-class RoomBuilder:
-    Build Room objects for the game from JSON files found in a directory.
-    Read json files in rooms data directory and create a Room object from each.
-    Returns a list of Room objects.
-class Room:
-    Room object model. Attributes and methods for each room.
-    Data attributes are:
-        name # name of room like Cafeteria
-        altnames # alternate name(s) like Cafe or Lunchroom
-        long # long description
-        short # short description
-        addl # additional something that happens when in the room
-        exits # dictionary of exit directions and name of the room
-        visited # STATE - True/False - has player visited the room
-class ItemBuilder:
-    Build Item objects for the game from JSON files found in a directory.
-    Read json files in items data directory and create an Item object from each.
-    Returns a list of Item objects.
-class Item:
-    Item object model. Attributes and methods for each item.
-    Data attributes are:
-        name # name of item like phone
-        altnames # alternate name(s) like cell and cellphone
-        long # long description
-        short # short description
-        start # location (room) at the start of a new game
-        have # text to print when player acquires item
-        available # text to print when player looks and item is available
-        take # text to print when player takes the item
-        drop # text to print when player drops the item
-        current # STATE - current location of item, will be start unless moved by player
-        havenot # ERROR - player tried to use item they do not have
-        unavailable # ERROR - player tried to take item when unavailable
-main() contains test code printing out the objects created.
-    when imported into another python module main() will not execute.
-    main() illustrates how to use the classes and some util functions.
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 '''
 
 import glob
@@ -70,16 +16,19 @@ import util
 DELAY = 0.005
 MAXLEN = 80
 
+'''
+Build Room objects for the game from JSON files found in a directory.
+Read json files in rooms data directory and create a Room object from each.
+Return a list of Room objects.
+'''
 class RoomBuilder:
-    '''
-    Build Room objects for the game from JSON files found in a directory.
-    '''
+
     def __init__(self):
         pass
 
     '''
     Read json files in rooms data directory and create a Room object from each.
-    Returns a list of Room objects.
+    Return a list of Room objects.
     '''
     def load_room_files(self, dir="./data/rooms/*.json"):
         files = glob.glob(dir)
@@ -92,6 +41,9 @@ class RoomBuilder:
                 list.append(new_room)
         return list
 
+'''
+Room object model. Attributes and methods for each room.
+'''
 class Room:
     def __init__(self, props):
         self.name        = props["name"]         # name of room like Cafeteria
@@ -148,16 +100,19 @@ class Room:
     def get_visited(self):
         return self.visited
 
+'''
+Build Item objects for the game from JSON files found in a directory.
+Read json files in items data directory and create an Item object from each.
+Return a list of Item objects.
+'''
 class ItemBuilder:
-    '''
-    Build Item objects for the game from JSON files found in a directory.
-    '''
+
     def __init__(self):
         pass
 
     '''
     Read all json files in the items data directory and create Item objects.
-    Returns a list of Item objects.
+    Return a list of Item objects.
     '''
     def load_item_files(self, dir="./data/items/*.json"):
         files = glob.glob(dir)
@@ -170,6 +125,9 @@ class ItemBuilder:
                 list.append(new_item)
         return list
 
+'''
+Item object model. Attributes and methods for each item.
+'''
 class Item:
     def __init__(self, props):
         self.name        = props["name"]         # name of item like phone
@@ -243,16 +201,19 @@ class Item:
     def get_drop(self):
         return self.drop
 
+'''
+Build Character objects for the game from JSON files found in a directory.
+Read all json files in the chars data directory and create Character objects.
+Return a list of Character objects.
+'''
 class CharacterBuilder:
-    '''
-    Build Character objects for the game from JSON files found in a directory.
-    '''
+
     def __init__(self):
         pass
 
     '''
     Read all json files in the chars data directory and create Character objects.
-    Returns a list of Character objects.
+    Return a list of Character objects.
     '''
     def load_char_files(self, dir="./data/chars/*.json"):
         files = glob.glob(dir)
@@ -265,6 +226,9 @@ class CharacterBuilder:
                 list.append(new_char)
         return list
 
+'''
+Character object model. Attributes and methods for each character.
+'''
 class Character:
     def __init__(self, props):
         self.name        = props["name"]         # name of item like phone
@@ -297,13 +261,17 @@ class Character:
     def get_hint(self):
         return self.hint
 
+'''
+Player object and methods. There is only one player object.
+There is no builder to create Players.
+'''
 class Player:
     def __init__(self):
-        self.name        = "Player1"
-        self.location    = "Detention"
-        self.items       = []
+        self.name        = "Player1"   # name of the player starting with Player1
+        self.location    = "Detention" # location of the player on the map starting in Detention.
+        self.items       = []          # items collected in inventory
         # self.timeleft    = props["timeleft"]
-        self.save()                              # save the new object just initialized
+        self.save()                    # saves the new object just initialized
 
     def save(self):
         util.save(self)
@@ -339,12 +307,12 @@ class Player:
     #    self.items.append(value)
 
 
+'''
+main() handles the following test code printing out the objects created.
+when imported into another python module main() will not execute.
+main() illustrates how to use the classes and some util functions.
+'''
 def main():
-    '''
-    main() handles the following test code printing out the objects created.
-    when imported into another python module main() will not execute.
-    main() illustrates how to use the classes and some util functions.
-    '''
 
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "Player defaults")
