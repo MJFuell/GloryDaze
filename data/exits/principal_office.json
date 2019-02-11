@@ -1,5 +1,5 @@
 {
-    "name"     : "Principal Office",
-    "long"     : "You have entered the very tidy and large principal office.  There are diplomas, certifications, and academic awards earned by the schools covering the walls.  There are many recent and older class pictures on the wall and on shelves.  There is a big, well organized desk with a big comfy executive chair behind it.  There are two large, black, plush chairs facing the desk.  There is the inevitable computer and phone on the desk, along with one box of Kleenex.",
-    "short"    : "The large and tidy principal office with awards and pictures on the wall."
+    "name"  : "Principal Office",
+    "long"  : "A large office with diplomas, certifications, awards and pictures on the wall is to the ",
+    "short" : "A large office with awards is to the "
 }
