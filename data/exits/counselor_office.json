@@ -1,5 +1,5 @@
 {
-    "name"     : "Counselor Office",
-    "long"     : "You have entered the small and cramped counselor office.  There are books, piles of paper, boxes of Kleenex, and two ugly brown chairs facing a desk.  A bottle of Advil is on the counselor desk.  There is a computer and phone on the desk.",
-    "short"    : "The cramped counselor office with boxes of Kleenex and Advil."
+    "name"  : "Counselor Office",
+    "long"  : "A small cramped office with boxes of Kleenex is to the ",
+    "short" : "A small cramped office is to the "
 }

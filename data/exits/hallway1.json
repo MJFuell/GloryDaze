@@ -1,5 +1,5 @@
 {
-    "name"     : "Hallway 1",
-    "long"     : "You are in a wide, brightly lit hallway.  At the north end is the detention room.  On the west is the main office.  Next to it are the trophy cases with many awards and pictures.  Across on the east side is the janitor office, also known as the broom closet.  The library is to the south.  There is a banner here about an upcoming event.",
-    "short"    : "A wide bright hall with trophies and banners.",
+    "name"  : "Hallway 1",
+    "long"  : "You see trophies and banners in a wide, bright area to the ",
+    "short" : "There are trophies to the "
 }

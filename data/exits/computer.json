@@ -1,6 +1,5 @@
 {
-    "name"     : "Computer Lab",
-    "long"     : "a room off of the library this room has windows on three of the four sides looking out onto the campus grounds. The fourth has a large dry erase board on it. There are several rows of tables with computers both PC’s and Mac’s in nice neat rows on them. There are chairs behind each computer for a student to sit and use the computer. At the end of each row there is a printer for each set of computers.",
-    "short"    : "a moderately sized room with rows of computers and printers. There are lots of windows here looking out onto campus.",
-
+    "name"  : "Computer Lab",
+    "long"  : "A room with rows of computers and lots of windows is to the ",
+    "short" : "A computer filled room is to the "
 }

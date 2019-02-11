@@ -1,6 +1,5 @@
 {
     "name"  : "Cafeteria",
-    "long"  : "A massive room with tables and chairs and large windows smelling of old food is to the south.",
-    "short" : "South is a room smelling of old food.",
-
+    "long"  : "A massive room with large windows smelling of old food is to the ",
+    "short" : "A room smelling of old food is to the "
 }

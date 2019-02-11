@@ -1,5 +1,5 @@
 {
-    "name"     : "Hallway 2",
-    "long"     : "You are in a wide, brightly lit hallway.  On the south side is the chemistry room.  At the end of the hall on the south is the music room and across on the north is the math room.  The library is at the east end.  There are lockers all along the walls of the hall.  There is a water fountain here.",
-    "short"    : "A wide bright hall with lockers and classrooms."
+    "name"  : "Hallway 2",
+    "long"  : "You see a water fountain and lockers in a wide, bright area to the ",
+    "short" : "There are lockers to the "
 }
