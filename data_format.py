@@ -13,7 +13,7 @@ import json
 
 import util
 
-DELAY = 0.005
+DELAY = 0.001
 MAXLEN = 80
 
 '''
@@ -37,9 +37,40 @@ class ExitBuilder:
             with open(file) as exit:
                 exit_props = json.load(exit)
                 new_exit = Exit(exit_props)
-                util.scroll(DELAY, MAXLEN, "Building Exit '{}' from {}".format(new_exit.get_name(), file))
+                util.scroll(DELAY, MAXLEN, "Created Exit '{}' from {}".format(new_exit.get_name(), file))
                 list.append(new_exit)
         return list
+
+'''
+Exit object model. Attributes and methods for each exit of a room.
+'''
+class Exit:
+
+    def __init__(self, props):
+        self.name  = props["name"]         # name of exit
+        self.long  = props["long"]         # long description
+        self.short = props["short"]        # short description
+        self.save()                        # save the new object just initialized
+
+    def save(self):
+        util.save(self)
+
+    def print_me(self):
+        util.scroll3(DELAY, MAXLEN, "---------")
+        util.scroll3(DELAY, MAXLEN, "Exit Info")
+        util.scroll3(DELAY, MAXLEN, "---------")
+        util.scroll3(DELAY, MAXLEN, "Name:    {}".format(self.get_name()))
+        util.scroll3(DELAY, MAXLEN, "Long:    {}".format(self.get_long()))
+        util.scroll3(DELAY, MAXLEN, "Short:   {}".format(self.get_short()))
+
+    def get_name(self):
+        return self.name
+
+    def get_long(self):
+        return self.long
+
+    def get_short(self):
+        return self.short
 
 '''
 Build Room objects for the game from JSON files found in a directory.
@@ -62,7 +93,7 @@ class RoomBuilder:
             with open(file) as room:
                 room_props = json.load(room)
                 new_room = Room(room_props)
-                util.scroll(DELAY, MAXLEN, "Building Room '{}' from {}".format(new_room.get_name(), file))
+                util.scroll(DELAY, MAXLEN, "Created Room '{}' from {}".format(new_room.get_name(), file))
                 list.append(new_room)
         return list
 
@@ -78,15 +109,15 @@ class Room:
         self.addl        = props["addl"]         # additional something that happens when in the room
         self.exits       = props["exits"]        # dictionary of exit directions and name of the room
         self.visited     = props["visited"]      # STATE - True/False - has player visited the room
-        self.save()                              # save the new item object just initialized
+        self.save()                              # save the new object just initialized
 
     def save(self):
         util.save(self)
 
     def print_me(self):
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "---------")
         util.scroll3(DELAY, MAXLEN, "Room Info")
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "---------")
         util.scroll3(DELAY, MAXLEN, "Name:    {}".format(self.get_name()))
         for altname in self.get_altnames():
             util.scroll3(DELAY, MAXLEN, "AltName: {}".format(altname))
@@ -146,7 +177,7 @@ class ItemBuilder:
             with open(file) as item:
                 item_props = json.load(item)
                 new_item = Item(item_props)
-                util.scroll(DELAY, MAXLEN, "Building Item '{}' from {}".format(new_item.get_name(), file))
+                util.scroll(DELAY, MAXLEN, "Created Item '{}' from {}".format(new_item.get_name(), file))
                 list.append(new_item)
         return list
 
@@ -167,15 +198,15 @@ class Item:
         self.current     = props["current"]      # STATE - current location is start unless moved by player
         self.havenot     = props["havenot"]      # ERROR - player tried to use item they do not have
         self.unavailable = props["unavailable"]  # ERROR - player tried to take item when unavailable
-        self.save()                              # save the new item object just initialized
+        self.save()                              # save the new object just initialized
 
     def save(self):
         util.save(self)
 
     def print_me(self):
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "---------")
         util.scroll3(DELAY, MAXLEN, "Item Info")
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "---------")
         util.scroll3(DELAY, MAXLEN, "Name:    {}".format(self.get_name()))
         for altname in self.get_altnames():
             util.scroll3(DELAY, MAXLEN, "AltName: {}".format(altname))
@@ -247,7 +278,7 @@ class CharacterBuilder:
             with open(file) as char:
                 char_props = json.load(char)
                 new_char = Character(char_props)
-                util.scroll(DELAY, MAXLEN, "Building Character '{}' from {}".format(new_char.get_name(), file))
+                util.scroll(DELAY, MAXLEN, "Created Character '{}' from {}".format(new_char.get_name(), file))
                 list.append(new_char)
         return list
 
@@ -266,9 +297,9 @@ class Character:
         util.save(self)
 
     def print_me(self):
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "--------------")
         util.scroll3(DELAY, MAXLEN, "Character Info")
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "--------------")
         util.scroll3(DELAY, MAXLEN, "Name:  {}".format(self.get_name()))
         util.scroll3(DELAY, MAXLEN, "Long:  {}".format(self.get_long()))
         util.scroll3(DELAY, MAXLEN, "Short: {}".format(self.get_short()))
@@ -296,15 +327,15 @@ class Player:
         self.location    = "Detention" # location of the player on the map starting in Detention.
         self.items       = []          # items collected in inventory
         # self.timeleft    = props["timeleft"]
-        self.save()                    # saves the new object just initialized
+        self.save()                    # save the new object just initialized
 
     def save(self):
         util.save(self)
 
     def print_me(self):
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "-----------")
         util.scroll3(DELAY, MAXLEN, "Player Info")
-        util.scroll3(DELAY, MAXLEN, "-" * 80)
+        util.scroll3(DELAY, MAXLEN, "-----------")
         util.scroll3(DELAY, MAXLEN, "Name:     {}".format(self.get_name()))
         util.scroll3(DELAY, MAXLEN, "Location: {}".format(self.get_location()))
         for item in self.get_items():
@@ -339,30 +370,10 @@ main() illustrates how to use the classes and some util functions.
 '''
 def main():
 
-    util.scroll(DELAY, MAXLEN, "-" * 80)
-    util.scroll(DELAY, MAXLEN, "Player class defaults then sets and adds")
-    util.scroll(DELAY, MAXLEN, "-" * 80)
-
-    player = Player()
-    player.print_me()
-
-    player.set_name("Pat")
-    player.set_location("Main Office")
-    player.add_item("metronome")
-    player.add_item("calculator")
-    player.add_item("master key")
-
-    player.print_me()
-
-    util.scroll(DELAY, MAXLEN, "-" * 80)
-    util.scroll(DELAY, MAXLEN, "Builders")
-    util.scroll(DELAY, MAXLEN, "-" * 80)
-
     ''' Make a Builder object and use it to load json data files to create a list of underlying game objects '''
 
     exit_builder = ExitBuilder()
     exit_list = ExitBuilder.load_exit_files(exit_builder)
-    quit()
 
     room_builder = RoomBuilder()
     room_list = RoomBuilder.load_room_files(room_builder)
@@ -376,6 +387,17 @@ def main():
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "print me - object.print_me()")
     util.scroll(DELAY, MAXLEN, "-" * 80)
+
+    player = Player()
+    player.print_me()
+
+    player.set_name("Pat")
+    player.set_location("Main Office")
+    player.add_item("metronome")
+    player.add_item("calculator")
+    player.add_item("master key")
+
+    player.print_me()
 
     ''' Loop through all the lists to do things like print_me() '''
     for exit in exit_list:
