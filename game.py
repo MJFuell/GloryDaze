@@ -12,7 +12,9 @@ class GameState:
 
 	#Map
 	room_list = None
+	exit_list = None
 	current_room = None
+	current_exit = None
 
 	#conditions
 	win = 0
@@ -38,9 +40,30 @@ def GameLoop(GS):
 		for x in GS.room_list:
 			if uInput == x.name:
 				GS.current_room = x
+				print('')
 				print('Moved to ' + GS.current_room.get_name())
+				print('')
+				exits = GS.current_room.get_exits()
+				if GS.current_room.visited:
+					print(GS.current_room.get_short())
+					print('')
+					for exits_dir, exits_room in exits.items():
+						for x in GS.exit_list:
+							if x.name == exits_room:
+								print("{} {}".format(x.get_short(),exits_dir))
+								print('')
+				else:
+					print(GS.current_room.get_long())
+					print('')
+					for exits_dir, exits_room in exits.items():
+						for x in GS.exit_list:
+							if x.name == exits_room:
+								print("{} {}".format(x.get_long(),exits_dir))
+								print('')
+				GS.current_room.visited = True
 
 		if uInput == 'view':
+			print('')
 			print(GS.current_room.get_exits())
 	
             
@@ -53,7 +76,9 @@ def GameLoop(GS):
 			pass
 		GS.turnCount += GS.turnCount
         
+		print('')
 		print('End of turn.')
+		print('')
 
 
 def RunGame(type):
@@ -75,6 +100,8 @@ def RunGame(type):
         print('\nBuilding rooms from files')
         room_builder = DF.RoomBuilder()
         gamestate.room_list = DF.RoomBuilder.load_room_files(room_builder)
+        exit_builder = DF.ExitBuilder()
+        gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
 
         print('\nChecking rooms loaded into gamestate:')
         for x in gamestate.room_list:
@@ -84,6 +111,7 @@ def RunGame(type):
         for x in gamestate.room_list:
             if x.name == 'Detention':
                 gamestate.current_room = x
+                gamestate.current_room.visited = True
         print('\nCurrent room is: ' + gamestate.current_room.name)
 
         
@@ -142,7 +170,19 @@ def RunGame(type):
 
     
     #Print room description so user knows where they are and start looping for input
-    print('You are in ' + gamestate.current_room.get_long())
+    print('You are in ' + gamestate.current_room.get_name())
+    print('')
+    print(gamestate.current_room.get_long())
+    print('')
+    #print(gamestate.current_room.get_exits())
+    #print('')
+    exits = gamestate.current_room.get_exits()
+    for exits_dir, exits_room in exits.items():
+        for x in gamestate.exit_list:
+            if x.name == exits_room:
+                print("{} {}".format(x.get_long(),exits_dir))
+    print('')
+
     GameLoop(gamestate)  
 
     
