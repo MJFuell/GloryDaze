@@ -9,5 +9,6 @@
                     "northwest" : "Principal Office",
                     "southwest" : "Counselor Office"
                  },
+    "items"    : ["cellphone"],
     "visited"  : false
 }

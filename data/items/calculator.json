@@ -1,0 +1,15 @@
+{
+    "name"          : "calculator",
+    "altnames"      : ["calc","calcalator","calclator"],
+    "long"          : "A special Business Edition calculator with many buttons and special features. It looks very useful for anyone trying to calculate a mortgage or create a budget.",
+    "short"         : "A special Business Edition calculator.",
+    "featureFalse"  : "",
+    "featureBool"   : "",
+    "featureTrue"   : "",
+    "have"          : "You have a calculator.",
+    "havenot"       : "You don't have a calculator.",
+    "take"          : "You take the calculator because it may be useful later.",
+    "drop"          : "You drop the calculator. I hope it didn't break!",
+    "available"     : "There is a calculator here.",
+    "unavailable"   : "You don't see a calculator here to take."
+}

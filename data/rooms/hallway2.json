@@ -9,5 +9,6 @@
                     "southwest" : "Music",
                     "northwest" : "Math"
                  },
+    "items"    : [],
     "visited"  : false
 }

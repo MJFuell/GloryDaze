@@ -13,6 +13,7 @@ class GameState:
 	#Map
 	room_list = None
 	exit_list = None
+	item_list = None
 	current_room = None
 	current_exit = None
 
@@ -38,15 +39,20 @@ def GameLoop(GS):
         	# ---------------------------------------------------------------------------------------------------------------------------------------
         	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
 		for x in GS.room_list:
-			if uInput == x.name:
+			if uInput == x.name or uInput in x.altnames:
 				GS.current_room = x
-				print('')
+				print('-' * 70, '\n\n\n')
 				print('Moved to ' + GS.current_room.get_name())
 				print('')
 				exits = GS.current_room.get_exits()
 				if GS.current_room.visited:
 					print(GS.current_room.get_short())
 					print('')
+					for item in GS.current_room.get_items():
+						for x in GS.item_list:
+							if x.name == item or item in x.altnames:
+								print("{}".format(x.get_avail()))
+								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
 							if x.name == exits_room:
@@ -55,6 +61,11 @@ def GameLoop(GS):
 				else:
 					print(GS.current_room.get_long())
 					print('')
+					for item in GS.current_room.get_items():
+						for x in GS.item_list:
+							if x.name == item or item in x.altnames:
+								print("{}".format(x.get_avail()))
+								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
 							if x.name == exits_room:
@@ -102,10 +113,12 @@ def RunGame(type):
         gamestate.room_list = DF.RoomBuilder.load_room_files(room_builder)
         exit_builder = DF.ExitBuilder()
         gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
+        item_builder = DF.ItemBuilder()
+        gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
 
-        print('\nChecking rooms loaded into gamestate:')
-        for x in gamestate.room_list:
-            print(x.name)
+        #print('\nChecking rooms loaded into gamestate:')
+        #for x in gamestate.room_list:
+            #print(x.name)
 
         #Start in detention
         for x in gamestate.room_list:
@@ -173,6 +186,14 @@ def RunGame(type):
     print('You are in ' + gamestate.current_room.get_name())
     print('')
     print(gamestate.current_room.get_long())
+    print('')
+    #print(gamestate.current_room.get_items())
+    #print('')
+    for item in gamestate.current_room.get_items():
+        for x in gamestate.item_list:
+            if x.name == item:
+                # print("{}".format(x.get_long()))
+                print("{}".format(x.get_avail()))
     print('')
     #print(gamestate.current_room.get_exits())
     #print('')

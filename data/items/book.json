@@ -1,0 +1,15 @@
+{
+    "name"          : "book",
+    "altnames"      : ["harry","harrypotter","potter","harrypotterbook"],
+    "long"          : "A large, heavy Harry Potter book.",
+    "short"         : "A large, heavy Harry Potter book.",
+    "featureFalse"  : "A corner of something sticking out from the pages.",
+    "featureBool"   : "False",
+    "featureTrue"   : "",
+    "have"          : "You have a Harry Potter book.",
+    "havenot"       : "You don't have a Harry Potter book.",
+    "take"          : "You take the Harry Potter book because it may be useful later.",
+    "drop"          : "You drop the Harry Potter book. I hope it didn't break!",
+    "available"     : "There is a Harry Potter book here.",
+    "unavailable"   : "You don't see a Harry Potter book here to take."
+}

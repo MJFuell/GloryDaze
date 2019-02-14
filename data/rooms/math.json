@@ -6,5 +6,6 @@
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "south"     : "Hallway 2"
                  },
+    "items"    : ["calculator"],
     "visited"  : false
 }
