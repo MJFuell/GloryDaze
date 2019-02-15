@@ -7,5 +7,6 @@
     "exits"    : {  "west"      : "Hallway 1",
                     "east"      : "Supply Room"
                  },
+    "items"    : [],
     "visited"  : false
 }

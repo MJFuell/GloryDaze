@@ -18,19 +18,19 @@ import sys
 import textwrap
 import time
 
-DELAY = 0.01
-MAXLEN = 80
+DELAY = 0.001    # make this smaller for a faster scroll
+MAXLEN = 80      # maximum line length to print
 
 ''' accepts text especially large text and will textwrap up to max_length. '''
 ''' wraps scroll2() to eliminate its awkward syntax '''
 def scroll3(delay, max_length, printout):
-    scroll2(DELAY, MAXLEN, textwrap.wrap(printout, MAXLEN))
+    scroll2(delay, max_length, textwrap.wrap(printout, max_length))
 
 ''' expects list of pre-wrapped text of max_length or less. '''
 ''' wraps scroll() to aid textwrap but resulted in awkward syntax. '''
 def scroll2(delay, max_length, printout):
     for wrapped_text in printout:
-        scroll(DELAY, MAXLEN, wrapped_text)
+        scroll(delay, max_length, wrapped_text)
 
 ''' accepts text to brute force wrap at max_length on white space. '''
 def scroll(delay, max_length, printout):

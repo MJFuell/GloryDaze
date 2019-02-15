@@ -13,8 +13,9 @@ import json
 
 import util
 
-DELAY = 0.001
-MAXLEN = 80
+# DELAY = 0.001   # make this smaller for a faster scroll
+DELAY = 0       # make this smaller for a faster scroll
+MAXLEN = 80     # maximum line length to print
 
 '''
     Build Exit objects for the game from JSON files found in a directory.
@@ -34,6 +35,7 @@ class ExitBuilder:
         files = glob.glob(dir)
         list = []
         for file in files:
+            # print("file: ", file)
             with open(file) as exit:
                 exit_props = json.load(exit)
                 new_exit = Exit(exit_props)
@@ -90,6 +92,7 @@ class RoomBuilder:
         files = glob.glob(dir)
         list = []
         for file in files:
+            # print("file: ", file)
             with open(file) as room:
                 room_props = json.load(room)
                 new_room = Room(room_props)
@@ -108,6 +111,7 @@ class Room:
         self.short       = props["short"]        # short description
         self.addl        = props["addl"]         # additional something that happens when in the room
         self.exits       = props["exits"]        # dictionary of exit directions and name of the room
+        self.items       = props["items"]        # list of items in the room
         self.visited     = props["visited"]      # STATE - True/False - has player visited the room
         self.save()                              # save the new object just initialized
 
@@ -130,6 +134,8 @@ class Room:
             util.scroll3(DELAY, MAXLEN, "Exit Next Room : {}".format(room))
             # util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, exits[exit])) # ok but ugly syntax
             util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, room))
+        for item in self.get_items():
+            util.scroll3(DELAY, MAXLEN, "Item:    {}".format(item))
         util.scroll3(DELAY, MAXLEN, "Visited:  {}".format(self.get_visited()))
 
     def get_name(self):
@@ -153,6 +159,15 @@ class Room:
     def get_exits(self):
         return self.exits
 
+    def get_items(self):
+        return self.items
+
+    def drop_item(self, value):
+        self.items.append(value)
+
+    def take_item(self, value):
+        self.items.remove(value)
+
     def get_visited(self):
         return self.visited
 
@@ -174,6 +189,7 @@ class ItemBuilder:
         files = glob.glob(dir)
         list = []
         for file in files:
+            # print("file: ", file)
             with open(file) as item:
                 item_props = json.load(item)
                 new_item = Item(item_props)
@@ -189,13 +205,14 @@ class Item:
         self.name        = props["name"]         # name of item like phone
         self.altnames    = props["altnames"]     # alternate name(s) like cell and cellphone
         self.long        = props["long"]         # long description
+        self.featFalse   = props["featureFalse"] # extra item feature description, like backpack has a tear
+        self.featBool    = props["featureBool"]  # feature description boolean
+        self.featTrue    = props["featureTrue"]  # extra item feature description, like backpack was fixed
         self.short       = props["short"]        # short description
-        self.start       = props["start"]        # location (room) at the start of a new game
         self.have        = props["have"]         # text to print when player acquires item
         self.available   = props["available"]    # text to print when player looks and item is available
         self.take        = props["take"]         # text to print when player takes the item
         self.drop        = props["drop"]         # text to print when player drops the item
-        self.current     = props["current"]      # STATE - current location is start unless moved by player
         self.havenot     = props["havenot"]      # ERROR - player tried to use item they do not have
         self.unavailable = props["unavailable"]  # ERROR - player tried to take item when unavailable
         self.save()                              # save the new object just initialized
@@ -211,15 +228,19 @@ class Item:
         for altname in self.get_altnames():
             util.scroll3(DELAY, MAXLEN, "AltName: {}".format(altname))
         util.scroll3(DELAY, MAXLEN, "Long:    {}".format(self.get_long()))
+        util.scroll3(DELAY, MAXLEN, "FeatF:   {}".format(self.get_feat_false()))
+        util.scroll3(DELAY, MAXLEN, "FeatB:   {}".format(self.get_feat_bool()))
+        util.scroll3(DELAY, MAXLEN, "FeatT:   {}".format(self.get_feat_true()))
         util.scroll3(DELAY, MAXLEN, "Short:   {}".format(self.get_short()))
-        util.scroll3(DELAY, MAXLEN, "Start:   {}".format(self.get_start()))
-        util.scroll3(DELAY, MAXLEN, "Current: {}".format(self.get_current()))
         util.scroll3(DELAY, MAXLEN, "Have:    {}".format(self.get_have()))
         util.scroll3(DELAY, MAXLEN, "HaveNot: {}".format(self.get_havenot()))
         util.scroll3(DELAY, MAXLEN, "Avail:   {}".format(self.get_avail()))
         util.scroll3(DELAY, MAXLEN, "Unavail: {}".format(self.get_unavail()))
         util.scroll3(DELAY, MAXLEN, "Take:    {}".format(self.get_take()))
         util.scroll3(DELAY, MAXLEN, "Drop:    {}".format(self.get_drop()))
+
+    def set_feat_bool(self, value):
+        self.featBool = value
 
     def get_name(self):
         return self.name
@@ -230,14 +251,17 @@ class Item:
     def get_long(self):
         return self.long
 
+    def get_feat_false(self):
+        return self.featFalse
+
+    def get_feat_bool(self):
+        return self.featBool
+
+    def get_feat_true(self):
+        return self.featTrue
+
     def get_short(self):
         return self.short
-
-    def get_start(self):
-        return self.start
-
-    def get_current(self):
-        return self.current
 
     def get_have(self):
         return self.have
@@ -275,6 +299,7 @@ class CharacterBuilder:
         files = glob.glob(dir)
         list = []
         for file in files:
+            # print("file: ", file)
             with open(file) as char:
                 char_props = json.load(char)
                 new_char = Character(char_props)
@@ -359,8 +384,8 @@ class Player:
     def add_item(self, value):
         self.items.append(value)
 
-    #TODO def drop_item(self, value):
-    #    self.items.append(value)
+    def drop_item(self, value):
+        self.items.remove(value)
 
 
 '''
@@ -412,6 +437,13 @@ def main():
     for character in character_list:
         character.print_me()
 
+    quit()
+    quit()
+    quit()
+    quit()
+    quit()
+    quit()
+
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "for thing in list print thing.attributes")
     util.scroll(DELAY, MAXLEN, "-" * 80)
@@ -435,9 +467,10 @@ def main():
         for altname in item.get_altnames():
             print("AltName:", altname)
         print("Long:   ", item.get_long())
+        print("FeatF:  ", item.get_feat_false())
+        print("FeatB:  ", item.get_feat_bool())
+        print("FeatT:  ", item.get_feat_true())
         print("Short:  ", item.get_short())
-        print("Start:  ", item.get_start())
-        print("Current:", item.get_current())
         print("Have:   ", item.get_have())
         print("HaveNot:", item.get_havenot())
         print("Avail:  ", item.get_avail())

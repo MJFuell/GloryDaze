@@ -1,0 +1,15 @@
+{
+    "name"          : "piccolo",
+    "altnames"      : ["picolo","piccollo","picollo","picalo","piccalo"],
+    "long"          : "An old piccolo that needs refinishing, but it still plays a sweet tune.",
+    "short"         : "An old tarnished piccolo.",
+    "featureFalse"  : "",
+    "featureBool"   : "",
+    "featureTrue"   : "",
+    "have"          : "You have a piccolo.",
+    "havenot"       : "You don't have a piccolo.",
+    "take"          : "You take the piccolo because it may be useful later.",
+    "drop"          : "You drop the piccolo. I hope it didn't break!",
+    "available"     : "There is a piccolo here.",
+    "unavailable"   : "You don't see a piccolo here to take."
+}

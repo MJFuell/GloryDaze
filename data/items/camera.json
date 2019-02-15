@@ -1,0 +1,15 @@
+{
+    "name"          : "camera",
+    "altnames"      : ["cam","gopro"],
+    "long"          : "A high resolution battery powered camera with something on the side.",
+    "short"         : "A battery powered camera.",
+    "featureFalse"  : "There is an empty memory expansion slot in the side.",
+    "featureBool"   : "False",
+    "featureTrue"   : "There is a SD card in the memory expansion slot.",
+    "have"          : "You have a camera.",
+    "havenot"       : "You don't have a camera.",
+    "take"          : "You take the camera because it may be useful later.",
+    "drop"          : "You drop the camera. I hope it didn't break!",
+    "available"     : "There is a camera here.",
+    "unavailable"   : "You don't see a camera here to take."
+}

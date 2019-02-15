@@ -1,10 +1,11 @@
 {
     "name"     : "Bathroom",
     "altnames" : ["potty", "head"],
-    "long"     : "a dimly lit room. The floor is really sticky and the smell is atrocious. There is water on the floor from where one of the toilets overflowed. There are four stalls on your right all with doors. The stall at the very end has a do not use sign on it. To your left there are three sinks with soap dispensers, all without soap. There are no mirrors in the bathroom. The floor tile is a sickly yellow looking color.",
-    "short"    : "a sad and pathetic looking room, it smell horrible and you really do not want to be in here. ",
+    "long"     : "A dimly lit room. The floor is really sticky and the smell is atrocious. There is water on the floor from where one of the toilets overflowed. There are four stalls on your right all with doors. The stall at the very end has a do not use sign on it. To your left there are three sinks with soap dispensers, all without soap. There are no mirrors in the bathroom. The floor tile is a sickly yellow looking color.",
+    "short"    : "A sad and pathetic looking room, it smells horrible and you really do not want to be in here.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "south"     : "Hallway 3"
                  },
+    "items"    : [],
     "visited"  : false
 }

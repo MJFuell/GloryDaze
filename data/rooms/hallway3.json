@@ -9,5 +9,6 @@
                     "south"     : "Cafeteria",
                     "west"      : "Library"
                  },
+    "items"    : [],
     "visited"  : false
 }
