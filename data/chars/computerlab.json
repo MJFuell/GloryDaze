@@ -1,6 +1,6 @@
 {
     "name"  : "LabTeacher",
-    "long"  : "need a long description.",
-    "short" : "need short description.",
-    "hint"  : "need a hint, use the force Luke."
+    "long"  : "Oh. You startled me. I was about to put in Lab Grades but was watching a video ... to help a friend. Please run along, you should be home eating supper.",
+    "short" : "Please run along. I am about to put in Lab Grades after watching this ... to help a friend.",
+    "hint"  : "I seem to have lost my SD Card."
 }

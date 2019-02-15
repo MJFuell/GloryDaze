@@ -1,6 +1,6 @@
 {
     "name"  : "Counselor",
-    "long"  : "need a long description.",
-    "short" : "need short description.",
-    "hint"  : "need a hint, use the force Luke."
+    "long"  : "Well hello. Thank you for finding that. I see people have been looking for me. That explains why it has been so quiet. But why are you still here? Oh, fell asleep in detention. And wandering around the school trying to find a way out. Yes the office pass system is new and it is not optimized yet.",
+    "short" : "Please go see the Principal to get out of the school building and to review the things you collected in your backpack.",
+    "hint"  : "Let the Principal look at the things in your backpack and let you out of the building."
 }
