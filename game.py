@@ -75,7 +75,9 @@ def GameLoop(GS):
 
 		if uInput == 'view':
 			print('')
-			print(GS.current_room.get_exits().values())
+			#print(GS.current_room.get_exits().values())
+			for val in GS.current_room.get_exits().values():
+				print(val)
 
 	
             
