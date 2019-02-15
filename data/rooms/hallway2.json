@@ -1,7 +1,7 @@
 {
     "name"     : "Hallway 2",
-    "altnames" : ["hall 2", "west hall"],
-    "long"     : "You are in a wide, brightly lit hallway.  On the south side is the chemistry room.  At the end of the hall on the south is the music room and across on the north is the math room.  The library is at the east end.  There are lockers all along the walls of the hall.  There is a water fountain here.",
+    "altnames" : ["Hallway2", "hallway2", "hall2", "hall 2", "west hall"],
+    "long"     : "You are in a wide, brightly lit hallway connecting classrooms. There are lockers for the students along the walls of this hallway. There is a water fountain here.",
     "short"    : "A wide bright hall with lockers and classrooms.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "east"      : "Library",

@@ -39,7 +39,7 @@ class ExitBuilder:
             with open(file) as exit:
                 exit_props = json.load(exit)
                 new_exit = Exit(exit_props)
-                util.scroll(DELAY, MAXLEN, "Created Exit '{}' from {}".format(new_exit.get_name(), file))
+                #util.scroll(DELAY, MAXLEN, "Created Exit '{}' from {}".format(new_exit.get_name(), file))
                 list.append(new_exit)
         return list
 
@@ -96,7 +96,7 @@ class RoomBuilder:
             with open(file) as room:
                 room_props = json.load(room)
                 new_room = Room(room_props)
-                util.scroll(DELAY, MAXLEN, "Created Room '{}' from {}".format(new_room.get_name(), file))
+                #util.scroll(DELAY, MAXLEN, "Created Room '{}' from {}".format(new_room.get_name(), file))
                 list.append(new_room)
         return list
 
@@ -193,7 +193,7 @@ class ItemBuilder:
             with open(file) as item:
                 item_props = json.load(item)
                 new_item = Item(item_props)
-                util.scroll(DELAY, MAXLEN, "Created Item '{}' from {}".format(new_item.get_name(), file))
+                #util.scroll(DELAY, MAXLEN, "Created Item '{}' from {}".format(new_item.get_name(), file))
                 list.append(new_item)
         return list
 
@@ -303,7 +303,7 @@ class CharacterBuilder:
             with open(file) as char:
                 char_props = json.load(char)
                 new_char = Character(char_props)
-                util.scroll(DELAY, MAXLEN, "Created Character '{}' from {}".format(new_char.get_name(), file))
+                #util.scroll(DELAY, MAXLEN, "Created Character '{}' from {}".format(new_char.get_name(), file))
                 list.append(new_char)
         return list
 

@@ -1,8 +1,8 @@
 {
     "name"     : "Music",
-    "altnames" : ["music room", "band room"],
+    "altnames" : ["music", "music room", "Music Room", "band room", "band"],
     "long"     : "There is a desk in the far left corner sitting catty corner with a chair behind it, this is obviously the teachers desk. Sitting in the middle of the room facing the wall are several rows of chairs in an arch. Each pair of chairs has has music stand in front of them. There is a high sitting chair in the middle of the arch with a music stand in front of it. A conductor's baton hangs from the music stand. Along the back and side walls are lockers of various shape and sizes for different instruments. There are other instruments laid out neatly and are ready to be used if wanted.",
-    "short"    : "A large room with chairs in an arch. There are lockers of various sizes at one end. There are also various music instruments out to be used.",
+    "short"    : "A room with chairs in an arch, lockers of various sizes, and music instruments.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "north"      : "Hallway 2"
                  },

@@ -4,7 +4,7 @@ import time
 import sys
 
 import data_format as DF
-
+import util
 
 class GameState:
 	#Player
@@ -46,36 +46,39 @@ def GameLoop(GS):
 				print('')
 				exits = GS.current_room.get_exits()
 				if GS.current_room.visited:
-					print(GS.current_room.get_short())
+					util.scroll3(0.01, 60, GS.current_room.get_short())
 					print('')
 					for item in GS.current_room.get_items():
 						for x in GS.item_list:
 							if x.name == item or item in x.altnames:
-								print("{}".format(x.get_avail()))
+								util.scroll3(0.01, 60, "{}".format(x.get_avail()))
 								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
 							if x.name == exits_room:
-								print("{} {}".format(x.get_short(),exits_dir))
+								util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
 								print('')
 				else:
-					print(GS.current_room.get_long())
+					util.scroll3(0.01, 60, GS.current_room.get_long())
 					print('')
 					for item in GS.current_room.get_items():
 						for x in GS.item_list:
 							if x.name == item or item in x.altnames:
-								print("{}".format(x.get_avail()))
+								util.scroll3(0.01, 60, "{}".format(x.get_avail()))
 								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
 							if x.name == exits_room:
-								print("{} {}".format(x.get_long(),exits_dir))
+								util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
 								print('')
 				GS.current_room.visited = True
 
 		if uInput == 'view':
 			print('')
-			print(GS.current_room.get_exits())
+			#print(GS.current_room.get_exits().values())
+			for val in GS.current_room.get_exits().values():
+				print(val)
+
 	
             
         	# ---------------------------------------------------------------------------------------------------------------------------------------
@@ -185,7 +188,7 @@ def RunGame(type):
     #Print room description so user knows where they are and start looping for input
     print('You are in ' + gamestate.current_room.get_name())
     print('')
-    print(gamestate.current_room.get_long())
+    util.scroll3(0.01, 60, gamestate.current_room.get_long())
     print('')
     #print(gamestate.current_room.get_items())
     #print('')
@@ -193,7 +196,7 @@ def RunGame(type):
         for x in gamestate.item_list:
             if x.name == item:
                 # print("{}".format(x.get_long()))
-                print("{}".format(x.get_avail()))
+                util.scroll3(0.01, 60, "{}".format(x.get_avail()))
     print('')
     #print(gamestate.current_room.get_exits())
     #print('')
@@ -201,7 +204,7 @@ def RunGame(type):
     for exits_dir, exits_room in exits.items():
         for x in gamestate.exit_list:
             if x.name == exits_room:
-                print("{} {}".format(x.get_long(),exits_dir))
+                util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
     print('')
 
     GameLoop(gamestate)  
@@ -214,14 +217,22 @@ def MainMenu():
     """
     First function called to play the game.  Presents the title screen to the user.  Calls RunGame() once the user chooses new game or load game
     """
-    print('Welcome to GloryDaze! The world\'s finest text-only school escape adventure.')
-    print('Please enter the number of an option below. (Free typing is allowed once the game starts)\n')
+    util.print_title()
+
+    util.scroll3(0.01, 60, 'Welcome to GloryDaze! The world\'s finest '+
+    'text-only school escape adventure. Please enter the number of an '+
+    'option below. (Free typing is allowed once the game starts)\n')
     print('1. New Game')
     print('2. Load Game')
     print('3. How to Play')
+    print('4. Quit')
 
-    selection = int(input('>'))
-    
+    try:
+        selection = int(input('>'))
+    except ValueError:
+        print('Please input a valid integer 1, 2, 3, or 4')
+        MainMenu()
+
     if selection == 1:
         print('Starting NEW GAME')
         RunGame(0)      
@@ -231,11 +242,24 @@ def MainMenu():
         print('LOAD GAME not yet implemented.\n')
         MainMenu()
 
-    if selection == 3:
-        print('GloryDaze is a text only adventure.  That means there are no graphics! Everything about the game will be displayed on the screen.')
-        print('Want to do something? Just type it in! (a ">" symbol means the game is waiting for your input)')
-        print('The game allows for as much natural language as possible but if you\'re having trouble getting around, try shorter sentences like "open door" or "push button".')
-        print('(NOT IMPLEMENTED) At any point during the game, type "savegame" to save your progress or "help" for help.  Have fun!\n')
+    elif selection == 3:
+        util.scroll3(0.005, 60, 'GloryDaze is a text only adventure.  '+
+        'That means there are no graphics! Everything about the game '+
+        'will be displayed on the screen. Want to do something? Just '+
+        'type it in! (a ">" symbol means the game is waiting for your '+
+        'input). The game allows for as much natural language as possible '+
+        'but if you\'re having trouble getting around, try shorter sentences '+
+        'like "open door" or "push button". (NOT IMPLEMENTED) At any '+
+        'point during the game, type "savegame" to save your progress '+
+        'or "help" for help.  Have fun!\n')
+        MainMenu()
+
+    elif selection == 4:
+        print('Have a nice day!')
+        quit()
+
+    else:
+        print('Please input a valid integer 1, 2, 3, or 4')
         MainMenu()
 
 
