@@ -63,6 +63,13 @@ def load(object):
     with open(filename, 'rb') as input:
         pickle.load(object, input, pickle.HIGHEST_PROTOCOL)
 
+''' print title '''
+def print_title():
+    f = open('./data/artwk/title', 'r')
+    file_contents = f.read()
+    print(file_contents)
+    f.close()
+
 def main():
     lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     scroll(DELAY, MAXLEN, "-" * MAXLEN)
@@ -86,6 +93,8 @@ def main():
     print("scroll3() 80 - best for long wrapped text")
     scroll3(DELAY, MAXLEN, lorem_ipsum)  # note this is scroll3()
     scroll(DELAY, MAXLEN, "-" * MAXLEN)
+
+    print_title()
 
 if __name__ == '__main__':
     main()

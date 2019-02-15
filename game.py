@@ -4,7 +4,7 @@ import time
 import sys
 
 import data_format as DF
-
+import util
 
 class GameState:
 	#Player
@@ -214,14 +214,19 @@ def MainMenu():
     """
     First function called to play the game.  Presents the title screen to the user.  Calls RunGame() once the user chooses new game or load game
     """
-    print('Welcome to GloryDaze! The world\'s finest text-only school escape adventure.')
-    print('Please enter the number of an option below. (Free typing is allowed once the game starts)\n')
+    util.print_title()
+
+    util.scroll3(0.01, 60, 'Welcome to GloryDaze! The world\'s finest text-only school escape adventure. Please enter the number of an option below. (Free typing is allowed once the game starts)\n')
     print('1. New Game')
     print('2. Load Game')
     print('3. How to Play')
 
-    selection = int(input('>'))
-    
+    try:
+        selection = int(input('>'))
+    except ValueError:
+        print('Please input a valid integer 1, 2, 3')
+        MainMenu()
+
     if selection == 1:
         print('Starting NEW GAME')
         RunGame(0)      
@@ -231,11 +236,12 @@ def MainMenu():
         print('LOAD GAME not yet implemented.\n')
         MainMenu()
 
-    if selection == 3:
-        print('GloryDaze is a text only adventure.  That means there are no graphics! Everything about the game will be displayed on the screen.')
-        print('Want to do something? Just type it in! (a ">" symbol means the game is waiting for your input)')
-        print('The game allows for as much natural language as possible but if you\'re having trouble getting around, try shorter sentences like "open door" or "push button".')
-        print('(NOT IMPLEMENTED) At any point during the game, type "savegame" to save your progress or "help" for help.  Have fun!\n')
+    elif selection == 3:
+        util.scroll3(0.005, 70, 'GloryDaze is a text only adventure.  That means there are no graphics! Everything about the game will be displayed on the screen. Want to do something? Just type it in! (a ">" symbol means the game is waiting for your input). The game allows for as much natural language as possible but if you\'re having trouble getting around, try shorter sentences like "open door" or "push button". (NOT IMPLEMENTED) At any point during the game, type "savegame" to save your progress or "help" for help.  Have fun!\n')
+        MainMenu()
+
+    else:
+        print('Please input a valid integer 1, 2, 3')
         MainMenu()
 
 
