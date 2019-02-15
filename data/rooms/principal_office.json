@@ -1,6 +1,6 @@
 {
     "name"     : "Principal Office",
-    "altnames" : ["principal", "big house"],
+    "altnames" : ["Principal", "principal office", "principaloffice", "principal", "principle", "Principle"],
     "long"     : "You have entered the very tidy and large principal office.  There are diplomas, certifications, and academic awards earned by the schools covering the walls.  There are many recent and older class pictures on the wall and on shelves.  There is a big, well organized desk with a big comfy executive chair behind it.  There are two large, black, plush chairs facing the desk.  There is the inevitable computer and phone on the desk, along with one box of Kleenex.",
     "short"    : "The large and tidy principal office with awards and pictures on the wall.",
     "addl"     : "A train whistle sounds across the lonely field",
