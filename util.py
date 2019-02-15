@@ -17,6 +17,7 @@ import pickle
 import sys
 import textwrap
 import time
+import glob
 
 DELAY = 0.001    # make this smaller for a faster scroll
 MAXLEN = 80      # maximum line length to print
@@ -70,7 +71,20 @@ def print_title():
     print(file_contents)
     f.close()
 
+''' print ascii artwork for rooms by passing in their name '''
+def print_ascii_art(name):
+    f = open(name, 'r')
+    file_contents = f.read()
+    print(file_contents)
+    f.close()
+
 def main():
+    dir = "./data/artwk/*"
+    files = sorted(glob.glob(dir))
+    for file in files:
+        #print("file: ", file)
+        print_ascii_art(file)
+
     lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     scroll(DELAY, MAXLEN, "-" * MAXLEN)
     print("scroll() 80/80 - incorrect")

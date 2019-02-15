@@ -42,7 +42,8 @@ def GameLoop(GS):
 			if uInput == x.name or uInput in x.altnames:
 				GS.current_room = x
 				print('-' * 70, '\n\n\n')
-				print('Moved to ' + GS.current_room.get_name())
+				#print('Moved to ' + GS.current_room.get_name())
+				util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
 				print('')
 				exits = GS.current_room.get_exits()
 				if GS.current_room.visited:
