@@ -1,11 +1,17 @@
 {
     "name"     : "Cafeteria",
     "altnames" : ["cafeteria", "cafe", "Cafe", "Lunch Room", "lunchroom"],
-    "long"     : "A massive room with tables and chairs in neat and orderly rows. There is food and food trays at various spots suggesting that students did not clean up after themselves. To your left there are two cash registers for students to pay for lunches. To the right and straight in front of you there is a wall of large windows looking outside. There is no one in sight and the room smells of old forgotten food.",
+    "long"     : "A massive room with tables and chairs in neat and orderly rows. There is food and food trays at various spots suggesting that students did not clean up after themselves. There are two cash registers for students to pay for lunches. There is a wall of large windows looking outside. There is no one in sight and the room smells of old forgotten food.",
     "short"    : "A room smelling of old food, but full of tables in orderly rows and windows.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "north"     : "Hallway 3"
                  },
     "items"    : ["water bottle"],
+    "features" : {  "table" : "On closer inspection, most tables were wiped and sanitized. Only a few tables near the front are messy. Maybe a group elsewhere in the building came in after hours and made this mess.",
+                    "tables" : "On closer inspection, most tables were wiped and sanitized. Only a few tables near the front are messy. Maybe a group elsewhere in the building came in after hours and made this mess.",
+                    "cash" : "You find a small refrigerator beside the cash register used to cool water.",
+                    "register" : "You find a small refrigerator beside the cash register used to cool water.",
+                    "cash register" : "You find a small refrigerator beside the cash register used to cool water."
+                 },
     "visited"  : false
 }

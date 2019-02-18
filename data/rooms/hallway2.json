@@ -10,5 +10,8 @@
                     "northwest" : "Math"
                  },
     "items"    : [],
+    "features" : {  "lockers" : "The lockers are newly painted for the school year but dings and dents and old markings are evident on closer examination.",
+                    "water fountain" : "Freshly cleaned by the staff, this water fountain provides clean, cold water."
+                 },
     "visited"  : false
 }

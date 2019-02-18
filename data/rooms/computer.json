@@ -1,11 +1,24 @@
 {
     "name"     : "Computer Lab",
-    "altnames" : ["computer","computerlab","lab"],
-    "long"     : "A room off of the library this room has windows on three of the four sides looking out onto the campus grounds. The fourth has a large dry erase board on it. There are several rows of tables with computers both PC’s and Mac’s in nice neat rows on them. There are chairs behind each computer for a student to sit and use the computer. At the end of each row there is a printer for each set of computers.",
+    "altnames" : ["computer", "computerlab", "lab"],
+    "long"     : "A room off of the library this room has windows on three of the four sides looking out onto the campus grounds. The fourth has a large dry erase board on it. There are several rows of tables with computers both PCs and Macs in nice neat rows on them. There are chairs behind each computer for a student to sit and use the computer. At the end of each row there is a printer for each set of computers.",
     "short"    : "A moderately sized room with rows of computers and printers. There are lots of windows here looking out onto campus.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "north"     : "Library"
                  },
     "items"    : ["SD card"],
+    "features" : {  "table" : "Nothing exciting on the tables.",
+                    "tables" : "Nothing exciting on the tables.",
+                    "printer" : "All the printers are turned off for the day except the one for the back row has a printout about uploading videos to YouTube.",
+                    "printers" : "All the printers are turned off for the day except the one for the back row has a printout about uploading videos to YouTube.",
+                    "PC" : "All the PCs are turned off for the day.",
+                    "PCs" : "All the PCs are turned off for the day.",
+                    "Mac" : "All the Macs are turned off for the day, except for one in the back corner of the room.",
+                    "Macs" : "All the Macs are turned off for the day, except for one in the back corner of the room.",
+                    "desk" : "The desks are all empty and tidy.",
+                    "desks" : "The desks are all empty and tidy.",
+                    "board" : "The days reading, homework, and lab assignments are listed. An example program is written.",
+                    "dry erase board" : "The days reading, homework, and lab assignments are listed. An example program is written."
+                 },
     "visited"  : false
 }

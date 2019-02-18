@@ -18,10 +18,10 @@ DELAY = 0       # make this smaller for a faster scroll
 MAXLEN = 80     # maximum line length to print
 
 '''
-    Build Exit objects for the game from JSON files found in a directory.
-    Read json files in exits data directory and create an Exit object from each.
-    Return a list of Exit objects.
-    '''
+Build Exit objects for the game from JSON files found in a directory.
+Read json files in exits data directory and create an Exit object from each.
+Return a list of Exit objects.
+'''
 class ExitBuilder:
     
     def __init__(self):
@@ -112,6 +112,7 @@ class Room:
         self.addl        = props["addl"]         # additional something that happens when in the room
         self.exits       = props["exits"]        # dictionary of exit directions and name of the room
         self.items       = props["items"]        # list of items in the room
+        self.features    = props["features"]     # dictionary of room features
         self.visited     = props["visited"]      # STATE - True/False - has player visited the room
         self.save()                              # save the new object just initialized
 
@@ -136,6 +137,10 @@ class Room:
             util.scroll3(DELAY, MAXLEN, "{} : {}".format(exit, room))
         for item in self.get_items():
             util.scroll3(DELAY, MAXLEN, "Item:    {}".format(item))
+        features = self.get_features()
+        for name, desc in features.items():
+            util.scroll3(DELAY, MAXLEN, "Feature Name : {}".format(name))
+            util.scroll3(DELAY, MAXLEN, "Feature Desc : {}".format(desc))
         util.scroll3(DELAY, MAXLEN, "Visited:  {}".format(self.get_visited()))
 
     def get_name(self):
@@ -154,13 +159,19 @@ class Room:
         return self.addl
 
     def get_exitdirs(self):
-        return self.exitdirs
+        return self.exits.keys()
+
+    def get_exitrooms(self):
+        return self.exits.values()
 
     def get_exits(self):
         return self.exits
 
     def get_items(self):
         return self.items
+
+    def get_features(self):
+        return self.features
 
     def drop_item(self, value):
         self.items.append(value)
@@ -381,7 +392,7 @@ class Player:
     def get_items(self):
         return self.items
 
-    def add_item(self, value):
+    def take_item(self, value):
         self.items.append(value)
 
     def drop_item(self, value):
@@ -418,9 +429,9 @@ def main():
 
     player.set_name("Pat")
     player.set_location("Main Office")
-    player.add_item("metronome")
-    player.add_item("calculator")
-    player.add_item("master key")
+    player.take_item("metronome")
+    player.take_item("calculator")
+    player.take_item("master key")
 
     player.print_me()
 
@@ -437,13 +448,6 @@ def main():
     for character in character_list:
         character.print_me()
 
-    quit()
-    quit()
-    quit()
-    quit()
-    quit()
-    quit()
-
     util.scroll(DELAY, MAXLEN, "-" * 80)
     util.scroll(DELAY, MAXLEN, "for thing in list print thing.attributes")
     util.scroll(DELAY, MAXLEN, "-" * 80)
@@ -454,11 +458,19 @@ def main():
         print("Long:   ", room.get_long())
         print("Short:  ", room.get_short())
         print("Addl:   ", room.get_addl())
+        for dir in room.get_exitdirs():
+            print("Exit Dir:   ", dir)
+        for nextroom in room.get_exitrooms():
+            print("Next Room:  ", nextroom)
         exits = room.get_exits()
         for exit, nextroom in exits.items():
             print("Exit Direction : {}".format(exit))
             print("Exit Next Room : {}".format(nextroom))
             print("{} : {}".format(exit, nextroom))
+        features = room.get_features()
+        for name, desc in features.items():
+            print("Feature Name : {}".format(name))
+            print("Feature Desc : {}".format(desc))
         print("Visited: ", room.get_visited())
 
     for item in item_list:

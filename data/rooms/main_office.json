@@ -10,5 +10,11 @@
                     "southwest" : "Counselor Office"
                  },
     "items"    : ["cellphone"],
+    "features" : {  "exit" : "The main entry/exit doors are locked since it is after hours.",
+                    "main exit" : "The main entry/exit doors are locked since it is after hours.",
+                    "main entry" : "The main entry/exit doors are locked since it is after hours.",
+                    "entry" : "The main entry/exit doors are locked since it is after hours.",
+                    "notebook" : "Many names of parents, volunteers, and a few tardy students have signed the notebook."
+                 },
     "visited"  : false
 }

@@ -7,5 +7,11 @@
     "exits"    : {  "east"      : "Main Office"
                  },
     "items"    : [],
+    "features" : {  "pictures" : "The pictures are all school related class pictures, awards pictures, event pictures, and the like.",
+                    "diplomas" : "The diplomas document the academic accomplishments of the principal.",
+                    "certifications" : "The certifications documents the accomplishments of the principal and the school and its students and staff.",
+                    "awards" : "The school and students awards earned here are numerous. This must be an excellent school.",
+                    "desk" : "Not much to see on the desk because it is very clean and tidy"
+                 },
     "visited"  : false
 }

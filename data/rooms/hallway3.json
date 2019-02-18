@@ -10,5 +10,10 @@
                     "west"      : "Library"
                  },
     "items"    : [],
+    "features" : {  "mop" : "Smells of strong cleaning solutions",
+                    "bucket" : "A bucket having a strong cleaning solution.",
+                    "evidence" : "This is ... well ... you really do not want to know, but it has been cleaned up with a disinfecting agent on top",
+                    "bulletin board" : "There is a prominent announcement in big bold letters about Dodgeball tryouts TODAY!"
+                 },
     "visited"  : false
 }

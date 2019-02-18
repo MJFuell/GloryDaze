@@ -7,5 +7,12 @@
     "exits"    : {  "east"      : "Main Office"
                  },
     "items"    : [],
+    "features" : {  "Advil" : "This is extra strength Advil",
+                    "advil" : "This is extra strength Advil",
+                    "Kleenex" : "All oversized boxes of Kleenex with lotion protection to calm a sore nose",
+                    "kleenex" : "All oversized boxes of Kleenex with lotion protection to calm a sore nose",
+                    "computer" : "The computer has many open windows on the screen concerning student records and case files.",
+                    "books" : "Many titles on caring and helping kids. The reader must care for their students."
+                 },
     "visited"  : false
 }
