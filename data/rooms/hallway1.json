@@ -10,5 +10,13 @@
                     "west"      : "Main Office"
                  },
     "items"    : [],
+    "features" : {  "banner" : "The event is announcement of Dodgeball Tryouts TODAY !! and the start of Dodgeball season in two weeks !!!",
+                    "event" : "The event is announcement of Dodgeball Tryouts TODAY !! and the start of Dodgeball season in two weeks !!!",
+                    "trophies" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "trophy case" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "awards" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "ribbons" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "pictures" : "Pictures documenting the many trophies and awards of student activities."
+                 },
     "visited"  : false
 }
