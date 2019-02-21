@@ -6,6 +6,8 @@ import sys
 import data_format as DF
 import util
 
+directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
+
 class GameState:
 	#Player
 	player = 0
@@ -56,7 +58,7 @@ def GameLoop(GS):
 								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
-							if x.name == exits_room:
+							if x.name == exits_room and exits_dir in directions:
 								util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
 								print('')
 				else:
@@ -69,7 +71,7 @@ def GameLoop(GS):
 								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
-							if x.name == exits_room:
+							if x.name == exits_room and exits_dir in directions:
 								util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
 								print('')
 				GS.current_room.visited = True
@@ -77,7 +79,7 @@ def GameLoop(GS):
 		if uInput == 'view':
 			print('')
 			#print(GS.current_room.get_exits().values())
-			for val in GS.current_room.get_exits().values():
+			for val in set(GS.current_room.get_exits().values()):
 				print(val)
 
 	
@@ -204,7 +206,7 @@ def RunGame(type):
     exits = gamestate.current_room.get_exits()
     for exits_dir, exits_room in exits.items():
         for x in gamestate.exit_list:
-            if x.name == exits_room:
+            if x.name == exits_room and exits_dir in directions:
                 util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
     print('')
 

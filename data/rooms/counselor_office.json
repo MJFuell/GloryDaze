@@ -4,7 +4,8 @@
     "long"     : "You have entered the small and cramped counselor office.  There are books, piles of paper, boxes of Kleenex, and two ugly brown chairs facing a desk.  A bottle of Advil is on the counselor desk.  There is a computer and phone on the desk.",
     "short"    : "The cramped counselor office with boxes of Kleenex and Advil.",
     "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "east"      : "Main Office"
+    "exits"    : {  "east"         : "Main Office",
+                    "large office" : "Main Office"
                  },
     "items"    : [],
     "features" : {  "Advil" : "This is extra strength Advil",

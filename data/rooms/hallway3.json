@@ -7,7 +7,11 @@
     "exits"    : {  "east"      : "Gym",
                     "north"     : "Bathroom",
                     "south"     : "Cafeteria",
-                    "west"      : "Library"
+                    "west"      : "Library",
+                    "funny smelling room"    : "Gym",
+                    "smelly room"            : "Bathroom",
+                    "pleasent smelling room" : "Cafeteria",
+                    "massive room"           : "Library"
                  },
     "items"    : [],
     "features" : {  "mop" : "Smells of strong cleaning solutions",

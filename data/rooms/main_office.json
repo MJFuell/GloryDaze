@@ -5,9 +5,11 @@
     "short"    : "The main office with a big L shaped counter and main exit doors of the school.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "east"      : "Hallway 1",
-                    "north"     : "Exit",
                     "northwest" : "Principal Office",
-                    "southwest" : "Counselor Office"
+                    "southwest" : "Counselor Office",
+                    "bright hallway"   : "Hallway 1",
+                    "decorated office" : "Principal Office",
+                    "cozy office"      : "Counselor Office"
                  },
     "items"    : ["cellphone"],
     "features" : {  "exit" : "The main entry/exit doors are locked since it is after hours.",

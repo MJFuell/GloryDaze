@@ -5,7 +5,9 @@
     "short"    : "A small, neat, and tidy office. This clearly belongs to someone who loves his family.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "west"      : "Hallway 1",
-                    "east"      : "Supply Room"
+                    "east"      : "Supply Room",
+                    "bright hallway"    : "Hallway 1",
+                    "disorganized room" : "Supply Room"
                  },
     "items"    : [],
     "features" : {  "picture" : "A family picture of a woman holding two kids smiling.",

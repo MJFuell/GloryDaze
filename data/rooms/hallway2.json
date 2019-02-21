@@ -7,7 +7,11 @@
     "exits"    : {  "east"      : "Library",
                     "south"     : "Chemistry",
                     "southwest" : "Music",
-                    "northwest" : "Math"
+                    "northwest" : "Math",
+                    "massive room"  : "Library",
+                    "science room"  : "Chemistry",
+                    "acoustic room" : "Music",
+                    "orderly room"  : "Math"
                  },
     "items"    : [],
     "features" : {  "lockers" : "The lockers are newly painted for the school year but dings and dents and old markings are evident on closer examination.",

@@ -6,7 +6,12 @@
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "north"     : "Hallway 1",
                     "west"      : "Hallway 2",
-                    "east"      : "Hallway 3"
+                    "east"      : "Hallway 3",
+                    "south"     : "Computer Lab",
+                    "bright hallway"   : "Hallway 1",
+                    "students hallway" : "Hallway 2",
+                    "dingy hallway"    : "Hallway 3",
+                    "computer room"    : "Computer Lab"
                  },
     "items"    : ["book"],
     "features" : {  "desk" : "There are books to be shelved here, and books on hold to be checked out. There are special edition books here on reserve.",

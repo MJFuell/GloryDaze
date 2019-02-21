@@ -4,7 +4,8 @@
     "long"     : "There is a desk in the corner sitting catty corner with a chair behind it, It is obviously the teachers desk. Sitting in the middle of the room facing the wall are several rows of chairs in an arch. Each pair of chairs has has music stand in front of them. There is a high sitting chair in the middle of the arch with a music stand in front of it. A conductor baton hangs from the music stand. Along the back and side walls are lockers of various shapes and sizes for different instruments. There are other instruments laid out neatly and are ready to be used if wanted.",
     "short"    : "A room with chairs in an arch, lockers of various sizes, and music instruments.",
     "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "north"      : "Hallway 2"
+    "exits"    : {  "north"      : "Hallway 2",
+                    "students hallway" : "Hallway 2"
                  },
     "items"    : ["piccolo"],
     "features" : {  "baton" : "The baton seems unusually heavy and made of an exotic material. It is not cheap plastic. The owner must be accomplished.",

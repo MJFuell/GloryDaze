@@ -7,7 +7,11 @@
     "exits"    : {  "north"     : "Detention",
                     "south"     : "Library",
                     "east"      : "Janitor Office",
-                    "west"      : "Main Office"
+                    "west"      : "Main Office",
+                    "small room"      : "Detention",
+                    "massive room"    : "Library",
+                    "cheerful office" : "Janitor Office",
+                    "large office"    : "Main Office"
                  },
     "items"    : [],
     "features" : {  "banner" : "The event is announcement of Dodgeball Tryouts TODAY !! and the start of Dodgeball season in two weeks !!!",
