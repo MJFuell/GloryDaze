@@ -1,6 +1,6 @@
 {
     "name"     : "Hallway 1",
-    "altnames" : ["Hallway1", "hallway1", "hall1", "hall 1", "north hall"],
+    "altnames" : ["bright hallway", "Hallway1", "hallway1", "hall1", "hall 1", "north hall"],
     "long"     : "You are in a wide, brightly lit hallway. This hall contains trophy cases with many awards, ribbons, and pictures. There is a banner here about an upcoming event.",
     "short"    : "A wide bright hall with trophies and banners.",
     "addl"     : "A train whistle sounds across the lonely field",

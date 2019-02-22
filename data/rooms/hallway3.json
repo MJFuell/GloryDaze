@@ -1,6 +1,6 @@
 {
     "name"     : "Hallway 3",
-    "altnames" : ["Hallway3", "hallway3", "hall3", "hall 3", "east hall"],
+    "altnames" : ["dingy hallway", "Hallway3", "hallway3", "hall3", "hall 3", "east hall"],
     "long"     : "You are in a wide, dingy hallway.  On the south side there is evidence that somebody threw up their lunch, again.  A mop and bucket is near the door, ready to continue cleaning up the evidence.  On the wall is a bulletin board with menus and announcements.",
     "short"    : "A wide dingy hall with mop and bucket and bulletin board.",
     "addl"     : "A train whistle sounds across the lonely field",

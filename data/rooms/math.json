@@ -1,11 +1,11 @@
 {
     "name"     : "Math",
-    "altnames" : ["math", "mathroom", "math room", "Math Room"],
+    "altnames" : ["orderly room", "math", "mathroom", "math room", "Math Room"],
     "long"     : "There are five columns of five rows each of desks facing a dry erase board and an overhead projector. The projector faces a screen that has been pulled down. There is a chair and small table next to it. There is a large desk on the far wall with a chair behind it. There are various posters related to math and calculators on the walls.",
     "short"    : "A neat, orderly room. Math and calculator posters hang on the wall.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "south"     : "Hallway 2",
-                    "students hallway" : "Hallway 2"
+                    "academic hallway" : "Hallway 2"
                  },
     "items"    : ["calculator"],
     "features" : {  "table" : "Someone left a calculator.",

@@ -1,6 +1,6 @@
 {
     "name"     : "Library",
-    "altnames" : ["library", "libary", "bookroom", "studyhall"],
+    "altnames" : ["massive room", "library", "libary", "bookroom", "studyhall"],
     "long"     : "A massive room with a huge desk to one side of the room. There are tables with chairs in various locations throughout the room for students to come and work. There are rows upon rows of shelves that hold books. There are glass displays holding various objects from different time periods. There are posters all along the walls encouraging students to read and to pick up books. There are three additional doors leading out of the library along the sides of the room.",
     "short"    : "A massive room filled with books, tables, chairs, and items for study.",
     "addl"     : "A train whistle sounds across the lonely field",
@@ -9,7 +9,7 @@
                     "east"      : "Hallway 3",
                     "south"     : "Computer Lab",
                     "bright hallway"   : "Hallway 1",
-                    "students hallway" : "Hallway 2",
+                    "academic hallway" : "Hallway 2",
                     "dingy hallway"    : "Hallway 3",
                     "computer room"    : "Computer Lab"
                  },

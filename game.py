@@ -41,13 +41,15 @@ def GameLoop(GS):
         	# ---------------------------------------------------------------------------------------------------------------------------------------
         	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
 		for x in GS.room_list:
+			#print('x.name = ' + x.name)
+			#print('x.altnames = ' + ", ".join(str(e) for e in x.altnames))
 			if uInput == x.name or uInput in x.altnames:
-				GS.current_room = x
 				print('-' * 70, '\n\n\n')
+				GS.current_room = x
+				exits = GS.current_room.get_exits()
 				#print('Moved to ' + GS.current_room.get_name())
 				util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
 				print('')
-				exits = GS.current_room.get_exits()
 				if GS.current_room.visited:
 					util.scroll3(0.01, 60, GS.current_room.get_short())
 					print('')
