@@ -6,6 +6,8 @@ import sys
 import data_format as DF
 import util
 
+directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
+
 class GameState:
 	#Player
 	player = 0
@@ -39,13 +41,15 @@ def GameLoop(GS):
         	# ---------------------------------------------------------------------------------------------------------------------------------------
         	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
 		for x in GS.room_list:
+			#print('x.name = ' + x.name)
+			#print('x.altnames = ' + ", ".join(str(e) for e in x.altnames))
 			if uInput == x.name or uInput in x.altnames:
-				GS.current_room = x
 				print('-' * 70, '\n\n\n')
+				GS.current_room = x
+				exits = GS.current_room.get_exits()
 				#print('Moved to ' + GS.current_room.get_name())
 				util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
 				print('')
-				exits = GS.current_room.get_exits()
 				if GS.current_room.visited:
 					util.scroll3(0.01, 60, GS.current_room.get_short())
 					print('')
@@ -56,7 +60,7 @@ def GameLoop(GS):
 								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
-							if x.name == exits_room:
+							if x.name == exits_room and exits_dir in directions:
 								util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
 								print('')
 				else:
@@ -69,7 +73,7 @@ def GameLoop(GS):
 								print('')
 					for exits_dir, exits_room in exits.items():
 						for x in GS.exit_list:
-							if x.name == exits_room:
+							if x.name == exits_room and exits_dir in directions:
 								util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
 								print('')
 				GS.current_room.visited = True
@@ -77,7 +81,7 @@ def GameLoop(GS):
 		if uInput == 'view':
 			print('')
 			#print(GS.current_room.get_exits().values())
-			for val in GS.current_room.get_exits().values():
+			for val in set(GS.current_room.get_exits().values()):
 				print(val)
 
 	
@@ -204,7 +208,7 @@ def RunGame(type):
     exits = gamestate.current_room.get_exits()
     for exits_dir, exits_room in exits.items():
         for x in gamestate.exit_list:
-            if x.name == exits_room:
+            if x.name == exits_room and exits_dir in directions:
                 util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
     print('')
 

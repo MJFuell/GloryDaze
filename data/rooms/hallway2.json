@@ -1,13 +1,17 @@
 {
     "name"     : "Hallway 2",
-    "altnames" : ["Hallway2", "hallway2", "hall2", "hall 2", "west hall"],
+    "altnames" : ["academic hallway", "Hallway2", "hallway2", "hall2", "hall 2", "west hall"],
     "long"     : "You are in a wide, brightly lit hallway connecting classrooms. There are lockers for the students along the walls of this hallway. There is a water fountain here.",
     "short"    : "A wide bright hall with lockers and classrooms.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "east"      : "Library",
                     "south"     : "Chemistry",
                     "southwest" : "Music",
-                    "northwest" : "Math"
+                    "northwest" : "Math",
+                    "massive room"  : "Library",
+                    "science room"  : "Chemistry",
+                    "acoustic room" : "Music",
+                    "orderly room"  : "Math"
                  },
     "items"    : [],
     "features" : {  "lockers" : "The lockers are newly painted for the school year but dings and dents and old markings are evident on closer examination.",

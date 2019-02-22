@@ -1,10 +1,11 @@
 {
     "name"     : "Gym",
-    "altnames" : ["gym", "gymnasium", "Gymnasium", "PE", "pe"],
+    "altnames" : ["funny smelling room", "gym", "gymnasium", "Gymnasium", "PE", "pe"],
     "long"     : "A large room with bleachers along each side. The floor is made up of wood. The floor has all the markings for a basketball court. There are small windows along the very top of the gym allowing some light in. The gym smells kinda funny and is very warm.",
     "short"    : "A large room that is warm and smells funny. There are bleachers along the sides and it doubles as a basketball court.",
     "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "west"      : "Hallway 3"
+    "exits"    : {  "west"      : "Hallway 3",
+                    "dingy hallway" : "Hallway 3"
                  },
     "items"    : [],
     "features" : {  "floor" : "The wood floor is heavily coated in wax for protection. There are dodgeballs scattered about.",
