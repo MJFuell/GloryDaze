@@ -72,6 +72,13 @@ def print_title():
     print(file_contents)
     f.close()
 
+''' print sorry you lost '''
+def print_sorry_you_lost():
+    f = open('./data/artwk/sorry', 'r')
+    file_contents = f.read()
+    print(file_contents)
+    f.close()
+
 ''' print ascii artwork for rooms by passing in their name '''
 def print_ascii_art(name):
     f = open(name, 'r')
