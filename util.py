@@ -18,6 +18,7 @@ import sys
 import textwrap
 import time
 import glob
+import os
 
 DELAY = 0.001    # make this smaller for a faster scroll
 MAXLEN = 80      # maximum line length to print
@@ -78,7 +79,34 @@ def print_ascii_art(name):
     print(file_contents)
     f.close()
 
+''' true or false - is terminal line size greater than check value '''
+def term_lines_gt(check):
+    lines = os.popen('tput lines', 'r').readline()
+    return(int(lines) > check)
+
+''' true or false - is terminal column size greater than check value '''
+def term_cols_gt(check):
+    cols  = os.popen('tput cols', 'r').readline()
+    return (int(cols) > check)
+
+''' perform terminal size check '''
+def term_check():
+    if (term_lines_gt(23)) and (term_cols_gt(79)):
+        print('')
+        print('terminal size ok')
+        print('')
+    else:
+        print('')
+        print('Please resize your terminal terminal to be')
+        print('equal or greater than 24 rows 80 columns')
+        print('which is often the default terminal size.')
+        print('')
+        quit()
+
+
 def main():
+    term_check()
+    input("Press any key to continue...")
     dir = "./data/artwk/*"
     files = sorted(glob.glob(dir))
     for file in files:

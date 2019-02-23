@@ -220,8 +220,11 @@ def RunGame(type):
 
 def MainMenu():
     """
-    First function called to play the game.  Presents the title screen to the user.  Calls RunGame() once the user chooses new game or load game
+    First functions called to play the game.
+    Check terminal size and present title screen for the user.
+    Calls RunGame() once the user chooses new game or load game.
     """
+    util.term_check()
     util.print_title()
 
     util.scroll3(0.01, 60, 'Welcome to GloryDaze! The world\'s finest '+
