@@ -1,6 +1,6 @@
 # GloryDaze
 
-GloryDaze Text Adventure made for cs467
+GloryDaze Text Adventure made for CS467
 
 ## Authors
 
@@ -15,7 +15,7 @@ GloryDaze Text Adventure made for cs467
 ### How to run on flip.engr.oregonstate.edu
 
 ```
-% python3 glorydaze.py
+% python3 game.py
 ```
 
 ## License

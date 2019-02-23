@@ -1,10 +1,18 @@
 {
     "name"     : "Supply Room",
-    "altnames" : ["Supplies", "Closet"],
-    "long"     : "A very small room that stores all of the cleaning equipment. It is very disorganized. The brooms and mops are in disarray. There are cleaning supplies in the bottles on the floor. There is a variety of toilet paper along the back wall. There are stains from various cleaning agents on the floors and shelves. You are afraid to touch anything because it might fall on you or the cleaning agents might spill.",
-    "short"    : "a very small disorganized room with lots of cleaning supplies.",
+    "altnames" : ["disorganized room", "supply room", "supplyroom", "supply", "supplies"],
+    "long"     : "A very small room that stores all of the cleaning equipment and associated supplies. It is very well organized like the office you just walked through to get here. There are cleaning supplies in bottles on the floor. There is a variety of paper products along the back of many shelves.",
+    "short"    : "A very small room with lots of cleaning equipment and supplies.",
     "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "west"      : "Janitor Office"
+    "exits"    : {  "west"      : "Janitor Office",
+                    "cheerful office" : "Janitor Office"
+                 },
+    "items"    : ["duct tape"],
+    "features" : {  "supplies" : "Besides cleaning and paper products, you see oddly enough, duct tape.",
+                    "paper" : "In front of paper products are rolls of duct tape.",
+                    "paper products" : "In front of paper products are rolls of duct tape.",
+                    "floor" : "There are stains from various cleaning supplies that accidentally leaked.",
+                    "shelves" : "There are stains from various cleaning supplies that accidentally leaked."
                  },
     "visited"  : false
 }

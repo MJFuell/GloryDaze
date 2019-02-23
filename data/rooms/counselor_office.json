@@ -1,10 +1,19 @@
 {
     "name"     : "Counselor Office",
-    "altnames" : ["counselor", "shrink"],
+    "altnames" : ["cozy office", "Counselor", "counselor office", "counseloroffice", "counselor", "counsel"],
     "long"     : "You have entered the small and cramped counselor office.  There are books, piles of paper, boxes of Kleenex, and two ugly brown chairs facing a desk.  A bottle of Advil is on the counselor desk.  There is a computer and phone on the desk.",
     "short"    : "The cramped counselor office with boxes of Kleenex and Advil.",
     "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "east"      : "Main Office"
+    "exits"    : {  "east"         : "Main Office",
+                    "large office" : "Main Office"
+                 },
+    "items"    : [],
+    "features" : {  "Advil" : "This is extra strength Advil",
+                    "advil" : "This is extra strength Advil",
+                    "Kleenex" : "All oversized boxes of Kleenex with lotion protection to calm a sore nose",
+                    "kleenex" : "All oversized boxes of Kleenex with lotion protection to calm a sore nose",
+                    "computer" : "The computer has many open windows on the screen concerning student records and case files.",
+                    "books" : "Many titles on caring and helping kids. The reader must care for their students."
                  },
     "visited"  : false
 }

@@ -1,0 +1,15 @@
+{
+    "name"          : "backpack",
+    "altnames"      : ["pack", "bag", "bookbag"],
+    "long"          : "A bag having two padded shoulder straps with zippered pockets of various sizes including a central pocket large enough to carry many books.",
+    "short"         : "A bag with shoulder straps and many zippered pockets",
+    "featureFalse"  : "It has a small tear in the side. Items may fall out.",
+    "featureBool"   : "False",
+    "featureTrue"   : "A tear in the side was fixed with duct tape.",
+    "have"          : "You have a backpack.",
+    "havenot"       : "You don't have a backpack.",
+    "take"          : "You take the backpack because it may be useful for carrying many things.",
+    "drop"          : "You dropped the backpack.",
+    "available"     : "There is a backpack here.",
+    "unavailable"   : "You don't see a backpack here to take."
+}

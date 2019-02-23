@@ -1,10 +1,16 @@
 {
     "name"     : "Detention",
-    "altnames" : [],
-    "long"     : "A small classroom filled with empty desks in nice neat rows. There is a large desk at the very front, along with a white board. There is a very angry looking red faced teacher standing behind the desk. To your right there is a large window overlooking a parking lot. To the left there is a closed door.",
-    "short"    : "An empty room with desks in neat rows. There is a large window overlooking the empty parking lot.",
-    "addl"     : "A train whistle sounds across the lonely field",
-    "exits"    : {  "south"      : "Hallway 1"
+    "altnames" : ["small room", "detention"],
+    "long"     : "A small classroom filled with empty desks in nice neat rows. There is a large desk at the very front, along with a white board. There is a very angry looking red faced teacher standing behind the desk. There is a large window overlooking a parking lot. There is a closed door marking the exit.",
+    "short"    : "An empty room with desks in neat rows. There is a large window and a closed door.",
+    "addl"     : "A train whistle sounds across the lonely field.",
+    "exits"    : {  "south"      : "Hallway 1",
+                    "bright hallway" : "Hallway 1"
+                 },
+    "items"    : ["backpack"],
+    "features" : {  "board" : "The white board says: You are in DETENTION so BE QUIET and DO your homework. Do NOT forget to take your homework and books when you leave!!",
+                    "white board" : "The white board says: You are in DETENTION so BE QUIET and DO your homework. Do NOT forget to take your homework and books when you leave!!",
+                    "door" : "The door is closed. You can see an empty hallway through the window."
                  },
     "visited"  : false
 }

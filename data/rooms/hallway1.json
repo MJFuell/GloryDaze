@@ -1,13 +1,26 @@
 {
     "name"     : "Hallway 1",
-    "altnames" : ["hall 1", "north hall"],
-    "long"     : "You are in a wide, brightly lit hallway.  At the north end is the detention room.  On the west is the main office.  Next to it are the trophy cases with many awards and pictures.  Across on the east side is the janitor office, also known as the broom closet.  The library is to the south.  There is a banner here about an upcoming event.",
+    "altnames" : ["bright hallway", "Hallway1", "hallway1", "hall1", "hall 1", "north hall"],
+    "long"     : "You are in a wide, brightly lit hallway. This hall contains trophy cases with many awards, ribbons, and pictures. There is a banner here about an upcoming event.",
     "short"    : "A wide bright hall with trophies and banners.",
     "addl"     : "A train whistle sounds across the lonely field",
     "exits"    : {  "north"     : "Detention",
                     "south"     : "Library",
                     "east"      : "Janitor Office",
-                    "west"      : "Main Office"
+                    "west"      : "Main Office",
+                    "small room"      : "Detention",
+                    "massive room"    : "Library",
+                    "cheerful office" : "Janitor Office",
+                    "large office"    : "Main Office"
+                 },
+    "items"    : [],
+    "features" : {  "banner" : "The event is announcement of Dodgeball Tryouts TODAY !! and the start of Dodgeball season in two weeks !!!",
+                    "event" : "The event is announcement of Dodgeball Tryouts TODAY !! and the start of Dodgeball season in two weeks !!!",
+                    "trophies" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "trophy case" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "awards" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "ribbons" : "The trophies and awards are across the range of student activities, sporting, music, and academic.",
+                    "pictures" : "Pictures documenting the many trophies and awards of student activities."
                  },
     "visited"  : false
 }

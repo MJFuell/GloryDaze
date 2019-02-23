@@ -1,0 +1,17 @@
+{
+    "name"          : "SD card",
+    "altnames"      : ["sd","card","sdcard","memorycard","memory card"],
+    "long"          : "A small, used, blue SD memory card for an electronic device.",
+    "short"         : "A used, blue SD Card.",
+    "featureFalse"  : "",
+    "featureBool"   : "",
+    "featureTrue"   : "",
+    "start"         : "Computer Lab",
+    "current"       : "Computer Lab",
+    "have"          : "You have a SD Card.",
+    "havenot"       : "You don't have a SD Card.",
+    "take"          : "You take the SD Card because it may be useful later.",
+    "drop"          : "You drop the SD Card.",
+    "available"     : "There is a SD Card here.",
+    "unavailable"   : "You don't see a SD Card to take."
+}
