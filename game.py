@@ -33,6 +33,7 @@ def GameLoop(GS):
 	"""
 	"Gaming Loop" which loops for user input and attempts to execute it.  
 	"""
+	start = time.time()
 	uInput = 0
 	while uInput != 'q':
 		uInput = input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
@@ -88,11 +89,21 @@ def GameLoop(GS):
             
         	# ---------------------------------------------------------------------------------------------------------------------------------------
 
+		elapsed = int(time.time() - start)
+		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
+		print('elapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		GS.elapsed = elapsed
+		if (GS.elapsed > 1200):
+			GS.lose = 1
+
 		#End of turn maintenance
 		if GS.win == 1:
 			pass
 		elif GS.lose == 1:
-			pass
+			util.print_sorry_you_lost()
+			print('Your elapsed time was more than 20 minutes.')
+			print('')
+			quit()
 		GS.turnCount += GS.turnCount
         
 		print('')
@@ -220,8 +231,11 @@ def RunGame(type):
 
 def MainMenu():
     """
-    First function called to play the game.  Presents the title screen to the user.  Calls RunGame() once the user chooses new game or load game
+    First functions called to play the game.
+    Check terminal size and present title screen for the user.
+    Calls RunGame() once the user chooses new game or load game.
     """
+    util.term_check()
     util.print_title()
 
     util.scroll3(0.01, 60, 'Welcome to GloryDaze! The world\'s finest '+
