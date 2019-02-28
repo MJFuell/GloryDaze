@@ -42,9 +42,9 @@ def GameLoop(GS):
 		uInput = input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
 
 		s = parser.parse_sentence(lexicon.scan(uInput))
-		print(s.subject)
-		print(s.verb)
-		print(s.object + '\n')
+		#print(s.subject)
+		#print(s.verb)
+		#print(s.object + '\n')
 
 		command.command(GS, s)
 		# ---------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ def GameLoop(GS):
 
 		elapsed = int(time.time() - start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
-		print('elapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
 		GS.elapsed = elapsed
 		if (GS.elapsed > 1200):
 			GS.lose = 1
