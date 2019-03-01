@@ -72,6 +72,23 @@ def print_title():
     print(file_contents)
     f.close()
 
+''' print title '''
+def print_start_menu():
+    f = open('./data/artwk/start_menu', 'r')
+    file_contents = f.readlines()
+    # print(file_contents)
+    for line in file_contents:
+        #print("file: ", file)
+        print(line.strip('|\n').center(60))
+    f.close()
+
+''' print you won '''
+def print_you_won():
+    f = open('./data/artwk/winner', 'r')
+    file_contents = f.read()
+    print(file_contents)
+    f.close()
+
 ''' print sorry you lost '''
 def print_sorry_you_lost():
     f = open('./data/artwk/sorry', 'r')
@@ -100,9 +117,13 @@ def term_cols_gt(check):
 def term_check():
     if (term_lines_gt(23)) and (term_cols_gt(79)):
         print('')
-        print('terminal size ok')
+        scroll3(0.1, MAXLEN, ' :) terminal size ok ...')
+        print('')
+        print('')
         print('')
     else:
+        print('')
+        scroll3(0.1, MAXLEN, ' :( terminal too small ...')
         print('')
         print('Please resize your terminal terminal to be')
         print('equal or greater than 24 rows 80 columns')
