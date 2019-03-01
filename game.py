@@ -3,6 +3,9 @@
 import time
 import sys
 
+import command
+from parser_files import parser
+from parser_files import lexicon
 import data_format as DF
 import util
 
@@ -38,8 +41,13 @@ def GameLoop(GS):
 	while uInput != 'q':
 		uInput = input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
 
+		s = parser.parse_sentence(lexicon.scan(uInput))
+		#print(s.subject)
+		#print(s.verb)
+		#print(s.object + '\n')
 
-        	# ---------------------------------------------------------------------------------------------------------------------------------------
+		command.command(GS, s)
+		# ---------------------------------------------------------------------------------------------------------------------------------------
         	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
 		for x in GS.room_list:
 			#print('x.name = ' + x.name)
@@ -78,7 +86,7 @@ def GameLoop(GS):
 								util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
 								print('')
 				GS.current_room.visited = True
-
+		
 		if uInput == 'view':
 			print('')
 			#print(GS.current_room.get_exits().values())
@@ -91,7 +99,7 @@ def GameLoop(GS):
 
 		elapsed = int(time.time() - start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
-		print('elapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
 		GS.elapsed = elapsed
 		if (GS.elapsed > 1200):
 			GS.lose = 1
@@ -245,6 +253,7 @@ def MainMenu():
     print('2. Load Game')
     print('3. How to Play')
     print('4. Quit')
+    print('5. DEBUG: Jump to loop for user input')
 
     try:
         selection = int(input('>'))
@@ -276,6 +285,36 @@ def MainMenu():
     elif selection == 4:
         print('Have a nice day!')
         quit()
+
+    elif selection == 5:
+        #Setup Gamestate
+        gamestate = GameState()
+
+        #Setup player
+        p = DF.Player()
+        gamestate.player = p
+
+        #setup room
+        print('\nBuilding rooms from files')
+        room_builder = DF.RoomBuilder()
+        gamestate.room_list = DF.RoomBuilder.load_room_files(room_builder)
+        exit_builder = DF.ExitBuilder()
+        gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
+        item_builder = DF.ItemBuilder()
+        gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
+
+        #print('\nChecking rooms loaded into gamestate:')
+        #for x in gamestate.room_list:
+            #print(x.name)
+
+        #Start in detention
+        for x in gamestate.room_list:
+            if x.name == 'Detention':
+                gamestate.current_room = x
+                gamestate.current_room.visited = True
+        print('\nCurrent room is: ' + gamestate.current_room.name)
+        gamestate.player.set_name('TEST')
+        GameLoop(gamestate)
 
     else:
         print('Please input a valid integer 1, 2, 3, or 4')
