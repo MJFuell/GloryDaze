@@ -31,7 +31,8 @@ def command(GS, s):
         
             
 	else:
-		print(err)
+		pass
+		#print(err)
 
 
 

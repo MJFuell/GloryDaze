@@ -18,6 +18,7 @@ import sys
 import textwrap
 import time
 import glob
+import os
 
 DELAY = 0.001    # make this smaller for a faster scroll
 MAXLEN = 80      # maximum line length to print
@@ -71,6 +72,30 @@ def print_title():
     print(file_contents)
     f.close()
 
+''' print title '''
+def print_start_menu():
+    f = open('./data/artwk/start_menu', 'r')
+    file_contents = f.readlines()
+    # print(file_contents)
+    for line in file_contents:
+        #print("file: ", file)
+        print(line.strip('|\n').center(60))
+    f.close()
+
+''' print you won '''
+def print_you_won():
+    f = open('./data/artwk/winner', 'r')
+    file_contents = f.read()
+    print(file_contents)
+    f.close()
+
+''' print sorry you lost '''
+def print_sorry_you_lost():
+    f = open('./data/artwk/sorry', 'r')
+    file_contents = f.read()
+    print(file_contents)
+    f.close()
+
 ''' print ascii artwork for rooms by passing in their name '''
 def print_ascii_art(name):
     f = open(name, 'r')
@@ -78,7 +103,38 @@ def print_ascii_art(name):
     print(file_contents)
     f.close()
 
+''' true or false - is terminal line size greater than check value '''
+def term_lines_gt(check):
+    lines = os.popen('tput lines', 'r').readline()
+    return(int(lines) > check)
+
+''' true or false - is terminal column size greater than check value '''
+def term_cols_gt(check):
+    cols  = os.popen('tput cols', 'r').readline()
+    return (int(cols) > check)
+
+''' perform terminal size check '''
+def term_check():
+    if (term_lines_gt(23)) and (term_cols_gt(79)):
+        print('')
+        scroll3(0.1, MAXLEN, ' :) terminal size ok ...')
+        print('')
+        print('')
+        print('')
+    else:
+        print('')
+        scroll3(0.1, MAXLEN, ' :( terminal too small ...')
+        print('')
+        print('Please resize your terminal terminal to be')
+        print('equal or greater than 24 rows 80 columns')
+        print('which is often the default terminal size.')
+        print('')
+        quit()
+
+
 def main():
+    term_check()
+    input("Press any key to continue...")
     dir = "./data/artwk/*"
     files = sorted(glob.glob(dir))
     for file in files:
