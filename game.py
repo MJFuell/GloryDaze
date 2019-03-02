@@ -1,4 +1,13 @@
+'''
+game.py
+The main game file for GloryDaze Text Adventure.
+started during engine development, debug and test.
+by: Michael Fuelling
 
+CS467
+Winter 2019
+Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+'''
 
 import time
 import sys
@@ -104,11 +113,18 @@ def GameLoop(GS):
 		if (GS.elapsed > 1200):
 			GS.lose = 1
 
+		# GS.win = 1 # test win condition,  TODO to set it up
+
 		#End of turn maintenance
 		if GS.win == 1:
-			pass
+			util.print_you_won()
+			print('')
+			print('Your time was', round(GS.elapsed/60, 1), 'minutes.')
+			print('')
+			quit()
 		elif GS.lose == 1:
 			util.print_sorry_you_lost()
+			print('')
 			print('Your elapsed time was more than 20 minutes.')
 			print('')
 			quit()
@@ -187,7 +203,7 @@ def RunGame(type):
         print('Hmm.... Uh, what? Where am I?')
         time.sleep(delay + 1)
         
-        print('"Where the hell do you think? You\'re in detention kid.  What\'s your name anyway?"')
+        print('"Where do you think?  You\'re in detention kid.  What\'s your name anyway?"')
         time.sleep(delay + 1)
         
         print('My... My name?  Its....')
@@ -195,10 +211,11 @@ def RunGame(type):
         gamestate.player.set_name(name)
         time.sleep(delay)
         
-        print('"Well, ' + gamestate.player.get_name() + ', it\'s 6:30 PM.  Detention ended a half hour ago.  Time to go home."')
+        print('"Well, ' + gamestate.player.get_name() + ', it\'s 6:30 PM."')
+        print('"Detention ended a half hour ago.  Time to go home."')
         time.sleep(delay + .5)
         
-        print('What? Its 6:30!? Crap! My parents are gonna kill me. I better get out of here!\n')
+        print('What? Its 6:30!? My parents are gonna kill me. I better get out of here!\n')
         time.sleep(delay)
 
 
@@ -235,25 +252,22 @@ def RunGame(type):
 
     
 
+def Title():
+    """
+    First functions called to play the game.
+    Check terminal size and present title screen for the user.
+    Calls MainMenu() and game loops to MainMenu(), not here, for some choices.
+    """
+    util.term_check()
+    util.print_title()
+    MainMenu()
 
 
 def MainMenu():
     """
-    First functions called to play the game.
-    Check terminal size and present title screen for the user.
     Calls RunGame() once the user chooses new game or load game.
     """
-    util.term_check()
-    util.print_title()
-
-    util.scroll3(0.01, 60, 'Welcome to GloryDaze! The world\'s finest '+
-    'text-only school escape adventure. Please enter the number of an '+
-    'option below. (Free typing is allowed once the game starts)\n')
-    print('1. New Game')
-    print('2. Load Game')
-    print('3. How to Play')
-    print('4. Quit')
-    print('5. DEBUG: Jump to loop for user input')
+    util.print_start_menu() # uses menu in ./data/artwk/start_menu
 
     try:
         selection = int(input('>'))
@@ -280,6 +294,7 @@ def MainMenu():
         'like "open door" or "push button". (NOT IMPLEMENTED) At any '+
         'point during the game, type "savegame" to save your progress '+
         'or "help" for help.  Have fun!\n')
+        print('')
         MainMenu()
 
     elif selection == 4:
@@ -321,6 +336,11 @@ def MainMenu():
         MainMenu()
 
 
+# Title, which calls MainMenu, instead of MainMenu here allows
+# terminal size check one time only and printing of GloryDaze
+# one time especially when option 3 help is used in a minimum
+# size terminal - GloryDaze art scrolls part of help off screen
+# MainMenu()
 
-MainMenu()
+Title()
 
