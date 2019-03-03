@@ -48,54 +48,16 @@ def GameLoop(GS):
 	start = time.time()
 	uInput = 0
 	while uInput != 'q':
-		uInput = input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
+		uInput = input('("q" to quit, "view" for adjacent rooms) >')
 
-		s = parser.parse_sentence(lexicon.scan(uInput))
-		#print(s.subject)
-		#print(s.verb)
-		#print(s.object + '\n')
+		s = parser.parse_sentence(lexicon.scan(uInput.lower()))
+		print(s.subject)
+		print(s.verb)
+		print(s.object + '\n')
 
 		command.command(GS, s)
-		# ---------------------------------------------------------------------------------------------------------------------------------------
-        	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
-		for x in GS.room_list:
-			#print('x.name = ' + x.name)
-			#print('x.altnames = ' + ", ".join(str(e) for e in x.altnames))
-			if uInput == x.name or uInput in x.altnames:
-				print('-' * 70, '\n\n\n')
-				GS.current_room = x
-				exits = GS.current_room.get_exits()
-				#print('Moved to ' + GS.current_room.get_name())
-				util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
-				print('')
-				if GS.current_room.visited:
-					util.scroll3(0.01, 60, GS.current_room.get_short())
-					print('')
-					for item in GS.current_room.get_items():
-						for x in GS.item_list:
-							if x.name == item or item in x.altnames:
-								util.scroll3(0.01, 60, "{}".format(x.get_avail()))
-								print('')
-					for exits_dir, exits_room in exits.items():
-						for x in GS.exit_list:
-							if x.name == exits_room and exits_dir in directions:
-								util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
-								print('')
-				else:
-					util.scroll3(0.01, 60, GS.current_room.get_long())
-					print('')
-					for item in GS.current_room.get_items():
-						for x in GS.item_list:
-							if x.name == item or item in x.altnames:
-								util.scroll3(0.01, 60, "{}".format(x.get_avail()))
-								print('')
-					for exits_dir, exits_room in exits.items():
-						for x in GS.exit_list:
-							if x.name == exits_room and exits_dir in directions:
-								util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
-								print('')
-				GS.current_room.visited = True
 		
+				
 		if uInput == 'view':
 			print('')
 			#print(GS.current_room.get_exits().values())
@@ -104,11 +66,13 @@ def GameLoop(GS):
 
 	
             
-        	# ---------------------------------------------------------------------------------------------------------------------------------------
-
 		elapsed = int(time.time() - start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
-		print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		
+		# -------------------- RELEVANT TO GAME.  UNCOMMENT AFTER DEBUG -----------------------------------------
+		#print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		# -------------------------------------------------------------------------------------------------------		
+
 		GS.elapsed = elapsed
 		if (GS.elapsed > 1200):
 			GS.lose = 1
