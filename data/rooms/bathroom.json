@@ -1,6 +1,6 @@
 {
     "name"     : "Bathroom",
-    "altnames" : ["smelly room", "bathroom", "bath room", "potty", "head"],
+    "altnames" : ["smelly room", "smellyroom", "bathroom", "bath room", "potty", "head"],
     "long"     : "A dimly lit room. The floor is really sticky and the smell is atrocious. There are four stalls and thankfully all have doors. The stall at the very end has a sign on it. There are sinks with soap dispensers, many appear to have no soap. There are no mirrors in the bathroom.",
     "short"    : "A sad and pathetic looking room, it smells horrible and you really do not want to be in here.",
     "addl"     : "A train whistle sounds across the lonely field",

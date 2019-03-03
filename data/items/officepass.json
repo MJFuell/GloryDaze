@@ -1,6 +1,6 @@
 {
     "name"          : "Office Pass",
-    "altnames"      : ["officepass","pass"],
+    "altnames"      : ["office pass", "officepass", "pass"],
     "long"          : "An office pass laminated key.",
     "short"         : "A pass.",
     "featureFalse"  : "",

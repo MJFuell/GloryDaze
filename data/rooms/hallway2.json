@@ -1,6 +1,6 @@
 {
     "name"     : "Hallway 2",
-    "altnames" : ["academic hallway", "Hallway2", "hallway2", "hall2", "hall 2", "west hall"],
+    "altnames" : ["academic hallway", "academichallway", "Hallway2", "hallway2", "hall2", "hall 2", "west hall", "westhall"],
     "long"     : "You are in a wide, brightly lit hallway connecting classrooms. There are lockers for the students along the walls of this hallway. There is a water fountain here.",
     "short"    : "A wide bright hall with lockers and classrooms.",
     "addl"     : "A train whistle sounds across the lonely field",

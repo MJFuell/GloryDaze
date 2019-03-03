@@ -1,6 +1,6 @@
 {
     "name"     : "Chemistry",
-    "altnames" : ["science room", "chemistry", "chem"],
+    "altnames" : ["science room", "scienceroom", "chemistry", "chem"],
     "long"     : "The room is rather large. There are three set of large tables on each side with a sink at each station. There are four rows of desks in the center of the room facing another large lab table and teacher desk with a dry erase board on the wall. On the far wall there is a cabinet filled with various glassware such as beakers, erlenmeyer flasks, and test tubes. There is a yellow cabinet next to the glassware cabinet with the word FLAMMABLE across the front.",
     "short"    : "This is a large room filled with desks, bench tops, skins, various equipment, chemicals to science experiments.",
     "addl"     : "A train whistle sounds across the lonely field",

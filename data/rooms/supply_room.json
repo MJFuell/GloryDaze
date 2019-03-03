@@ -1,6 +1,6 @@
 {
     "name"     : "Supply Room",
-    "altnames" : ["disorganized room", "supply room", "supplyroom", "supply", "supplies"],
+    "altnames" : ["disorganized room", "disorganizedroom", "supply room", "supplyroom", "supply", "supplies"],
     "long"     : "A very small room that stores all of the cleaning equipment and associated supplies. It is very well organized like the office you just walked through to get here. There are cleaning supplies in bottles on the floor. There is a variety of paper products along the back of many shelves.",
     "short"    : "A very small room with lots of cleaning equipment and supplies.",
     "addl"     : "A train whistle sounds across the lonely field",

@@ -1,6 +1,6 @@
 {
     "name"     : "Janitor Office",
-    "altnames" : ["cheerful office", "Janitor", "janitor office", "janitoroffice", "janitor", "custodian"],
+    "altnames" : ["cheerful office", "cheerfuloffice", "Janitor", "janitor office", "janitoroffice", "janitor", "custodian"],
     "long"     : "A neat and tidy office, you feel a little cramped in it because it is very small. There is a desk with a chair behind it. There is a coat rack with overalls hanging on it. The desk has lots of papers in nice neat organized piles, and a big picture. There is a calendar on the wall.",
     "short"    : "A small, neat, and tidy office. This clearly belongs to someone who loves his family.",
     "addl"     : "A train whistle sounds across the lonely field",
