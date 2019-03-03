@@ -233,7 +233,28 @@ WORD_TYPES = {
 	"email" : "noun", 
 	"calculator" : "noun", 
 	"batteries" : "noun", 
-	"water" : "noun"
+	"water" : "noun",
+
+	#Rooms
+	"bathroom" : "noun",
+	"cafeteria" : "noun",
+	"chemistry" : "noun",
+	"computer" : "noun",
+	"counselor" : "noun",
+	"detention" : "noun",
+	"gym" : "noun",
+	"hallway1" : "noun",
+	"hallway2" : "noun",
+	"hallway3" : "noun",
+	"janitor" : "noun",
+	"library" : "noun",
+	"main" : "noun",
+	"math" : "noun",
+	"music" : "noun",
+	"principal" : "noun",
+	"supply" : "noun"
+
+
 }
 
 def convert_number(word):
