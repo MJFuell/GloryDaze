@@ -1,6 +1,6 @@
 {
     "name"          : "water bottle",
-    "altnames"      : ["water","bottle","coldwater","cold water"],
+    "altnames"      : ["waterbottle", "water", "bottle", "coldwater", "cold water"],
     "long"          : "A bottle filled with cold, refreshing vitamin water. Anyone drinking this would feel calm and renewed.",
     "short"         : "A bottle of cold refreshing vitamin water.",
     "featureFalse"  : "",

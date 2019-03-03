@@ -1,6 +1,6 @@
 {
     "name"          : "calculator",
-    "altnames"      : ["calc","calcalator","calclator"],
+    "altnames"      : ["calc", "calcalator", "calclator"],
     "long"          : "A special Business Edition calculator with many buttons and special features. It looks very useful for anyone trying to calculate a mortgage or create a budget.",
     "short"         : "A special Business Edition calculator.",
     "featureFalse"  : "",
