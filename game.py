@@ -22,7 +22,7 @@ directions = ["north", "south", "east", "west", "northeast", "southeast", "north
 
 class GameState:
 	#Player
-	player = 0
+	player = None
 
 	#Map
 	room_list = None
@@ -30,6 +30,10 @@ class GameState:
 	item_list = None
 	current_room = None
 	current_exit = None
+
+	#items
+	backpack = False
+	inventory = []	
 
 	#conditions
 	win = 0
@@ -57,15 +61,27 @@ def GameLoop(GS):
 
 		command.command(GS, s)
 		
-				
+		# ----------------------------------------------------------------------------------------------------------
+		# Temporary Debug/ease of use short cuts.  Need to later implement in command.py			
 		if uInput == 'view':
 			print('')
 			#print(GS.current_room.get_exits().values())
 			for val in set(GS.current_room.get_exits().values()):
 				print(val)
+		
+		if uInput == 'items':
+			for x in GS.current_room.items:
+				for y in GS.item_list:
+					if x == y.name:
+						print(y.name)
 
-	
+
+		# ---------------------------------------------------------------------------------------------------------
             
+
+
+
+
 		elapsed = int(time.time() - start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
 		
@@ -94,10 +110,11 @@ def GameLoop(GS):
 			quit()
 		GS.turnCount += GS.turnCount
         
+		'''
 		print('')
 		print('End of turn.')
 		print('')
-
+		'''
 
 def RunGame(type):
     """
