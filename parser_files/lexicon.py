@@ -15,7 +15,7 @@ WORD_TYPES = {
 	
 	
 	#Verbs
-	
+	"move" : "verb",	
     "go" : "verb",
     "eat" : "verb",
 	"stop": "verb", 
