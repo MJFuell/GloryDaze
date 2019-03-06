@@ -26,9 +26,10 @@ def verb_help(GS, obj):
 	#print help info to the user
 
 def verb_inventory(GS, obj):
-	pass
 	#display current inventory
-
+	print('You are currently holding:')
+	for x in GS.inventory:
+		print(x.name)
 
 
 
@@ -99,17 +100,66 @@ def verb_go(GS, obj):
         
 
 def verb_look(GS, obj):
-	pass
 	#If no object, print long description of room
 	#otherwise print description of item
+	if obj == 'e':
+		print(GS.current_room.long)
+	
+	for x in GS.item_list:
+		if obj == x.name.lower() or obj in x.altnames:
+			for y in GS.current_room.items:
+				if y == x.name:
+					print(x.long)
+	
+	if obj in GS.current_room.features:
+		print(GS.current_room.features.get(obj))
+
+	# IMPLEMENT CHARACTERS -------------------------------------------------------------------------------------
+
+
+
+def util_verb_take(GS, item):
+	for x in GS.item_list:
+		if x.name == item.name:
+			GS.inventory.append(item)
+			GS.current_room.items.remove(item.name)
+			print('You are now holding a ' + item.name)
+			#add to inventory
+			#remove from room inventory
+
 
 def verb_take(GS, obj):
-	pass
 	#make sure user has a backpack
 	#verify item is in the room
 	#add item to inventory if possible
+	
+	#Make sure its in the room
+	take = False
+	tempItem = None
+	for x in GS.current_room.items:						#look at all the names of items in the room
+		for y in GS.item_list:						#and all the items in the master item_list
+			if x == y.name:						#find the item in item_list that matches the name of the item in the room
+				if obj == y.name.lower() or obj in y.altnames:	#if that item is what the user entered
+					tempItem = y				#save the item
+					take = True				#say we're going to take it
 
+	#Item wasn't found in this room
+	if take == False:
+		print('I can\'t find that here.')
 
+	else:
+		if tempItem.name == 'backpack':
+			if GS.backpack == True:
+				print('I\m already holding that')
+			else:
+				GS.backpack = True
+				util_verb_take(GS, tempItem)
+		else:
+			if GS.backpack == False:
+				print('I need somewhere to put that...')
+			else:
+				util_verb_take(GS, tempItem)
+		
 
 
 def command(GS, s):
@@ -129,13 +179,13 @@ def command(GS, s):
 
 
 
-		if s.verb == "go":
+		if s.verb == 'go' or s.verb == 'move':
 			verb_go(GS, s.object)
         
 		if s.verb == 'look':
-			verb_go(GS, s.object)
+			verb_look(GS, s.object)
 
-		if s.verb == 'take':
+		if s.verb == 'take' or s.verb == 'pickup' or s.verb == 'grab':
 			verb_take(GS, s.object)
 
 		
