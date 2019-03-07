@@ -1,12 +1,16 @@
 
 
 import util
-import data_format
-from parser_files import parser
-from parser_files import lexicon
-
 
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
+charRoom = {
+    "Gym" : "Coach",
+    "Computer Lab" : "LabTeacher",
+    "Counselor Office" : "Counselor",
+    "Janitor Office" : "Janitor",
+    "Library" : "Librarian",
+    "Principal Office" : "Principal"
+}
 
 err = "Can't do that"
 
@@ -102,19 +106,48 @@ def verb_go(GS, obj):
 def verb_look(GS, obj):
 	#If no object, print long description of room
 	#otherwise print description of item
+
+	#room itself
 	if obj == 'e':
 		print(GS.current_room.long)
-	
+	#----------------------------------------------- Move down to verb_lookat once parser is updated-------------------	
+	#items in the room
 	for x in GS.item_list:
 		if obj == x.name.lower() or obj in x.altnames:
 			for y in GS.current_room.items:
 				if y == x.name:
 					print(x.long)
-	
+					if x.featBool:
+						print(x.featTrue)
+					else:
+						print(x.featFalse)
+	#features
 	if obj in GS.current_room.features:
 		print(GS.current_room.features.get(obj))
 
-	# IMPLEMENT CHARACTERS -------------------------------------------------------------------------------------
+	#inventory
+	for x in GS.inventory:
+		if obj == x.name.lower() or obj in x.altnames:
+			print(x.long)
+			if x.featBool:
+				print(x.featTrue)
+			else:
+				print(x.featFalse)
+
+	#characters
+	if GS.current_room.name in charRoom:
+		tempName = charRoom.get(GS.current_room.name)
+		#print('tempName is ' + tempName)
+		for x in GS.char_list:
+			if tempName == x.name:
+				if obj == x.name.lower() or obj in x.altnames:
+					print('Still need to implement character descriptions') #--------------------------------------------------------------------------
+
+	#-------------------------------------------------------------------------------------------------------------------
+
+
+def verb_lookat(GS, obj):
+	pass
 
 
 
@@ -145,21 +178,52 @@ def verb_take(GS, obj):
 
 	#Item wasn't found in this room
 	if take == False:
-		print('I can\'t find that here.')
+		print('Can\'t find that here.')
 
 	else:
 		if tempItem.name == 'backpack':
 			if GS.backpack == True:
-				print('I\m already holding that')
+				print('You are already holding that')
 			else:
 				GS.backpack = True
 				util_verb_take(GS, tempItem)
 		else:
 			if GS.backpack == False:
-				print('I need somewhere to put that...')
+				print('You need somewhere to put that...')
 			else:
 				util_verb_take(GS, tempItem)
 		
+
+
+def verb_talk(GS, obj):
+	pass
+
+def verb_ask(GS, obj):
+	pass
+
+def verb_drop(GS, obj):
+	drop = False
+	for x in GS.inventory:
+		if obj == x.name.lower() or obj in x.altnames:
+			if x.name == 'backpack':
+				print('That\'s too important to put down!')
+				drop = True
+			else:
+				GS.current_room.items.append(x.name)
+				GS.inventory.remove(x)
+				drop = True
+				print('You are no longer holding a ' + x.name)
+	if drop == False:
+		print('You\'re not holding that')			
+
+
+
+def verb_open(GS, obj):
+	pass
+
+
+
+
 
 
 def command(GS, s):
@@ -185,6 +249,9 @@ def command(GS, s):
 		if s.verb == 'look':
 			verb_look(GS, s.object)
 
+		if s.verb == 'lookat':
+			verb_lookat(GS, s.object)
+
 		if s.verb == 'take' or s.verb == 'pickup' or s.verb == 'grab':
 			verb_take(GS, s.object)
 
@@ -194,11 +261,16 @@ def command(GS, s):
 		if s.verb == 'talk':
 			verb_talk(GS, s.object)
 
+		if s.verb == 'ask':
+			verb_ask(GS, s.object)
+
 		if s.verb == 'drop':
 			verb_drop(GS, s.object)
 
 		if s.verb == 'open':
 			verb_open(GS, s.object)
+
+
 
 	else:
 		print('I Don\'t understand')
