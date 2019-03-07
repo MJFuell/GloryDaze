@@ -19,6 +19,15 @@ import data_format as DF
 import util
 
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
+charRoom = {
+    "Gym" : "Coach",
+    "Computer Lab" : "LabTeacher",
+    "Counselor Office" : "Counselor",
+    "Janitor Office" : "Janitor",
+    "Library" : "Librarian",
+    "Principal Office" : "Principal"
+}
+
 
 class GameState:
 	#Player
@@ -28,6 +37,7 @@ class GameState:
 	room_list = None
 	exit_list = None
 	item_list = None
+	char_list = None
 	current_room = None
 	current_exit = None
 
@@ -60,7 +70,7 @@ def GameLoop(GS):
 		print(s.object + '\n')
 
 		command.command(GS, s)
-		
+		print('')		
 		# ----------------------------------------------------------------------------------------------------------
 		# Temporary Debug/ease of use short cuts.  Need to later implement in command.py			
 		if uInput == 'view':
@@ -139,6 +149,9 @@ def RunGame(type):
         gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
         item_builder = DF.ItemBuilder()
         gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
+        char_builder = DF.CharacterBuilder()
+        gamestate.char_list = DF.CharacterBuilder.load_char_files(char_builder)
+	
 
         #print('\nChecking rooms loaded into gamestate:')
         #for x in gamestate.room_list:
@@ -298,7 +311,9 @@ def MainMenu():
         gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
         item_builder = DF.ItemBuilder()
         gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
-
+        char_builder = DF.CharacterBuilder()
+        gamestate.char_list = DF.CharacterBuilder.load_char_files(char_builder)
+	
         #print('\nChecking rooms loaded into gamestate:')
         #for x in gamestate.room_list:
             #print(x.name)
