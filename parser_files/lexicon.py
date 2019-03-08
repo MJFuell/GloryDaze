@@ -11,8 +11,7 @@ WORD_TYPES = {
 	"left" : "direction", 
 	"right" : "direction", 
 	"back" : "direction",
-	"forward" : "direction",
-	"down" : "direction", 
+	"forward" : "direction",	
 	
 	
 	#Verbs
@@ -22,7 +21,7 @@ WORD_TYPES = {
 	"stop": "verb", 
 	"eat" : "verb", 
 	"look" : "verb", 
-	"lookat": "verb", 
+	"at": "verb", 
 	"take": "verb", 
 	"help": "verb", 
 	"inventory": "verb",
@@ -78,6 +77,7 @@ WORD_TYPES = {
 	"does" : "stop", 
 	"doing" : "stop", 
 	"don't" : "stop", 
+	"down" : "stop", 
 	"during" : "stop", 
 	"each" : "stop", 
 	"few" : "stop", 
@@ -177,8 +177,6 @@ WORD_TYPES = {
 	"yours" : "stop", 
 	"yourself" : "stop", 
 	"yourselves" : "stop", 
-	
-	
 
 	
 	#Nouns
@@ -187,47 +185,47 @@ WORD_TYPES = {
 	"backpack" : "noun", 
 	"bookbag" : "noun", 
 	"desk" : "noun", 
-	"desks" : "noun",
-	"dryerasemarker" : "noun", 
-	"gymbag" : "noun", 
+	"dry erase marker" : "noun", 
+	"gym bag" : "noun", 
 	"chair" : "noun", 
-	"whiteboard" : "noun", 
+	"white board" : "noun", 
 	"book" : "noun", 
 	"ruler" : "noun", 
 	"yardstick" : "noun", 
 	"beaker" : "noun", 
-	"bunsenburner" : "noun", 
+	"bunsen burner" : "noun", 
 	"chemicals" : "noun", 
 	"chalk" : "noun", 
 	"highlighters" : "noun", 
 	"phone" : "noun", 
 	"headphones" : "noun", 
 	"camera" : "noun", 
-	"magnifyingglass" : "noun", 
+	"magnifying glass" : "noun", 
 	"tablet" : "noun", 
 	"laptop" : "noun", 
 	"computer" : "noun", 
 	"locker" : "noun", 
 	"cloths" : "noun", 
+	"calcculator" : "noun", 
 	"water" : "noun", 
-	"waterfountain" : "noun", 
-	"foodtrays" : "noun", 
+	"water fountain" : "noun", 
+	"food trays" : "noun", 
 	"tables" : "noun", 
-	"firealarm" : "noun",
-	"hallmonitor" : "noun", 
-	"dodgeballteam" : "noun", 
+	"fire alarm" : "noun",
+	"hall monitor" : "noun", 
+	"dodge ball team" : "noun", 
 	"coach" : "noun", 
 	"librarian" : "noun", 
-	"viceprincipal" : "noun", 
+	"vice principal" : "noun", 
 	"principal" : "noun", 
 	"janitor" : "noun", 
 	"custodian" : "noun", 
-	"cafeteriacook" : "noun", 
+	"cafeteria cook" : "noun", 
 	"cook" : "noun", 
 	"counselor" : "noun", 
-	"computerteacher" : "noun", 
+	"computer teacher" : "noun", 
 	"teacher" : "noun", 
-	"chemistryteacher" : "noun", 
+	"chemistry teacher" : "noun", 
 	"matches" : "noun", 
 	"lighter" : "noun", 
 	"web pages" : "noun", 
@@ -235,69 +233,7 @@ WORD_TYPES = {
 	"email" : "noun", 
 	"calculator" : "noun", 
 	"batteries" : "noun", 
-	"water" : "noun",
-	"ducttape" : "noun",
-	"SDcard" : "noun", 
-	"table" : "noun", 
-	"board" : "noun", 
-	"dryeraseboard" : "noun", 
-	"cabinet" : "noun", 
-	"yellowcabinet" : "noun", 
-	"glasswarecabinet" : "noun", 
-	"glassware" : "noun", 
-	"printer" : "noun", 
-	"printers" : "noun", 
-	"PC" : "noun", 
-	"PCs" : "noun", 
-	"Mac" : "noun", 
-	"Macs" : "noun", 
-	"floor" : "noun", 
-	"bleachers" : "noun", 
-	#rooms
-	"smellyroom" : "noun",
-	"bathroom" : "noun",
-	"potty" : "noun",
-	"head" : "noun",
-	"pleasentsmellingroom" : "noun",
-	"cafeteria" : "noun", 
-	"cafe" : "noun", 
-	"lunchroom" : "noun", 
-	"scienceroom" : "noun", 
-	"chemistry" : "noun", 
-	"chem" : "noun", 
-	"computerroom" : "noun", 
-	"computerlab" : "noun", 
-	"lab" : "noun", 
-	"computer" : "noun", 
-	"Advil" : "noun", 
-	"advil" : "noun", 
-	"Kleenex" : "noun", 
-	"kleenex" : "noun", 
-	"cozyoffice" : "noun", 
-	"Counselor" : "noun", 
-	"counseloroffice" : "noun", 
-	"counselor" : "noun", 
-	"counsel" : "noun", 
-	"sign" : "noun", 
-	"stall" : "noun",
-	"stalls" : "noun",
-	"soap" : "noun",
-	"sink" : "noun",
-	"sinks" : "noun", 
-	"table" : "noun",
-	"tables" : "noun",
-	"cash" : "noun",
-	"register" : "noun",
-	"cashregister" : "noun",
-	"detention" : "noun", 
-	"smallroom" : "noun", 
-	"gym" : "noun", 
-	"gymnasium" : "noun", 
-	"Gymnasium" : "noun", 
-	"PE" : "noun", 
-	"pe" : "noun", 
-	"funnysmellingroom" : "noun", 
-	
+	"water" : "noun"
 }
 
 def convert_number(word):
@@ -305,61 +241,23 @@ def convert_number(word):
         return int(word)
     except:
         return None
-		
-
 
 def scan(sentence):
-	sentence = sentence.lower()
-	#verbs
-	sentence = sentence.replace('look at', 'lookat')
-	#nouns
-	sentence = sentence.replace('dry erase marker', 'dryerasemarker') #stopped testing here
-	sentence = sentence.replace('gym bag', 'gymbag') 
-	sentence = sentence.replace('white board', 'whiteboard')
-	sentence = sentence.replace('bunsen burner', 'bunsenburner')
-	sentence = sentence.replace('magnifying glass', 'magnifyingglass')
-	sentence = sentence.replace('water fountain', 'waterfountain')
-	sentence = sentence.replace('food trays', 'foodtrays')
-	sentence = sentence.replace('fire alarm', 'firealarm')
-	sentence = sentence.replace('hall monitor', 'hallmonitor')
-	sentence = sentence.replace('dodge ball team', 'dodgeballteam')
-	sentence = sentence.replace('vice principal', 'viceprincipal')
-	sentence = sentence.replace('cafeteria cook', 'cafeteriacook')
-	sentence = sentence.replace('computer teacher', 'computerteacher')
-	sentence = sentence.replace('chemistry teacher', 'chemistryteacher')
-	sentence = sentence.replace('web pages', 'webpages')
-	sentence = sentence.replace('SD card', 'SDcard')
-	sentence = sentence.replace('dry erase board', 'dryeraseboard')
-	#rooms
-	sentence = sentence.replace('smelly room', 'smellyroom')
-	sentence = sentence.replace('bath room', 'bathroom')
-	sentence = sentence.replace('smelly room', 'smellyroom')
-	sentence = sentence.replace('lunch room', 'lunchroom')
-	sentence = sentence.replace('science room', 'scienceroom')
-	sentence = sentence.replace('computer lab', 'computerlab')
-	sentence = sentence.replace('computer room', 'computerroom')
-	sentence = sentence.replace('Counselor office', 'counseloroffice')
-	sentence = snetence.replace('cozy office', 'cozyoffice') 
-	sentence = sentence.replace('cash register', 'cashregister')
-	sentence = sentence.replace('yellow cabinet', 'yellowcabinet')
-	sentence = sentence.replace('glassware cabinet', 'glasswarecabinet') 
-	sentence = sentence.replace('smalle room', 'smallroom')
-	sentence = sentence.replace('funny smelling room', 'funnysmellingroom') 
-	words = sentence.split()
-	results = []
+    words = sentence.split()
+    results = []
 
-	for word in words:
-		word_type = WORD_TYPES.get(word)
+    for word in words:
+        word_type = WORD_TYPES.get(word)
         
-		if word_type == None:
+        if word_type == None:
             # it might be a number, so try converting
-			number = convert_number(word)
+            number = convert_number(word)
 
-			if number != None:
-				results.append(("number", number))
-			else:
-				results.append(("error", word))
-		else:
-			results.append((word_type, word))
+            if number != None:
+                results.append(("number", number))
+            else:
+                results.append(("error", word))
+        else:
+            results.append((word_type, word))
    
-	return results
+    return results

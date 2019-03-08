@@ -19,31 +19,17 @@ import data_format as DF
 import util
 
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
-charRoom = {
-    "Gym" : "Coach",
-    "Computer Lab" : "LabTeacher",
-    "Counselor Office" : "Counselor",
-    "Janitor Office" : "Janitor",
-    "Library" : "Librarian",
-    "Principal Office" : "Principal"
-}
-
 
 class GameState:
 	#Player
-	player = None
+	player = 0
 
 	#Map
 	room_list = None
 	exit_list = None
 	item_list = None
-	char_list = None
 	current_room = None
 	current_exit = None
-
-	#items
-	backpack = False
-	inventory = []	
 
 	#conditions
 	win = 0
@@ -62,43 +48,67 @@ def GameLoop(GS):
 	start = time.time()
 	uInput = 0
 	while uInput != 'q':
-		uInput = input('("q" to quit, "view" for adjacent rooms) >')
+		uInput = input('("q" to quit, "view" for adjacent rooms, "ROOM_NAME" to move there) >')
 
-		s = parser.parse_sentence(lexicon.scan(uInput.lower()))
-		print(s.subject)
-		print(s.verb)
-		print(s.object + '\n')
+		s = parser.parse_sentence(lexicon.scan(uInput))
+		#print(s.subject)
+		#print(s.verb)
+		#print(s.object + '\n')
 
 		command.command(GS, s)
-		print('')		
-		# ----------------------------------------------------------------------------------------------------------
-		# Temporary Debug/ease of use short cuts.  Need to later implement in command.py			
+		# ---------------------------------------------------------------------------------------------------------------------------------------
+        	#PASS INPUT TO COMMAND PARSE FUNCTION/TRY TO DO WHAT IT SAYS
+		for x in GS.room_list:
+			#print('x.name = ' + x.name)
+			#print('x.altnames = ' + ", ".join(str(e) for e in x.altnames))
+			if uInput == x.name or uInput in x.altnames:
+				print('-' * 70, '\n\n\n')
+				GS.current_room = x
+				exits = GS.current_room.get_exits()
+				#print('Moved to ' + GS.current_room.get_name())
+				util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
+				print('')
+				if GS.current_room.visited:
+					util.scroll3(0.01, 60, GS.current_room.get_short())
+					print('')
+					for item in GS.current_room.get_items():
+						for x in GS.item_list:
+							if x.name == item or item in x.altnames:
+								util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+								print('')
+					for exits_dir, exits_room in exits.items():
+						for x in GS.exit_list:
+							if x.name == exits_room and exits_dir in directions:
+								util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
+								print('')
+				else:
+					util.scroll3(0.01, 60, GS.current_room.get_long())
+					print('')
+					for item in GS.current_room.get_items():
+						for x in GS.item_list:
+							if x.name == item or item in x.altnames:
+								util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+								print('')
+					for exits_dir, exits_room in exits.items():
+						for x in GS.exit_list:
+							if x.name == exits_room and exits_dir in directions:
+								util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
+								print('')
+				GS.current_room.visited = True
+		
 		if uInput == 'view':
 			print('')
 			#print(GS.current_room.get_exits().values())
 			for val in set(GS.current_room.get_exits().values()):
 				print(val)
-		
-		if uInput == 'items':
-			for x in GS.current_room.items:
-				for y in GS.item_list:
-					if x == y.name:
-						print(y.name)
 
-
-		# ---------------------------------------------------------------------------------------------------------
+	
             
-
-
-
+        	# ---------------------------------------------------------------------------------------------------------------------------------------
 
 		elapsed = int(time.time() - start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
-		
-		# -------------------- RELEVANT TO GAME.  UNCOMMENT AFTER DEBUG -----------------------------------------
-		#print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
-		# -------------------------------------------------------------------------------------------------------		
-
+		print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
 		GS.elapsed = elapsed
 		if (GS.elapsed > 1200):
 			GS.lose = 1
@@ -120,11 +130,10 @@ def GameLoop(GS):
 			quit()
 		GS.turnCount += GS.turnCount
         
-		'''
 		print('')
 		print('End of turn.')
 		print('')
-		'''
+
 
 def RunGame(type):
     """
@@ -149,9 +158,6 @@ def RunGame(type):
         gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
         item_builder = DF.ItemBuilder()
         gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
-        char_builder = DF.CharacterBuilder()
-        gamestate.char_list = DF.CharacterBuilder.load_char_files(char_builder)
-	
 
         #print('\nChecking rooms loaded into gamestate:')
         #for x in gamestate.room_list:
@@ -311,9 +317,7 @@ def MainMenu():
         gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
         item_builder = DF.ItemBuilder()
         gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
-        char_builder = DF.CharacterBuilder()
-        gamestate.char_list = DF.CharacterBuilder.load_char_files(char_builder)
-	
+
         #print('\nChecking rooms loaded into gamestate:')
         #for x in gamestate.room_list:
             #print(x.name)
