@@ -18,6 +18,7 @@ WORD_TYPES = {
 	#Verbs
 	
     "go" : "verb",
+	"move" : "verb",
     "eat" : "verb",
 	"move": "verb", 
 	"stop": "verb", 
@@ -48,7 +49,9 @@ WORD_TYPES = {
 	"grab": "verb", 
 	"give" : "verb",
 	"items" : "verb", 
+	"item" : "verb", 
 	"exit" : "verb", 
+	"exits" : "verb", 
 	"people" : "verb", 
 	"pickup":"verb",
 	
@@ -235,6 +238,7 @@ WORD_TYPES = {
 	"computerteacher" : "noun", 
 	"teacher" : "noun", 
 	"chemistryteacher" : "noun", 
+	"director" : "noun", 
 	"matches" : "noun", 
 	"lighter" : "noun", 
 	"web pages" : "noun", 
@@ -462,6 +466,10 @@ def scan(sentence):
 	sentence = sentence.replace('supply room', 'supplyroom') 
 	sentence = sentence.replace('supply office', 'supplyroom')
 	sentence = sentence.replace('disorganized room', 'disorganizedroom') 
+	#people
+	sentence = sentence.replace('custodian', 'janitor') 
+	sentence = sentence.replace('computer teacher', 'teacher') 
+	sentence = sentence.replace('computerteacher', 'teacher') 
 	words = sentence.split()
 	results = []
 
