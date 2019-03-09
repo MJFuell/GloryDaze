@@ -1,5 +1,6 @@
 {
     "name"  : "coach",
+    "desc"  : "You see a physically fit yet slightly pudgy person with a red sweaty face wearing a T-shirt that says COACH and sweat pants.",
     "long"  : "Are you here for tryouts? If you are, you are LATE !!! I was about to wrap up. I have chosen a team that is sure to win STATE this year. You HEAR that? Win STATE. And these students are PUMPED. Man it is so HOT in here. I may pass out. I am so thirsty. Are you still here? Do you want me to let the TEAM take care of you?",
     "short" : "You are LATE for tryouts. It is HOT in here, and I am so thirsty. Are you still HERE?",
     "hint"  : "I would be really grateful for cold water. The water fountain is on the other side of the Library, and the librarian complains when we walk through."
