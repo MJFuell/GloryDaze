@@ -19,6 +19,7 @@ WORD_TYPES = {
 	
     "go" : "verb",
     "eat" : "verb",
+	"move": "verb", 
 	"stop": "verb", 
 	"eat" : "verb", 
 	"look" : "verb", 
@@ -27,6 +28,8 @@ WORD_TYPES = {
 	"help": "verb", 
 	"inventory": "verb",
 	"savegame": "verb", 
+	"save": "verb",
+	"load": "verb",
 	"loadgame": "verb", 
 	"talk": "verb", 
 	"ask": "verb", 
@@ -385,6 +388,10 @@ def scan(sentence):
 	#verbs
 	sentence = sentence.replace('look at', 'lookat')
 	sentence = sentence.replace('pick up', 'pickup')
+	sentence = sentence.replace('savegame', 'save')
+	sentence = sentence.replace('save game', 'save')
+	sentence = sentence.replace('loadgame', 'load')
+	sentence = sentence.replace('load game', 'load')
 	#nouns
 	sentence = sentence.replace('dry erase marker', 'dryerasemarker') #stopped testing here
 	sentence = sentence.replace('gym bag', 'gymbag') 
@@ -414,7 +421,6 @@ def scan(sentence):
 	#rooms
 	sentence = sentence.replace('smelly room', 'smellyroom')
 	sentence = sentence.replace('bath room', 'bathroom')
-	sentence = sentence.replace('smelly room', 'smellyroom')
 	sentence = sentence.replace('lunch room', 'lunchroom')
 	sentence = sentence.replace('science room', 'scienceroom')
 	sentence = sentence.replace('computer lab', 'computerlab')
@@ -445,13 +451,16 @@ def scan(sentence):
 	sentence = sentence.replace('main office', 'mainoffice')
 	sentence = sentence.replace('the office', 'theoffice') 
 	sentence = sentence.replace('orderly room', 'orderlyroom')
-	sentence = sentence.replace('math room', 'mathroom')
+	sentence = sentence.replace('math room', 'math')
+	sentence = sentence.replace('mathroom', 'math')
 	sentence = sentence.replace('acoustic room', 'acousticroom')
-	sentence = sentence.replace('music room', 'musicroom') 
+	sentence = sentence.replace('music room', 'music')
+	sentence = sentence.replace('musicroom', 'music')
 	sentence = sentence.replace('band room', 'bandroom') 
 	sentence = sentence.replace('principal office', 'principaloffice')
 	sentence = sentence.replace('decorated office', 'decoratedoffice') 
 	sentence = sentence.replace('supply room', 'supplyroom') 
+	sentence = sentence.replace('supply office', 'supplyroom')
 	sentence = sentence.replace('disorganized room', 'disorganizedroom') 
 	words = sentence.split()
 	results = []
