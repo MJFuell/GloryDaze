@@ -48,6 +48,7 @@ WORD_TYPES = {
 	"exits":"verb", 
 	"items":"verb", 
 	"people":"verb", 
+	"give":"verb", 
 	
 	
 	#Stop words
