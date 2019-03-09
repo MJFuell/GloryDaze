@@ -1,5 +1,6 @@
 {
     "name"  : "teacher",
+    "desc"  : "You see a nervous person, with shifting eyes, and fidgeting fingers working at a computer.",
     "long"  : "Oh. You startled me. I was about to put in Lab Grades but was watching a video ... to help a friend. Please run along, you should be home eating supper.",
     "short" : "Please run along. I am about to put in Lab Grades after watching this ... to help a friend.",
     "hint"  : "I seem to have lost my SD Card."
