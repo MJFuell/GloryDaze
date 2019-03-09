@@ -66,7 +66,7 @@ def GameLoop(GS):
 	start = time.time()
 	uInput = 0
 	while uInput != 'q':
-		uInput = input('("q" to quit, "view" for adjacent rooms) >')
+		uInput = input('("q" to quit) >')
 
 		s = parser.parse_sentence(lexicon.scan(uInput.lower()))
 		print(s.subject)

@@ -300,7 +300,8 @@ def verb_drop(GS, obj):
 		print('You\'re not holding that')			
 
 
-
+def verb_give(GS, obj):
+	print('GIVE not implemented')
 
 
 def command(GS, s):
@@ -354,6 +355,9 @@ def command(GS, s):
 
 		if s.verb == 'drop':
 			verb_drop(GS, s.object)
+
+		if s.verb == 'give':
+			verb_give(GS, s.object)	
 
 
 
