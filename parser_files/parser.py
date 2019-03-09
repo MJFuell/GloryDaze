@@ -40,7 +40,7 @@ def parse_verb(word_list):
         return match(word_list, 'verb')
     else:
         #raise ParserError("Expected a verb next.")
-        return 'a','parse_verb() error'
+        return 'a','e'
 
 
 def parse_object(word_list):
@@ -53,7 +53,7 @@ def parse_object(word_list):
         return match(word_list, 'direction')
     else:
         #raise ParserError("Expected a noun or direction next.")
-        return 'a','parse_object() error'
+        return 'a','e'
 
 
 def parse_subject(word_list):
@@ -66,7 +66,7 @@ def parse_subject(word_list):
         return ('noun', 'player')
     else:
         #raise ParserError("Expected a verb next.")
-        return 'a','parse_subject() error'
+        return 'a','e'
 
 
 def parse_sentence(word_list):
