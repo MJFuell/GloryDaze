@@ -359,6 +359,19 @@ def command(GS, s):
 		if s.verb == 'give':
 			verb_give(GS, s.object)	
 
+	#movement without verb
+	elif s.verb == 'e':
+		#room name
+		for x in GS.room_list:
+			if s.subject == x.name or s.subject in x.altnames:
+				verb_go(GS, s.subject)
+
+		#direction
+		if s.object in GS.current_room.exits:
+			roomName = GS.current_room.exits.get(s.object)
+			for x in GS.room_list:
+				if x.name == roomName:
+					verb_go(GS, s.object)
 
 
 	else:
