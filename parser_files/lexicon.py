@@ -18,7 +18,6 @@ WORD_TYPES = {
 	#Verbs
 	
     "go" : "verb",
-    "move" : "verb",
     "eat" : "verb",
 	"stop": "verb", 
 	"eat" : "verb", 
@@ -26,9 +25,9 @@ WORD_TYPES = {
 	"lookat": "verb", 
 	"take": "verb", 
 	"help": "verb", 
-	"inventory": "verb", 
-	"save": "verb", 
-	"load": "verb", 
+	"inventory": "verb",
+	"savegame": "verb", 
+	"loadgame": "verb", 
 	"talk": "verb", 
 	"ask": "verb", 
 	"open": "verb", 
@@ -44,11 +43,11 @@ WORD_TYPES = {
 	"eat": "verb", 
 	"drink": "verb",
 	"grab": "verb", 
-	"pickup":"verb", 
-	"exits":"verb", 
-	"items":"verb", 
-	"people":"verb", 
-	"give":"verb", 
+	"give" : "verb",
+	"items" : "verb", 
+	"exit" : "verb", 
+	"people" : "verb", 
+	"pickup":"verb",
 	
 	
 	#Stop words
@@ -233,7 +232,6 @@ WORD_TYPES = {
 	"computerteacher" : "noun", 
 	"teacher" : "noun", 
 	"chemistryteacher" : "noun", 
-	"director" : "noun", 
 	"matches" : "noun", 
 	"lighter" : "noun", 
 	"web pages" : "noun", 
@@ -259,25 +257,62 @@ WORD_TYPES = {
 	"Macs" : "noun", 
 	"floor" : "noun", 
 	"bleachers" : "noun", 
-
+	"Advil" : "noun", 
+	"advil" : "noun", 
+	"Kleenex" : "noun", 
+	"kleenex" : "noun", 
+	"sign" : "noun", 
+	"stall" : "noun",
+	"stalls" : "noun",
+	"soap" : "noun",
+	"sink" : "noun",
+	"sinks" : "noun", 
+	"tables" : "noun",
+	"cash" : "noun",
+	"register" : "noun",
+	"cashregister" : "noun",
+	"banner" : "noun", 
+	"event" : "noun", 
+	"trophies" : "noun", 
+	"trophycase" : "noun", 
+	"awards" : "noun", 
+	"ribbions" : "noun", 
+	"pictures" : "noun", 
+	"lockers" : "noun", 
+	"mop" : "noun", 
+	"bucket" : "noun", 
+	"evidence" : "noun", 
+	"bulletinboard" : "noun", 
+	"picture" : "noun", 
+	"calendar" : "noun", 
+	"displays" : "noun", 
+	"glassdisplays" : "noun", 
+	"posters" : "noun", 
+	"cellphone" : "noun", 
+	"exit" : "noun", 
+	"mainexit" : "noun", 
+	"mainentry" : "noun", 
+	"entry" : "noun", 
+	"notebook" : "noun", 
+	"smalltable" : "noun", 
+	"poster" : "noun", 
+	"piccolo" : "noun", 
+	"conductorbaton" : "noun", 
+	"instrument" : "noun", 
+	"instruments" : "noun", 
+	"diplomas" : "noun", 
+	"certifications" : "noun", 
+	"paper" : "noun", 
+	"paperproducts" : "noun", 
+	"shelves" : "noun", 
+		
 	#rooms
-
-
-	"cafeteria" : "noun",
-	"hallway1" : "noun",
-	"hallway2" : "noun",
-	"hallway3" : "noun",
-	"library" : "noun",
-	"mainoffice" : "noun",
-	"math" : "noun",
-	"music" : "noun",
-	"principaloffice" : "noun",
-	"supplyroom" : "noun",
 	"smellyroom" : "noun",
 	"bathroom" : "noun",
 	"potty" : "noun",
 	"head" : "noun",
-	"pleasentsmellingroom" : "noun", 
+	"pleasentsmellingroom" : "noun",
+	"cafeteria" : "noun", 
 	"cafe" : "noun", 
 	"lunchroom" : "noun", 
 	"scienceroom" : "noun", 
@@ -286,27 +321,12 @@ WORD_TYPES = {
 	"computerroom" : "noun", 
 	"computerlab" : "noun", 
 	"lab" : "noun", 
-	"computer" : "noun", 
-	"Advil" : "noun", 
-	"advil" : "noun", 
-	"Kleenex" : "noun", 
-	"kleenex" : "noun", 
+	"computer" : "noun", 	
 	"cozyoffice" : "noun", 
 	"Counselor" : "noun", 
 	"counseloroffice" : "noun", 
 	"counselor" : "noun", 
-	"counsel" : "noun", 
-	"sign" : "noun", 
-	"stall" : "noun",
-	"stalls" : "noun",
-	"soap" : "noun",
-	"sink" : "noun",
-	"sinks" : "noun", 
-	"table" : "noun",
-	"tables" : "noun",
-	"cash" : "noun",
-	"register" : "noun",
-	"cashregister" : "noun",
+	"counsel" : "noun", 	
 	"detention" : "noun", 
 	"smallroom" : "noun", 
 	"gym" : "noun", 
@@ -314,8 +334,42 @@ WORD_TYPES = {
 	"Gymnasium" : "noun", 
 	"PE" : "noun", 
 	"pe" : "noun", 
-	"funnysmellingroom" : "noun", 
-	
+	"funnysmellingroom" : "noun", 	
+	"hallway1" : "noun", 
+	"brighthallway" : "noun", 
+	"hall1" : "noun", 
+	"northhall" : "noun", 
+	"hallway2" : "noun", 
+	"hall2" : "noun", 
+	"westhall" : "noun", 
+	"dingyhallway" : "noun", 
+	"hallway3" : "noun", 
+	"hall3" : "noun", 
+	"easthall" : "noun", 
+	"cheerfuloffice" : "noun", 
+	"janitoroffice" : "noun", 
+	"massiveroom" : "noun", 
+	"library" : "noun", 
+	"libary" : "noun", 
+	"bookroom" : "noun", 
+	"studyhall" : "noun", 
+	"largeoffice" : "noun", 
+	"mainoffice" : "noun", 
+	"main" : "noun", 
+	"theoffice" : "noun", 
+	"math" : "noun", 
+	"orderlyroom" : "noun", 
+	"mathroom" : "noun", 
+	"music" : "noun", 
+	"acousticroom" : "noun", 
+	"musicroom" : "noun", 
+	"bandroom" : "noun", 
+	"band" : "noun", 
+	"principaloffice" : "noun", 
+	"decoratedoffice" : "noun", 
+	"supplyroom" : "noun", 
+	"disorganizedroom" : "noun", 
+	"supplies" : "noun"
 }
 
 def convert_number(word):
@@ -331,10 +385,6 @@ def scan(sentence):
 	#verbs
 	sentence = sentence.replace('look at', 'lookat')
 	sentence = sentence.replace('pick up', 'pickup')
-	sentence = sentence.replace('savegame', 'save')
-	sentence = sentence.replace('save game', 'save')
-	sentence = sentence.replace('loadgame', 'load')
-	sentence = sentence.replace('load game', 'load')
 	#nouns
 	sentence = sentence.replace('dry erase marker', 'dryerasemarker') #stopped testing here
 	sentence = sentence.replace('gym bag', 'gymbag') 
@@ -353,18 +403,15 @@ def scan(sentence):
 	sentence = sentence.replace('web pages', 'webpages')
 	sentence = sentence.replace('SD card', 'SDcard')
 	sentence = sentence.replace('dry erase board', 'dryeraseboard')
+	sentence = sentence.replace('trophy case', 'trophycase')
+	sentence = sentence.replace('bulletin board', 'bulletinboard')
+	sentence = sentence.replace('glass displays', 'glassdisplays')
+	sentence = sentence.replace('main exit', 'mainexit')
+	sentence = sentence.replace('main entry', 'mainentry') 
+	sentence = sentence.replace('conductor baton', 'conductorbaton')
+	sentence = sentence.replace('duct tape', 'ducttape')	
+	sentence = sentence.replace('paper products', 'paperproducts')
 	#rooms
-	sentence = sentence.replace('hallway 1', 'hallway1')
-	sentence = sentence.replace('hallway 2', 'hallway2')
-	sentence = sentence.replace('hallway 3', 'hallway3')
-	sentence = sentence.replace('main office', 'mainoffice')
-	sentence = sentence.replace('music room', 'music')
-	sentence = sentence.replace('musicroom', 'music')
-	sentence = sentence.replace('math room', 'math')
-	sentence = sentence.replace('mathroom', 'math')
-	sentence = sentence.replace('principal office', 'principaloffice')
-	sentence = sentence.replace('supply office', 'supplyroom')
-	sentence = sentence.replace('supply room', 'supplyroom')
 	sentence = sentence.replace('smelly room', 'smellyroom')
 	sentence = sentence.replace('bath room', 'bathroom')
 	sentence = sentence.replace('smelly room', 'smellyroom')
@@ -379,6 +426,33 @@ def scan(sentence):
 	sentence = sentence.replace('glassware cabinet', 'glasswarecabinet') 
 	sentence = sentence.replace('smalle room', 'smallroom')
 	sentence = sentence.replace('funny smelling room', 'funnysmellingroom') 
+	sentence = sentence.replace('bright hallway', 'brighthallway')
+	sentence = sentence.replace('hallway 1', 'hallway1') 
+	sentence = sentence.replace('hall 1', 'hall1') 
+	sentence = sentence.replace('north hall', 'northhall')
+	sentence = sentence.replace('hallway 2', 'hallway2')
+	sentence = sentence.replace('academichallway', 'academichallway')
+	sentence = sentence.replace('hall 2', 'hall2')
+	sentence = sentence.replace('west hall', 'westhall')
+	sentence = sentence.replace('dingy hall', 'dingyhallway') 
+	sentence = sentence.replace('hallway 3', 'hallway3') 
+	sentence = sentence.replace('hall 3', 'hall3') 
+	sentence = sentence.replace('east hall', 'easthall') 
+	sentence = sentence.replace('cheerful office', 'cheerfuloffice')
+	sentence = sentence.replace('janitor office', 'janitoroffice')
+	sentence = sentence.replace('massive room' , 'massiveroom')
+	sentence = sentence.replace('large office', 'largeoffice') 
+	sentence = sentence.replace('main office', 'mainoffice')
+	sentence = sentence.replace('the office', 'theoffice') 
+	sentence = sentence.replace('orderly room', 'orderlyroom')
+	sentence = sentence.replace('math room', 'mathroom')
+	sentence = sentence.replace('acoustic room', 'acousticroom')
+	sentence = sentence.replace('music room', 'musicroom') 
+	sentence = sentence.replace('band room', 'bandroom') 
+	sentence = sentence.replace('principal office', 'principaloffice')
+	sentence = sentence.replace('decorated office', 'decoratedoffice') 
+	sentence = sentence.replace('supply room', 'supplyroom') 
+	sentence = sentence.replace('disorganized room', 'disorganizedroom') 
 	words = sentence.split()
 	results = []
 
