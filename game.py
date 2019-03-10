@@ -11,6 +11,7 @@ Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 
 import time
 import sys
+import readline
 
 import command
 from parser_files import parser
