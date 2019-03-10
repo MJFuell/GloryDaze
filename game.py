@@ -7,10 +7,14 @@ by: Michael Fuelling
 CS467
 Winter 2019
 Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+
+Credits:
+- https://stackoverflow.com/questions/14796323/input-using-backspace-and-arrow-keys
 '''
 
 import time
 import sys
+import readline
 
 import command
 from parser_files import parser
@@ -82,7 +86,7 @@ def GameLoop(GS):
 		
 		# -------------------- RELEVANT TO GAME.  UNCOMMENT AFTER DEBUG -----------------------------------------
 		#print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
-        #print('')
+		#print('')
 		# -------------------------------------------------------------------------------------------------------		
 
 		GS.elapsed = elapsed
