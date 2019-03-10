@@ -13,6 +13,8 @@ WORD_TYPES = {
 	"back" : "direction",
 	"forward" : "direction",
 	"down" : "direction", 
+	"southwest" : "direction", 
+	"northwest" : "direction", 
 	
 	
 	#Verbs
