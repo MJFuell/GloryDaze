@@ -65,8 +65,12 @@ def verb_inventory(GS, obj):
 
 
 def verb_exits(GS, obj):
-	for val in set(GS.current_room.get_exits().values()):
-		print(val)
+	for x in GS.current_room.exits:
+		if x in directions:
+			print(x + " : " + GS.current_room.exits.get(x))
+
+	#for val in set(GS.current_room.get_exits().values()):
+	#	print(val)
 
 
 def verb_items(GS, obj):
@@ -165,7 +169,7 @@ def verb_lookat(GS, obj):
 			for y in GS.current_room.items:
 				if y == x.name:
 					print(x.long)
-					if x.featBool:
+					if x.featBool == True:
 						print(x.featTrue)
 					else:
 						print(x.featFalse)
@@ -177,7 +181,7 @@ def verb_lookat(GS, obj):
 	for x in GS.inventory:
 		if obj == x.name.lower() or obj in x.altnames:
 			print(x.long)
-			if x.featBool:
+			if x.featBool == 'True':
 				print(x.featTrue)
 			else:
 				print(x.featFalse)
@@ -189,7 +193,7 @@ def verb_lookat(GS, obj):
 		#print('tempName is ' + tempName)
 			for x in GS.char_list:
 				if tempName == x.name:
-					print(tempName + ' - still need to implement character descriptions') #--------------------------------------------------------------------------
+					print(x.desc)
 
 
 
@@ -301,7 +305,22 @@ def verb_drop(GS, obj):
 
 
 def verb_give(GS, obj):
-	print('GIVE not implemented')
+	#print('in give function')
+	give = False
+	if GS.current_room.name in charRoom:
+		#print('current room is in charRoom')
+		for x in GS.inventory:
+			if obj == x.name.lower() or obj in x.altnames:
+				
+
+				print('You are holding that and there is someone to give it too')
+				give = True
+
+
+		if give == False:
+			print('You\'re not holding that')	
+	else:
+		print('There\'s no one here to give that too')		
 
 
 def command(GS, s):
