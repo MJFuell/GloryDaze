@@ -324,6 +324,7 @@ Character object model. Attributes and methods for each character.
 class Character:
     def __init__(self, props):
         self.name        = props["name"]         # name of item like phone
+        self.desc        = props["desc"]         # description of character themselves
         self.long        = props["long"]         # long description
         self.short       = props["short"]        # short description
         self.hint        = props["hint"]         # hint to share with player
@@ -337,12 +338,16 @@ class Character:
         util.scroll3(DELAY, MAXLEN, "Character Info")
         util.scroll3(DELAY, MAXLEN, "--------------")
         util.scroll3(DELAY, MAXLEN, "Name:  {}".format(self.get_name()))
+        util.scroll3(DELAY, MAXLEN, "Desc:  {}".format(self.get_desc()))
         util.scroll3(DELAY, MAXLEN, "Long:  {}".format(self.get_long()))
         util.scroll3(DELAY, MAXLEN, "Short: {}".format(self.get_short()))
         util.scroll3(DELAY, MAXLEN, "Hint:  {}".format(self.get_hint()))
 
     def get_name(self):
         return self.name
+
+    def get_desc(self):
+        return self.desc
 
     def get_long(self):
         return self.long
