@@ -53,6 +53,24 @@ class GameState:
 		"principal" : 0
 	}
 
+	#Story line specifics
+	storyFlags = {    
+	#rooms
+	"Main Office" : 0,
+	"Hallway 2" : 0,
+	"Supply Room" : 0,
+	"Principal Office" : 0,
+	"Hallway 3" : 1,
+
+	#items
+	"piccolo" : 0,
+	"book" : 0,
+
+	"h3c" : 0,
+	"h3sd" : 0
+	}
+
+
 	#conditions
 	win = 0
 	lose = 0
@@ -61,6 +79,17 @@ class GameState:
 	#Initializer
 	def __init__(self):
 		pass
+
+
+# Move save and load here---------------------------------------------------------------------
+def save_game(GS):
+	print('SAVE GAME')
+
+
+def load_game():
+	print('LOAD GAME')
+
+
 
 
 def GameLoop(GS):
@@ -77,16 +106,24 @@ def GameLoop(GS):
 		print(s.verb)
 		print(s.object + '\n')
 
-		command.command(GS, s)
-		print('')		
+		
+		if s.verb == 'save':
+			save_game(GS)
 
+		elif s.verb == 'load':
+			load_game()
+
+		else:
+			command.command(GS, s)
+		
+		print('')		
 
 		elapsed = int(time.time() - start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
 		
 		# -------------------- RELEVANT TO GAME.  UNCOMMENT AFTER DEBUG -----------------------------------------
 		#print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
-		#print('')
+        #print('')
 		# -------------------------------------------------------------------------------------------------------		
 
 		GS.elapsed = elapsed
@@ -100,12 +137,14 @@ def GameLoop(GS):
 			util.print_you_won()
 			print('')
 			print('Your time was', round(GS.elapsed/60, 1), 'minutes.')
+			print('It took you ' + GS.turnCount + ' turns.')
 			print('')
 			quit()
 		elif GS.lose == 1:
 			util.print_sorry_you_lost()
 			print('')
 			print('Your elapsed time was more than 20 minutes.')
+			print('You got this far in ' + GS.turnCount + ' turns.')
 			print('')
 			quit()
 		GS.turnCount += GS.turnCount
@@ -196,11 +235,22 @@ def RunGame(type):
         time.sleep(delay)
         
         print('"Well, ' + gamestate.player.get_name() + ', it\'s 6:30 PM."')
+	time.sleep(delay)
         print('"Detention ended a half hour ago.  Time to go home."')
-        time.sleep(delay + .5)
+        time.sleep(delay + 1)
         
-        print('What? Its 6:30!? My parents are gonna kill me. I better get out of here!\n')
-        time.sleep(delay)
+        print('What? Its 6:30!? My parents are gonna kill me!')
+        time.sleep(delay + 1)
+
+        print('"You better be out of here in 20 minutes or you\'ll be stuck here forever!!! Muahahaha....."')
+        time.sleep(delay + 1)
+
+        print('What happens in 20 minutes? And who is talking???')
+        time.sleep(delay + 1)
+
+        print('I don\'t like this at all. I better get a move on.')
+        time.sleep(delay + 2)
+	print('')
 
 
 
@@ -251,74 +301,79 @@ def MainMenu():
     Calls RunGame() once the user chooses new game or load game.
     """
     util.print_start_menu() # uses menu in ./data/artwk/start_menu
+    
+    selection = input('>')
 
-    try:
-        selection = int(input('>'))
-    except ValueError:
+    selections = ['1', '2', '3', '4', '5']
+    if selection not in selections:
         print('Please input a valid integer 1, 2, 3, or 4')
-        MainMenu()
-
-    if selection == 1:
-        print('Starting NEW GAME')
-        RunGame(0)      
-
-    elif selection == 2:
-        #RunGame(1)
-        print('LOAD GAME not yet implemented.\n')
-        MainMenu()
-
-    elif selection == 3:
-        util.scroll3(0.005, 60, 'GloryDaze is a text only adventure.  '+
-        'That means there are no graphics! Everything about the game '+
-        'will be displayed on the screen. Want to do something? Just '+
-        'type it in! (a ">" symbol means the game is waiting for your '+
-        'input). The game allows for as much natural language as possible '+
-        'but if you\'re having trouble getting around, try shorter sentences '+
-        'like "open door" or "push button". (NOT IMPLEMENTED) At any '+
-        'point during the game, type "savegame" to save your progress '+
-        'or "help" for help.  Have fun!\n')
         print('')
         MainMenu()
+    else:
+        if selection == '1':
+            print('Starting NEW GAME')
+            RunGame(0)      
 
-    elif selection == 4:
-        print('Have a nice day!')
-        quit()
+        elif selection == '2':
+            #RunGame(1)
+            print('LOAD GAME not yet implemented.\n')
+            MainMenu()
 
-    elif selection == 5:
-        #Setup Gamestate
-        gamestate = GameState()
+        elif selection == '3':
+            util.scroll3(0.005, 60, 'GloryDaze is a text only adventure.  '+
+            'That means there are no graphics! Everything about the game '+
+            'will be displayed on the screen. Want to do something? Just '+
+            'type it in!')
+            util.scroll3(0.005, 60, '(a ">" symbol means the game is waiting for your '+
+            'input)')
+            print('')
+            util.scroll3(0.005, 60, 'The game allows for as much natural language as possible '+
+            'but if you\'re having trouble getting around, try shorter sentences '+
+            'like "move south" or "take book".')
+            print('')
+            util.scroll3(0.005, 60, 'At any '+
+            'point during the game, type "save" to save your progress '+
+            'or "help" for help.')
+            print('Have fun!')
+            print('')
+            MainMenu()
 
-        #Setup player
-        p = DF.Player()
-        gamestate.player = p
+        elif selection == '4':
+            print('Have a nice day!')
+            quit()
 
-        #setup room
-        print('\nBuilding rooms from files')
-        room_builder = DF.RoomBuilder()
-        gamestate.room_list = DF.RoomBuilder.load_room_files(room_builder)
-        exit_builder = DF.ExitBuilder()
-        gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
-        item_builder = DF.ItemBuilder()
-        gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
-        char_builder = DF.CharacterBuilder()
-        gamestate.char_list = DF.CharacterBuilder.load_char_files(char_builder)
+        elif selection == '5':
+            #Setup Gamestate
+            gamestate = GameState()
+
+            #Setup player
+            p = DF.Player()
+            gamestate.player = p
+
+            #setup room
+            print('\nBuilding rooms from files')
+            room_builder = DF.RoomBuilder()
+            gamestate.room_list = DF.RoomBuilder.load_room_files(room_builder)
+            exit_builder = DF.ExitBuilder()
+            gamestate.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
+            item_builder = DF.ItemBuilder()
+            gamestate.item_list = DF.ItemBuilder.load_item_files(item_builder)
+            char_builder = DF.CharacterBuilder()
+            gamestate.char_list = DF.CharacterBuilder.load_char_files(char_builder)
 	
-        #print('\nChecking rooms loaded into gamestate:')
-        #for x in gamestate.room_list:
+            #print('\nChecking rooms loaded into gamestate:')
+            #for x in gamestate.room_list:
             #print(x.name)
 
-        #Start in detention
-        for x in gamestate.room_list:
-            if x.name == 'Detention':
-                gamestate.current_room = x
-                gamestate.current_room.visited = True
-        print('\nCurrent room is: ' + gamestate.current_room.name)
-        gamestate.player.set_name('TEST')
-        GameLoop(gamestate)
+            #Start in detention
+            for x in gamestate.room_list:
+                if x.name == 'Detention':
+                    gamestate.current_room = x
+                    gamestate.current_room.visited = True
+            print('\nCurrent room is: ' + gamestate.current_room.name)
+            gamestate.player.set_name('TEST')
+            GameLoop(gamestate)
 
-    else:
-        print('Please input a valid integer 1, 2, 3, or 4')
-        MainMenu()
 
 
 # Title, which calls MainMenu, instead of MainMenu here allows
