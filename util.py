@@ -11,6 +11,9 @@ Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 main() contains some test code for some of the utility functions.
     when imported into another python module main() will not execute.
     main() illustrates how to use the utility functions.
+
+Credits:
+- https://stackoverflow.com/questions/287871/print-in-terminal-with-colors
 '''
 
 import pickle
@@ -22,6 +25,19 @@ import os
 
 DELAY = 0.001    # make this smaller for a faster scroll
 MAXLEN = 80      # maximum line length to print
+
+formatters = {
+    'RED'    : '\033[91m',
+    'GREEN'  : '\033[92m',
+    'YELLOW' : '\033[93m',
+    'BLUE'   : '\033[94m',
+    'VIOLET' : '\033[95m',
+    'CYAN'   : '\033[96m',
+    'END'    : '\033[0m',
+    'BOLD'   : '\033[1m',
+    'BLINK'  : '\033[5m',
+    'BLINK2' : '\033[6m',
+}
 
 ''' accepts text especially large text and will textwrap up to max_length. '''
 ''' wraps scroll2() to eliminate its awkward syntax '''
@@ -69,39 +85,56 @@ def load(object):
 def print_title():
     f = open('./data/artwk/title', 'r')
     file_contents = f.read()
+    print('{BLINK}'.format(**formatters))
+    print('{BLUE}'.format(**formatters))
+    print('{BOLD}'.format(**formatters))
     print(file_contents)
+    print('{BLINK2}'.format(**formatters))
+    print('{END}'.format(**formatters))
     f.close()
 
 ''' print title '''
 def print_start_menu():
     f = open('./data/artwk/start_menu', 'r')
     file_contents = f.readlines()
+    print('{VIOLET}'.format(**formatters))
+    print('{BOLD}'.format(**formatters))
     # print(file_contents)
     for line in file_contents:
         #print("file: ", file)
         print(line.strip('|\n').center(60))
     f.close()
+    print('{END}'.format(**formatters))
 
 ''' print you won '''
 def print_you_won():
     f = open('./data/artwk/winner', 'r')
+    print('{GREEN}'.format(**formatters))
+    print('{BOLD}'.format(**formatters))
     file_contents = f.read()
     print(file_contents)
     f.close()
+    print('{END}'.format(**formatters))
 
 ''' print sorry you lost '''
 def print_sorry_you_lost():
     f = open('./data/artwk/sorry', 'r')
+    print('{RED}'.format(**formatters))
+    print('{BOLD}'.format(**formatters))
     file_contents = f.read()
     print(file_contents)
     f.close()
+    print('{END}'.format(**formatters))
 
 ''' print ascii artwork for rooms by passing in their name '''
 def print_ascii_art(name):
     f = open(name, 'r')
+    print('{BLUE}'.format(**formatters))
+    print('{BOLD}'.format(**formatters))
     file_contents = f.read()
     print(file_contents)
     f.close()
+    print('{END}'.format(**formatters))
 
 ''' true or false - is terminal line size greater than check value '''
 def term_lines_gt(check):
