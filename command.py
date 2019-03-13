@@ -13,18 +13,25 @@ charRoom = {
     "Principal Office" : "principal"
 }
 
+
+#text for failing story line specifics
+storyFlagText = {
+    #rooms
+    "Main Office" : "That room is locked.  It seems to require a keycard to get in.",
+    "Hallway 2" : "You notice a cart full of books in the way.\nLibrarian: 'I'll move those books in a little bit!  Why don't you go talk to other teachers in the mean time.",
+    "Supply Room" : "Janitor: 'Hey kid! Don't you dare go in there without talking to me first!!!'",
+    "Principal Office" :"That room is locked.",
+    "Hallway 3" : "You should probably wash your hands first...",
+
+    #items
+    "piccolo" : "Director: 'Don't go messing around with my instruments! Maybe once i'm done with this you can take one.'",
+    "book" : "Librarian: 'I'm in no mood to let you take my stuff!!'",
+}
+
+
+dodge = ['dodge', 'duck', 'dip', 'dive']
+
 err = "Can't do that"
-
-def verb_save(GS, obj):
-	print('SAVE not implemented')
-	#Save all game info to save files/directory
-	#let the user know the game has been saved
-
-def verb_load(GS, obj):
-	print('LOAD not implemented')
-	#Ask the user if they are sure they want to load as it will overwrite current progress
-	#load data into new gamestate
-	#call gameLoop() with loaded gamestate
 
 def verb_help(GS, obj):
 	print('           ------------ HELP SCREEN ------------')
@@ -45,9 +52,11 @@ def verb_help(GS, obj):
 	print('look at ___ - view a description of a particular thing')
 	print('go ___      - move a particular direction or to a particular room')
 	print('take ___    - add an item to your inventory')
-	print('drop ___    - leave something in your inventory in the current room')
+	print('drop ___    - leave something from your inventory in the current room')
 	print('talk ___    - talk to someone')
 	print('ask ___     - ask someone for help')
+	print('give ___    - give something to whoever is in the room')
+	print('use ___     - use an item you are holding')
 	
 
 	
@@ -94,6 +103,7 @@ def verb_people(GS, obj):
 
 def verb_go(GS, obj):
 	move = False
+	tempRoom = None
 
 	#Room name or alt room name
 	#Make sure that room is adjacent
@@ -103,7 +113,7 @@ def verb_go(GS, obj):
 		if obj == x.name.lower() or obj in x.altnames:
 			#print('x is ' + x.name)
 			if x.name in GS.current_room.exits.values():
-				GS.current_room = x
+				tempRoom = x
 				move = True
 
 			
@@ -113,11 +123,19 @@ def verb_go(GS, obj):
 		roomName = GS.current_room.exits.get(obj)
 		for x in GS.room_list:
 			if x.name == roomName:
-				GS.current_room = x
+				tempRoom = x
 				move = True
+
+	#if story line prevents us from being able to move there
+	if move == True:
+		if tempRoom.name in GS.storyFlags:
+			if GS.storyFlags.get(tempRoom.name) == 0:
+				print(storyFlagText.get(tempRoom.name))
+				move = False
 
 	#If we successfully moved rooms
 	if move == True:
+		GS.current_room = tempRoom
 		print('-' * 70, '\n\n\n')
 		exits = GS.current_room.get_exits()
 		#print('Moved to ' + GS.current_room.get_name())
@@ -214,6 +232,7 @@ def verb_take(GS, obj):
 	
 	#Make sure its in the room
 	take = False
+	sl = False
 	tempItem = None
 	for x in GS.current_room.items:						#look at all the names of items in the room
 		for y in GS.item_list:						#and all the items in the master item_list
@@ -222,22 +241,31 @@ def verb_take(GS, obj):
 					tempItem = y				#save the item
 					take = True				#say we're going to take it
 
-	#Item wasn't found in this room
-	if take == False:
-		print('Can\'t find that here.')
 
-	else:
-		if tempItem.name == 'backpack':
-			if GS.backpack == True:
-				print('You are already holding that')
-			else:
-				GS.backpack = True
-				util_verb_take(GS, tempItem)
+	if take == True:
+		if tempItem.name in GS.storyFlags:
+			if GS.storyFlags.get(tempItem.name) == 0:
+				print(storyFlagText.get(tempItem.name))
+				sl = True
+
+	#if no storyline interuption
+	if sl == False:
+		#Item wasn't found in this room
+		if take == False:
+			print('Can\'t find that here.')
+
 		else:
-			if GS.backpack == False:
-				print('You need somewhere to put that...')
+			if tempItem.name == 'backpack':
+				if GS.backpack == True:
+					print('You are already holding that')
+				else:
+					GS.backpack = True
+					util_verb_take(GS, tempItem)
 			else:
-				util_verb_take(GS, tempItem)
+				if GS.backpack == False:
+					print('You need somewhere to put that...')
+				else:
+					util_verb_take(GS, tempItem)
 		
 
 
@@ -304,6 +332,20 @@ def verb_drop(GS, obj):
 		print('You\'re not holding that')			
 
 
+
+def dodgeball(GS):
+	print('The varisty dodgeball team hurls balls at you.')
+	print('What do you do to avoid them?!?')
+	uInput = input('>')
+	if uInput.lower() in dodge:
+		print('Coach: "Great job, ' + GS.player.get_name() + '. You made me proud.  Go ahead and get outta here."')
+	else:
+		print('Multiple dodgeballs strike you in the face, liver, kidneys, and spleen. You are knocked unconscious for 5 minutes.')
+		print('Coach: "Woah kid are you alright? You really need to watch the movie Dodgeball."')
+		print('Coach: "Get outta here before you hurt yourself again, ' + GS.player.get_name() + '!"')
+		print('IMPLEMENT TIME PENALTY') #----------------------------------------------------------------------------------------------------------------------
+
+
 def verb_give(GS, obj):
 	#print('in give function')
 	give = False
@@ -311,11 +353,48 @@ def verb_give(GS, obj):
 		#print('current room is in charRoom')
 		for x in GS.inventory:
 			if obj == x.name.lower() or obj in x.altnames:
-				
-
 				print('You are holding that and there is someone to give it too')
-				give = True
-
+				if GS.current_room.name == 'Gym':
+					for x in GS.inventory:
+						if x.name == "water bottle":
+							tempItem = x
+							if obj == x.name.lower() or obj in x.altnames:
+								for y in GS.inventory:
+									if y.name == "water bottle":
+										GS.inventory.remove(y)
+								print('You give your water bottle to the coach.')
+								print('Coach: "Thanks! I really needed that.  Now that I\'m feeling better.... DODGEBALL"')
+								GS.storyFlags['h3c'] = 1
+								give = True
+								dodgeball(GS)
+				elif GS.current_room == "Music":
+					for x in GS.inventory:
+						if x.name == "calculator":
+							tempItem = x
+							if obj == x.name.lower() or obj in x.altnames:
+								for y in GS.inventory:
+									if y.name == "calculator":
+										GS.inventory.remove(y)
+								print('You give your calculator to the director.')
+								print('Director: "Wow thanks so much! This will help a bunch."')
+								print('Director: "Go ahead and take that piccolo if you want to bang out some sick tunes"')
+								GS.storyFlags['piccolo'] = 1
+								give = True
+				elif GS.current_room == "Library":
+					for x in GS.inventory:
+						if x.name == "piccolo":
+							tempItem = x
+							if obj == x.name.lower() or obj in x.altnames:
+								for y in GS.inventory:
+									if y.name == "piccolo":
+										GS.inventory.remove(y)
+								print('You give your piccolo to the librarian.')
+								print('Librarian: "OOOoooOOooooo for ME?! Thank you so much!!!"')
+								print('Librarian: "Sorry if i\'ve been rude to you before.  Take all the books you like!"')
+								GS.storyFlags['book'] = 1
+								give = True
+				else:
+					print('No one here wants that')
 
 		if give == False:
 			print('You\'re not holding that')	
@@ -323,14 +402,31 @@ def verb_give(GS, obj):
 		print('There\'s no one here to give that too')		
 
 
+def verb_use(GS, obj):
+	print('USE: need to implement more items to hold and things in the room')
+	have = False
+
+	#Things you're holding
+	for x in GS.item_list:
+		if x.name == item.name:
+			if item.name == 'book':
+				print('When you open the book you notice a keycard is inside.')
+				GS.storyFlags["Main Office"] = 1
+				have = True
+			
+
+
+
+			else:
+				print('There\'s nothing you can do with that right now')
+
+	if have == False:
+		print('You\'re not holding that')
+				
+
+
 def command(GS, s):
 	if s.subject == 'player':
-
-		if s.verb == 'save':
-			verb_save(GS, s.object)
-
-		if s.verb == 'load':
-			verb_load(GS, s.object)
 
 		if s.verb == 'help':
 			verb_help(GS, s.object)
@@ -378,11 +474,16 @@ def command(GS, s):
 		if s.verb == 'give':
 			verb_give(GS, s.object)	
 
+		if s.verb == 'use':
+			verb_use(GS, s.object)	
+
 	#movement without verb
 	elif s.verb == 'e':
+		moved = False
 		#room name
 		for x in GS.room_list:
 			if s.subject == x.name or s.subject in x.altnames:
+				moved = True
 				verb_go(GS, s.subject)
 
 		#direction
@@ -390,9 +491,12 @@ def command(GS, s):
 			roomName = GS.current_room.exits.get(s.object)
 			for x in GS.room_list:
 				if x.name == roomName:
+					moved = True
 					verb_go(GS, s.object)
 
 
+		if moved == False:
+			print('I Don\'t understand')
 	else:
 		print('I Don\'t understand')
 
