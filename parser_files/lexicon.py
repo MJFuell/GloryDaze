@@ -13,8 +13,8 @@ WORD_TYPES = {
 	"back" : "direction",
 	"forward" : "direction",
 	"down" : "direction", 
-	"southwest" : "direction", 
 	"northwest" : "direction", 
+	"southwest" : "direction",
 	
 	
 	#Verbs
@@ -56,6 +56,7 @@ WORD_TYPES = {
 	"exits" : "verb", 
 	"people" : "verb", 
 	"pickup":"verb",
+	"debug":"verb",
 	
 	
 	#Stop words
@@ -314,6 +315,11 @@ WORD_TYPES = {
 	"paper" : "noun", 
 	"paperproducts" : "noun", 
 	"shelves" : "noun", 
+	"bottle" : "noun", 
+	"q" : "noun", 
+	"quit" : "noun", 
+	"sdcard" : "noun", 
+	"toilet" : "noun", 
 		
 	#rooms
 	"smellyroom" : "noun",
@@ -424,6 +430,7 @@ def scan(sentence):
 	sentence = sentence.replace('conductor baton', 'conductorbaton')
 	sentence = sentence.replace('duct tape', 'ducttape')	
 	sentence = sentence.replace('paper products', 'paperproducts')
+	sentence = sentence.replace('sd card', 'sdcard')
 	#rooms
 	sentence = sentence.replace('smelly room', 'smellyroom')
 	sentence = sentence.replace('bath room', 'bathroom')
@@ -447,6 +454,7 @@ def scan(sentence):
 	sentence = sentence.replace('hall 2', 'hall2')
 	sentence = sentence.replace('west hall', 'westhall')
 	sentence = sentence.replace('dingy hall', 'dingyhallway') 
+	sentence = sentence.replace('dingy hallway', 'dingyhallway') 
 	sentence = sentence.replace('hallway 3', 'hallway3') 
 	sentence = sentence.replace('hall 3', 'hall3') 
 	sentence = sentence.replace('east hall', 'easthall') 
