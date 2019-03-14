@@ -67,7 +67,9 @@ class GameState:
 	"book" : 0,
 
 	"h3c" : 0,
-	"h3sd" : 0
+	"h3sd" : 0,
+
+	"sdgive" : 0
 	}
 
 
@@ -75,6 +77,8 @@ class GameState:
 	win = 0
 	lose = 0
 	turnCount = 0
+
+	endGame = 0
 
 	#Initializer
 	def __init__(self):
@@ -106,8 +110,10 @@ def GameLoop(GS):
 		print(s.verb)
 		print(s.object + '\n')
 
-		
-		if s.verb == 'save':
+		if GS.endGame == 1:
+			GS.win = 1;
+
+		elif s.verb == 'save':
 			save_game(GS)
 
 		elif s.verb == 'load':
@@ -115,7 +121,10 @@ def GameLoop(GS):
 
 		else:
 			command.command(GS, s)
-		
+	
+		if GS.endGame == 1:
+			GS.win = 1;
+	
 		print('')		
 
 		elapsed = int(time.time() - start)
@@ -133,21 +142,22 @@ def GameLoop(GS):
 		# GS.win = 1 # test win condition,  TODO to set it up
 
 		#End of turn maintenance
+		GS.turnCount += GS.turnCount
 		if GS.win == 1:
 			util.print_you_won()
 			print('')
 			print('Your time was', round(GS.elapsed/60, 1), 'minutes.')
-			print('It took you ' + GS.turnCount + ' turns.')
+			print('It took you ' + str(GS.turnCount) + ' turns.')
 			print('')
 			quit()
 		elif GS.lose == 1:
 			util.print_sorry_you_lost()
 			print('')
 			print('Your elapsed time was more than 20 minutes.')
-			print('You got this far in ' + GS.turnCount + ' turns.')
+			print('You got this far in ' + str(GS.turnCount) + ' turns.')
 			print('')
 			quit()
-		GS.turnCount += GS.turnCount
+		
         
 		'''
 		print('')
@@ -171,7 +181,7 @@ def RunGame(type):
         gamestate.player = p
 
         #setup rooms
-        print('\nBuilding rooms from files')
+        #print('\nBuilding rooms from files')
         room_builder = DF.RoomBuilder()
         gamestate.room_list = DF.RoomBuilder.load_room_files(room_builder)
         exit_builder = DF.ExitBuilder()
@@ -191,11 +201,11 @@ def RunGame(type):
             if x.name == 'Detention':
                 gamestate.current_room = x
                 gamestate.current_room.visited = True
-        print('\nCurrent room is: ' + gamestate.current_room.name)
+        #print('\nCurrent room is: ' + gamestate.current_room.name)
 
         
         #Play opener to get player name
-        print('\nNEW GAME OPENER:\n')
+        #print('\nNEW GAME OPENER:\n')
         delay = 1.5
         
         opener1 = '"Hey."\n'
@@ -235,7 +245,7 @@ def RunGame(type):
         time.sleep(delay)
         
         print('"Well, ' + gamestate.player.get_name() + ', it\'s 6:30 PM."')
-	time.sleep(delay)
+        time.sleep(delay)
         print('"Detention ended a half hour ago.  Time to go home."')
         time.sleep(delay + 1)
         
@@ -250,7 +260,7 @@ def RunGame(type):
 
         print('I don\'t like this at all. I better get a move on.')
         time.sleep(delay + 2)
-	print('')
+        print('')
 
 
 
@@ -260,7 +270,9 @@ def RunGame(type):
 
     
     #Print room description so user knows where they are and start looping for input
-    print('You are in ' + gamestate.current_room.get_name())
+    print('-' * 70, '\n\n\n')
+	#print('Moved to ' + GS.current_room.get_name())
+    util.print_ascii_art('./data/artwk/' + gamestate.current_room.get_name())
     print('')
     util.scroll3(0.01, 60, gamestate.current_room.get_long())
     print('')
