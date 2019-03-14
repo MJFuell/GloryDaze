@@ -1,7 +1,7 @@
 {
     "name"  : "counselor",
     "desc"  : "You see a calm, casual person with a kind face and smile who seems interested in helping you.",
-    "long"  : "Well hello. Thank you for finding that. I see people have been looking for me. That explains why it has been so quiet. But why are you still here? Oh, fell asleep in detention. And wandering around the school trying to find a way out. Yes the office pass system is new and it is not optimized yet.",
-    "short" : "Please go see the Principal to get out of the school building and to review the things you collected in your backpack.",
-    "hint"  : "Let the Principal look at the things in your backpack and let you out of the building."
+    "long"  : "Well hello. I see people have been looking for me. That explains why it has been so quiet. But why are you still here? Oh, fell asleep in detention. And wandering around the school trying to find a way out. I'd help you but I'm busy looking for my cell phone.",
+    "short" : "It sure is quiet here.  Sorry you've been so lost.  I'll help you get home once I find my cell phone.",
+    "hint"  : "Thank you so much for helping me out! I used my key fob to unlock the principal's office for you.  Go talk to him and he'll let you out of the school."
 }
