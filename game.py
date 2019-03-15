@@ -346,6 +346,9 @@ def MainMenu():
             util.scroll3(0.005, 60, 'At any '+
             'point during the game, type "save" to save your progress '+
             'or "help" for help.')
+            print('')
+            util.scroll3(0.005, 60, 'Finally, your terminal may allow you to scroll up'+
+            'to see your past actions which may help you. :)')
             print('Have fun!')
             print('')
             MainMenu()

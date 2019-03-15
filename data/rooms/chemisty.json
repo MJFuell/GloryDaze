@@ -10,14 +10,14 @@
     "items"    : ["camera"],
     "features" : {  "table" : "Nothing exciting on the tables.",
                     "tables" : "Nothing exciting on the tables.",
-                    "lab table" : "There is a camera and a camera manual here.",
+                    "labtable" : "There is a camera and a camera manual here.",
                     "desk" : "The desks are all empty and tidy.",
                     "desks" : "The desks are all empty and tidy.",
                     "board" : "The days reading, homework, and lab assignments are listed. Everything else was erased.",
-                    "dry erase board" : "The days reading, homework, and lab assignments are listed. Everything else was erased.",
+                    "dryeraseboard" : "The days reading, homework, and lab assignments are listed. Everything else was erased.",
                     "cabinet" : "In addition to the glassware and chemicals, there is a shelf with an empty camera box.",
-                    "yellow cabinet" : "In addition to the glassware and chemicals, there is a shelf with an empty camera box.",
-                    "glassware cabinet" : "In addition to the glassware and chemicals, there is a shelf with an empty camera box.",
+                    "yellowcabinet" : "In addition to the glassware and chemicals, there is a shelf with an empty camera box.",
+                    "glasswarecabinet" : "In addition to the glassware and chemicals, there is a shelf with an empty camera box.",
                     "glassware" : "In addition to the glassware and chemicals, there is a shelf with an empty camera box."
                  },
     "visited"  : false

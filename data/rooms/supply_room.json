@@ -10,7 +10,7 @@
     "items"    : ["duct tape"],
     "features" : {  "supplies" : "Besides cleaning and paper products, you see oddly enough, duct tape.",
                     "paper" : "In front of paper products are rolls of duct tape.",
-                    "paper products" : "In front of paper products are rolls of duct tape.",
+                    "paperproducts" : "In front of paper products are rolls of duct tape.",
                     "floor" : "There are stains from various cleaning supplies that accidentally leaked.",
                     "shelves" : "There are stains from various cleaning supplies that accidentally leaked."
                  },
