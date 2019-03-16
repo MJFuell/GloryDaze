@@ -2,6 +2,10 @@
 
 import util
 
+DELAY = 0.01    # make this smaller for a faster scroll
+MAXLEN = 70     # maximum line length to print
+
+
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
 charRoom = {
     "Gym" : "coach",
@@ -207,30 +211,30 @@ def verb_go(GS, obj):
 		util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
 		print('')
 		if GS.current_room.visited:
-			util.scroll3(0.01, 60, GS.current_room.get_short())
+			util.scroll3(DELAY, MAXLEN, GS.current_room.get_short())
 			print('')
 			for item in GS.current_room.get_items():
 				for x in GS.item_list:
 					if x.name == item or item in x.altnames:
-						util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+						util.scroll3(DELAY, MAXLEN, "{}".format(x.get_avail()))
 						print('')
 			for exits_dir, exits_room in exits.items():
 				for x in GS.exit_list:
 					if x.name == exits_room and exits_dir in directions:
-						util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
+						util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_short(),exits_dir))
 						print('')
 		else:
-			util.scroll3(0.01, 60, GS.current_room.get_long())
+			util.scroll3(DELAY, MAXLEN, GS.current_room.get_long())
 			print('')
 			for item in GS.current_room.get_items():
 				for x in GS.item_list:
 					if x.name == item or item in x.altnames:
-						util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+						util.scroll3(DELAY, MAXLEN, "{}".format(x.get_avail()))
 						print('')
 			for exits_dir, exits_room in exits.items():
 				for x in GS.exit_list:
 					if x.name == exits_room and exits_dir in directions:
-						util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
+						util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_long(),exits_dir))
 						print('')
 		GS.current_room.visited = True
 
@@ -257,7 +261,7 @@ def verb_go(GS, obj):
 
 def verb_look(GS, obj):
 	#If no object, print long description of room
-	print(GS.current_room.long)
+	util.scroll3(DELAY, MAXLEN, GS.current_room.long)
 
 
 
@@ -269,25 +273,25 @@ def verb_lookat(GS, obj):
 			look = True
 			for y in GS.current_room.items:
 				if y == x.name:
-					print(x.long)
+					util.scroll3(DELAY, MAXLEN, x.long)
 					if x.featBool == True:
-						print(x.featTrue)
+						util.scroll3(DELAY, MAXLEN, x.featTrue)
 					else:
-						print(x.featFalse)
+						util.scroll3(DELAY, MAXLEN, x.featFalse)
 	#features
 	if obj in GS.current_room.features:
 		look = True
-		print(GS.current_room.features.get(obj))
+		util.scroll3(DELAY, MAXLEN, GS.current_room.features.get(obj))
 
 	#inventory
 	for x in GS.inventory:
 		if obj == x.name.lower() or obj in x.altnames:
 			look = True
-			print(x.long)
+			util.scroll3(DELAY, MAXLEN, x.long)
 			if x.featBool == 'True':
-				print(x.featTrue)
+				util.scroll3(DELAY, MAXLEN, x.featTrue)
 			else:
-				print(x.featFalse)
+				util.scroll3(DELAY, MAXLEN, x.featFalse)
 
 	#characters
 	if GS.current_room.name in charRoom:
@@ -297,7 +301,7 @@ def verb_lookat(GS, obj):
 		#print('tempName is ' + tempName)
 			for x in GS.char_list:
 				if tempName == x.name:
-					print(x.desc)
+					util.scroll3(DELAY, MAXLEN, x.desc)
 
 	if look == False:
 		print('Can\'t see that')
@@ -370,20 +374,20 @@ def verb_talk(GS, obj):
 			if obj == x.name:
 				if x.name == 'librarian':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 					elif GS.talk_count.get(x.name) == 1:
-						print(x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print(x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 
 				elif x.name == 'counselor':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 						GS.talk_count[x.name] = 1
 					elif GS.talk_count[x.name] == 1:
-						print (x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print (x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 
 				elif x.name == 'principal':
 					end_game(GS)
@@ -392,10 +396,10 @@ def verb_talk(GS, obj):
 					if x.name == 'janitor':
 						GS.storyFlags['Supply Room'] = 1
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 						GS.talk_count[x.name] = 1
 					else:
-						print(x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 	
 	else:
 		print('That person isn\'t in this room')
@@ -409,27 +413,27 @@ def verb_ask(GS, obj):
 			if obj == x.name:
 				if x.name == 'librarian':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 					elif GS.talk_count.get(x.name) == 1:
-						print(x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print(x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 				
 				elif x.name == 'counselor':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 						GS.talk_count[x.name] = 1
 					elif GS.talk_count[x.name] == 1:
-						print (x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print (x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 
 
 				elif x.name == 'principal':
 					end_game(GS)
 
 				else:
-					print(x.hint)
+					util.scroll3(DELAY, MAXLEN, x.hint)
 	else:
 		print('That person isn\'t in this room')
 
@@ -551,7 +555,7 @@ def verb_use(GS, obj):
 	for x in GS.inventory:
 		if x.name == obj or obj in x.altnames:
 			if x.name == 'book':
-				print('When you open the book you notice a key fob is inside. You press it and hear a door unlock somewhere.')
+				util.scroll3(DELAY, MAXLEN, 'When you open the book you notice a key fob is inside. You press it and hear a door unlock somewhere.')
 				GS.storyFlags["Main Office"] = 1
 				have = True
 
@@ -575,7 +579,7 @@ def verb_use(GS, obj):
 				cam = False
 				for y in GS.inventory:
 					if y.name == 'camera':
-						print('You load the SD card into the camera and find rather scanadlous photos of a man wearing nothing but holding a mug that says "World\'s best principal"')
+						util.scroll3(DELAY, MAXLEN, 'You load the SD card into the camera and find rather scandalous photos of a man wearing nothing but holding a mug that says "World\'s best principal"')
 						cam = True
 				if cam == False:
 					print('You have nothing to view that with')
