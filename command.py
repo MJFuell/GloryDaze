@@ -99,7 +99,7 @@ def verb_help(GS, obj):
 	print('In order to do that you\'ll need to interact with items and people.')
 	print('Here\'s a few verbs to help you get around:')
 	print('')
-	print('save        - save your current progress (only one save file can exist at a time)')
+	print('save        - save your current progress (only one save file exists at a time)')
 	print('load        - end your current game and load from a saved file')
 	print('help        - print this help screen')
 	print('')
