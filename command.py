@@ -263,8 +263,10 @@ def verb_look(GS, obj):
 
 def verb_lookat(GS, obj):
 	#items in the room
+	look = False
 	for x in GS.item_list:
 		if obj == x.name.lower() or obj in x.altnames:
+			look = True
 			for y in GS.current_room.items:
 				if y == x.name:
 					print(x.long)
@@ -274,11 +276,13 @@ def verb_lookat(GS, obj):
 						print(x.featFalse)
 	#features
 	if obj in GS.current_room.features:
+		look = True
 		print(GS.current_room.features.get(obj))
 
 	#inventory
 	for x in GS.inventory:
 		if obj == x.name.lower() or obj in x.altnames:
+			look = True
 			print(x.long)
 			if x.featBool == 'True':
 				print(x.featTrue)
@@ -289,11 +293,14 @@ def verb_lookat(GS, obj):
 	if GS.current_room.name in charRoom:
 		tempName = charRoom.get(GS.current_room.name)
 		if obj == tempName:
+			look = True
 		#print('tempName is ' + tempName)
 			for x in GS.char_list:
 				if tempName == x.name:
 					print(x.desc)
 
+	if look == False:
+		print('Can\'t see that')
 
 
 def util_verb_take(GS, item):
