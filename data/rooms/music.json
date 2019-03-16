@@ -9,7 +9,7 @@
                  },
     "items"    : ["piccolo"],
     "features" : {  "baton" : "The baton seems unusually heavy and made of an exotic material. It is not cheap plastic. The owner must be accomplished.",
-                    "conductor baton" : "The baton seems unusually heavy and made of an exotic material. It is not cheap plastic. The owner must be accomplished.",
+                    "conductorbaton" : "The baton seems unusually heavy and made of an exotic material. It is not cheap plastic. The owner must be accomplished.",
                     "instrument" : "All instruments are kept polished and shiny even though they have their share of dents. All except an old piccolo in the back corner.",
                     "instruments" : "All instruments are kept polished and shiny even though they have their share of dents. All except an old piccolo in the back corner.",
                     "locker" : "The lockers are all need a bit of cleaning. This room is heavily used.",

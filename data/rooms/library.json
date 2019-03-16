@@ -16,8 +16,9 @@
     "items"    : ["book"],
     "features" : {  "desk" : "There are books to be shelved here, and books on hold to be checked out. There are special edition books here on reserve.",
                     "displays" : "These are historical objects to entice and encourage student interest in reading.",
-                    "glass displays" : "These are historical objects to entice and encourage student interest in reading.",
-                    "posters" : "Many alternate strategies are employed by the posters to spark reading, biographical, science, arts, sports, history, and more."
+                    "glassdisplays" : "These are historical objects to entice and encourage student interest in reading.",
+                    "posters" : "Many alternate strategies are employed by the posters to spark reading, biographical, science, arts, sports, history, and more.",
+                    "poster" : "Many alternate strategies are employed by the posters to spark reading, biographical, science, arts, sports, history, and more."
                  },
     "visited"  : false
 }

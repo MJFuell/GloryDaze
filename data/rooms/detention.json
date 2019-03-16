@@ -9,7 +9,7 @@
                  },
     "items"    : ["backpack"],
     "features" : {  "board" : "The white board says: You are in DETENTION so BE QUIET and DO your homework. Do NOT forget to take your homework and books when you leave!!",
-                    "white board" : "The white board says: You are in DETENTION so BE QUIET and DO your homework. Do NOT forget to take your homework and books when you leave!!",
+                    "whiteboard" : "The white board says: You are in DETENTION so BE QUIET and DO your homework. Do NOT forget to take your homework and books when you leave!!",
                     "door" : "The door is closed. You can see an empty hallway through the window."
                  },
     "visited"  : false

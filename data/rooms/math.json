@@ -9,11 +9,11 @@
                  },
     "items"    : ["calculator"],
     "features" : {  "table" : "Someone left a calculator.",
-                    "small table" : "Someone left a calculator.",
+                    "smalltable" : "Someone left a calculator.",
                     "desk" : "The desks are all empty and tidy.",
                     "desks" : "The desks are all empty and tidy.",
                     "board" : "The days homework is listed. Example problems are worked on the board.",
-                    "dry erase board" : "The days homework is listed. Example problems are worked on the board.",
+                    "dryeraseboard" : "The days homework is listed. Example problems are worked on the board.",
                     "poster" : "Some posters are more like infographics for how to solve problems. Some are biographies of famous mathematicians.",
                     "posters" : "Some posters are more like infographics for how to solve problems. Some are biographies of famous mathematicians."
                  },
