@@ -13,7 +13,8 @@
                     "stalls" : "The sign at the far end reads OUT OF ORDER, and there is some water on the floor. The stall closest to the door seems ok.",
                     "soap" : "The sink closest to the door has soap in its soap dispenser.",
                     "sink" : "The sink closest to the door has soap in its soap dispenser.",
-                    "sinks" : "The sink closest to the door has soap in its soap dispenser."
+                    "sinks" : "The sink closest to the door has soap in its soap dispenser.",
+                    "toilet" : "The only toilet that looks remotely usable, even though it is still quite messy."
                  },
     "visited"  : false
 }
