@@ -1,3 +1,16 @@
+'''
+lexicon.py
+Defines words the game recognizes in sentences or rather commands
+entered by the user. Scanner lower cases text, recognizes words and
+word phrases having spaces, and determines their types, such as verb
+and noun, for the parser.
+by: Jordan Riojas
+
+CS467
+Winter 2019
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+'''
+
 WORD_TYPES = {
 
 	#Directions

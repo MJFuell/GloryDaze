@@ -1,3 +1,14 @@
+'''
+parser.py
+Passes sentences or rather command phrases to the lexicon and utilizes
+the results to determine action command and subject for the game engine.
+by: Jordan Riojas
+
+CS467
+Winter 2019
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+'''
+
 class ParserError(Exception):
     pass
 

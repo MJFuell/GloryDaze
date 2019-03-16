@@ -1,4 +1,12 @@
+'''
+command.py
+command processor of the game engine.
+by: Michael Fuelling
 
+CS467
+Winter 2019
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+'''
 
 import util
 

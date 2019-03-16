@@ -6,7 +6,7 @@ by: Richard Ratliff
 
 CS467
 Winter 2019
-Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 
 main() contains some test code for some of the utility functions.
     when imported into another python module main() will not execute.
