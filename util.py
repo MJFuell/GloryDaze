@@ -6,7 +6,7 @@ by: Richard Ratliff
 
 CS467
 Winter 2019
-Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 
 main() contains some test code for some of the utility functions.
     when imported into another python module main() will not execute.
@@ -85,20 +85,20 @@ def load(object):
 def print_title():
     f = open('./data/artwk/title', 'r')
     file_contents = f.read()
-    print('{BLINK}'.format(**formatters))
-    print('{BLUE}'.format(**formatters))
-    print('{BOLD}'.format(**formatters))
-    print(file_contents)
-    print('{BLINK2}'.format(**formatters))
-    print('{END}'.format(**formatters))
+    print('{BLINK}'.format(**formatters),
+          '{BLUE}'.format(**formatters),
+          '{BOLD}'.format(**formatters))
+    print(file_contents,
+          '{BLINK2}'.format(**formatters),
+          '{END}'.format(**formatters))
     f.close()
 
 ''' print title '''
 def print_start_menu():
     f = open('./data/artwk/start_menu', 'r')
     file_contents = f.readlines()
-    print('{VIOLET}'.format(**formatters))
-    print('{BOLD}'.format(**formatters))
+    print('{VIOLET}'.format(**formatters),
+          '{BOLD}'.format(**formatters))
     # print(file_contents)
     for line in file_contents:
         #print("file: ", file)
@@ -129,12 +129,12 @@ def print_sorry_you_lost():
 ''' print ascii artwork for rooms by passing in their name '''
 def print_ascii_art(name):
     f = open(name, 'r')
-    print('{BLUE}'.format(**formatters))
-    print('{BOLD}'.format(**formatters))
+    print('{BLUE}'.format(**formatters),
+          '{BOLD}'.format(**formatters))
     file_contents = f.read()
-    print(file_contents)
+    print(file_contents,
+          '{END}'.format(**formatters))
     f.close()
-    print('{END}'.format(**formatters))
 
 ''' true or false - is terminal line size greater than check value '''
 def term_lines_gt(check):
@@ -151,8 +151,6 @@ def term_check():
     if (term_lines_gt(23)) and (term_cols_gt(79)):
         print('')
         scroll3(0.1, MAXLEN, ' :) terminal size ok ...')
-        print('')
-        print('')
         print('')
     else:
         print('')

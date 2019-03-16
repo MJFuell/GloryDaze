@@ -6,7 +6,7 @@ by: Michael Fuelling
 
 CS467
 Winter 2019
-Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 
 Credits:
 - https://stackoverflow.com/questions/14796323/input-using-backspace-and-arrow-keys
