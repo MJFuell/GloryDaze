@@ -27,6 +27,12 @@ directions = ["north", "south", "east", "west", "northeast", "southeast", "north
 
 
 class GameState:
+	#timing
+	start = None
+	elapsed = None
+
+	steps = 0
+
 	#Player
 	player = None
 
@@ -85,13 +91,38 @@ class GameState:
 		pass
 
 
-# Move save and load here---------------------------------------------------------------------
+
 def save_game(GS):
-	print('SAVE GAME')
+	print('SAVE GAME - not implemented yet')
+	#Save everything into files here--------------------------------------------------------------------------------------------
+	#all in a "save game" directory
+
+	#gamestate - save everything
+
+	#rooms - only item list changes
+
+	#items - only FeatBool changes
+
+	#don't need to save chars or exits as they don't change
+	
+
+	#tell user game was successfully saved
 
 
 def load_game():
-	print('LOAD GAME')
+	print('LOAD GAME - not implemented yet')
+    #Load everything into gamestate here -------------------------------------------------------------------------------------------
+
+    #gamestate - Load everything
+
+    #rooms - only change is what items are in there
+
+    #items - only change is FeatBool True/False
+
+    #don't need to load chars or exits as they don't change
+
+	
+	#return loaded gamestate
 
 
 
@@ -100,7 +131,7 @@ def GameLoop(GS):
 	"""
 	"Gaming Loop" which loops for user input and attempts to execute it.  
 	"""
-	start = time.time()
+	#start = time.time() #Moved to before gameloop is called
 	uInput = 0
 	while uInput != 'q':
 		uInput = input('("q" to quit) >')
@@ -127,12 +158,12 @@ def GameLoop(GS):
 	
 		print('')		
 
-		elapsed = int(time.time() - start)
+		elapsed = int(time.time() - GS.start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
 		
 		# -------------------- RELEVANT TO GAME.  UNCOMMENT AFTER DEBUG -----------------------------------------
-		#print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
-        #print('')
+		print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		print('')
 		# -------------------------------------------------------------------------------------------------------		
 
 		GS.elapsed = elapsed
@@ -142,7 +173,7 @@ def GameLoop(GS):
 		# GS.win = 1 # test win condition,  TODO to set it up
 
 		#End of turn maintenance
-		GS.turnCount += GS.turnCount
+		GS.turnCount = GS.turnCount + 1
 		if GS.win == 1:
 			util.print_you_won()
 			print('')
@@ -155,6 +186,7 @@ def GameLoop(GS):
 			print('')
 			print('Your elapsed time was more than 20 minutes.')
 			print('You got this far in ' + str(GS.turnCount) + ' turns.')
+			print('Load your save game or try again from the start!')
 			print('')
 			quit()
 		
@@ -265,8 +297,8 @@ def RunGame(type):
 
 
     #LOAD GAME
-    if type == 1:           
-        pass
+    if type == 1:    
+        gamestate = load_game()      
 
     
     #Print room description so user knows where they are and start looping for input
@@ -293,6 +325,7 @@ def RunGame(type):
                 util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
     print('')
 
+    gamestate.start = time.time()
     GameLoop(gamestate)  
 
     
@@ -387,6 +420,8 @@ def MainMenu():
                     gamestate.current_room.visited = True
             print('\nCurrent room is: ' + gamestate.current_room.name)
             gamestate.player.set_name('TEST')
+            gamestate.start = time.time()
+
             GameLoop(gamestate)
 
 
