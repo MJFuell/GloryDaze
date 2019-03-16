@@ -201,7 +201,7 @@ def verb_go(GS, obj):
 	#If we successfully moved rooms
 	if move == True:
 		GS.current_room = tempRoom
-		print('-' * 70, '\n\n\n')
+		# print('-' * 70, '\n\n\n')
 		exits = GS.current_room.get_exits()
 		#print('Moved to ' + GS.current_room.get_name())
 		util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
