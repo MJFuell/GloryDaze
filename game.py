@@ -568,7 +568,7 @@ def RunGame(type):
         time.sleep(delay + 1)
 
         print('"You better be out of here in 30 minutes or you\'ll be stuck here forever!!!"') 
-        print('"Muahahaha....."')
+        print('"Mwahahaha....."')
         time.sleep(delay + 1)
 
         print('What happens in 30 minutes? And who is talking???')

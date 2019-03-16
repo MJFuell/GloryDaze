@@ -48,10 +48,10 @@ err = "Can't do that"
 
 
 def end_game(GS):
-	print('Principal: "Well, well, well.  So you finally found me."')
-	print('Principal: "Let me guess, you\'ve been running around the school unsupervised, talking to teachers and stealing things?!?"')
-	print('Principal: "Give me that backpack!"')
-	print('The principal takes your backpack and begins rummaging through your stuff.')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Well, well, well.  So you finally found me."')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Let me guess, you\'ve been running around the school unsupervised, talking to teachers and stealing things?!?"')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Give me that backpack!"')
+	util.scroll3(DELAY, MAXLEN, 'The principal takes your backpack and begins rummaging through your stuff.')
 	sd = False
 	cam = False
 	for x in GS.inventory:
@@ -60,33 +60,33 @@ def end_game(GS):
 		elif x.name == 'SD card':
 			sd = True
 	if cam == False:
-		print('Principal: "Hmmm you didn\'t find my camera anywhere?  Hang on, let me go grab it real quick."')
-		print('The principal returns after 2 minutes.')		
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Hmmm you didn\'t find my camera anywhere?  Hang on, let me go grab it real quick."')
+		util.scroll3(DELAY, MAXLEN, 'The principal returns after 2 minutes.')		
 		GS.start = GS.start - 120
 	else:
-		print('Principal: "Thanks for finding my camera!"')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Thanks for finding my camera!"')
 
-	print('Principal: "Okay, what else do we have here..."')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Okay, what else do we have here..."')
 
 	if sd == False:
-		print('Principal: "Darn you don\'t have my SD card?  I\'ll be right back."')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Darn you don\'t have my SD card?  I\'ll be right back."')
 		if GS.storyFlags['sdgive'] == 0:
-			print('The principal returns after 3 minutes.')
-			print('Principal: "Found it!  All good.  Let\'s get you home, ' + GS.player.get_name() + '!"')
+			util.scroll3(DELAY, MAXLEN, 'The principal returns after 3 minutes.')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Found it!  All good.  Let\'s get you home, ' + GS.player.get_name() + '!"')
 			GS.start = GS.start - 180
 		else:
-			print('The principal returns after 5 minutes.')
-			print('Principal: "You gave my SD card to the TEACHER IN THE COMPUTER LAB?!?"')
-			print('Principal: "DO YOU HAVE ANY IDEA WHAT WAS ON THERE!!!!"')
-			print('Principal: "Well, if you do you better keep your mouth shut about it."')
-			print('Principal: "Or else you\'ll have detention for a year!"')
-			print('Principal: "Alright, time to get you out of here, ' + GS.player.get_name() + '."')
+			util.scroll3(DELAY, MAXLEN, 'The principal returns after 5 minutes.')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "You gave my SD card to the TEACHER IN THE COMPUTER LAB?!?"')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "DO YOU HAVE ANY IDEA WHAT WAS ON THERE!!!!"')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Well, if you do you better keep your mouth shut about it."')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Or else you\'ll have detention for a year!"')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Alright, time to get you out of here, ' + GS.player.get_name() + '."')
 			GS.start = GS.start - 300
 	else:
-		print('Principal: "Oh my SD card! Thank goodness that didn\'t fall into the wrong hands...."')
-		print('Principal: "Alright, let\'s get you out of here, ' + GS.player.get_name() + '."')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Oh my SD card! Thank goodness that didn\'t fall into the wrong hands...."')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Alright, let\'s get you out of here, ' + GS.player.get_name() + '."')
 
-	print('The principal walks you out of his office and out the main exit of the school!')
+	util.scroll3(DELAY, MAXLEN, 'The principal walks you out of his office and out the main exit of the school!')
 
 	GS.endGame = 1
 
@@ -207,7 +207,7 @@ def verb_go(GS, obj):
 	if move == True:
 		if tempRoom.name in GS.storyFlags:
 			if GS.storyFlags.get(tempRoom.name) == 0:
-				print(storyFlagText.get(tempRoom.name))
+				util.scroll3(DELAY, MAXLEN, storyFlagText.get(tempRoom.name))
 				move = False
 
 	#If we successfully moved rooms
@@ -350,7 +350,7 @@ def verb_take(GS, obj):
 	if take == True:
 		if tempItem.name in GS.storyFlags:
 			if GS.storyFlags.get(tempItem.name) == 0:
-				print(storyFlagText.get(tempItem.name))
+				util.scroll3(DELAY, MAXLEN, storyFlagText.get(tempItem.name))
 				sl = True
 
 	#if no storyline interuption
@@ -482,7 +482,7 @@ def verb_give(GS, obj):
 									if y.name == "water bottle":
 										GS.inventory.remove(y)
 								print('You give your water bottle to the coach.')
-								print('Coach: "Thanks! I really needed that.  Now that I\'m feeling better.... DODGEBALL"')
+								print('Coach: "Thanks! I really needed that. Now that I\'m feeling better... DODGEBALL"')
 								GS.storyFlags['h3c'] = 1
 								give = True
 								if GS.storyFlags['h3sd'] == 1:
@@ -499,7 +499,7 @@ def verb_give(GS, obj):
 										GS.inventory.remove(y)
 								print('You give your calculator to the director.')
 								print('Director: "Wow thanks so much! This will help a bunch."')
-								print('Director: "Go ahead and take that piccolo if you want to bang out some sick tunes"')
+								print('Director: "Please take that piccolo if you want to bang out some sick tunes"')
 								GS.storyFlags['piccolo'] = 1
 								give = True
 				elif GS.current_room.name == "Library":
@@ -512,7 +512,7 @@ def verb_give(GS, obj):
 										GS.inventory.remove(y)
 								print('You give your piccolo to the librarian.')
 								print('Librarian: "OOOoooOOooooo for ME?! Thank you so much!!!"')
-								print('Librarian: "Sorry if i\'ve been rude to you before.  Take all the books you like!"')
+								print('Librarian: "Sorry if I was rude to you before. Take all the books you like!"')
 								GS.storyFlags['book'] = 1
 								GS.talk_count['librarian'] = 2
 								give = True
@@ -526,7 +526,7 @@ def verb_give(GS, obj):
 										GS.inventory.remove(y)
 								print('You give your cellphone to the counselor.')
 								print('Counselor: "Wow thank you for finding that! I\'ve been looking everywhere."')
-								print('Counselor: "I just remotely unlocked the principal\'s office.  Go see him and he\'ll help you get out."')
+								util.scroll3(DELAY, MAXLEN, 'Counselor: "I just remotely unlocked the principal\'s office.  Go see him and he\'ll help you get out."')
 								GS.storyFlags['Principal Office'] = 1
 								GS.talk_count["counselor"] = 2
 								give = True
@@ -539,7 +539,7 @@ def verb_give(GS, obj):
 									if y.name == "SD card":
 										GS.inventory.remove(y)
 								print('You give your SD Card to the teacher.')
-								print('Teacher: "Oh wow. Nice find kid. You didn\'t look at what was on there did you?!?"')
+								print('Teacher: "Wow. Nice find kid. You didn\'t look at what was on there did you?!?"')
 								print('Teacher: "Well anyway, thank you. Now get lost!"')
 								GS.storyFlags['sdgive'] = 1
 								give = True
