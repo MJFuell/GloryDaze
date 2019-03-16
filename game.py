@@ -167,7 +167,7 @@ def GameLoop(GS):
 		# -------------------------------------------------------------------------------------------------------		
 
 		GS.elapsed = elapsed
-		if (GS.elapsed > 1200):
+		if (GS.elapsed > 1800):
 			GS.lose = 1
 
 		# GS.win = 1 # test win condition,  TODO to set it up
@@ -184,7 +184,7 @@ def GameLoop(GS):
 		elif GS.lose == 1:
 			util.print_sorry_you_lost()
 			print('')
-			print('Your elapsed time was more than 20 minutes.')
+			print('Your elapsed time was more than 30 minutes.')
 			print('You got this far in ' + str(GS.turnCount) + ' turns.')
 			print('Load your save game or try again from the start!')
 			print('')
@@ -284,10 +284,11 @@ def RunGame(type):
         print('What? Its 6:30!? My parents are gonna kill me!')
         time.sleep(delay + 1)
 
-        print('"You better be out of here in 20 minutes or you\'ll be stuck here forever!!! Muahahaha....."')
+        print('"You better be out of here in 30 minutes or you\'ll be stuck here forever!!!"')
+        print('"Muahahaha....."')
         time.sleep(delay + 1)
 
-        print('What happens in 20 minutes? And who is talking???')
+        print('What happens in 30 minutes? And who is talking???')
         time.sleep(delay + 1)
 
         print('I don\'t like this at all. I better get a move on.')
