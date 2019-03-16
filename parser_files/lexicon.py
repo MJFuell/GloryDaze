@@ -431,6 +431,7 @@ def scan(sentence):
 	sentence = sentence.replace('duct tape', 'ducttape')	
 	sentence = sentence.replace('paper products', 'paperproducts')
 	sentence = sentence.replace('sd card', 'sdcard')
+	sentence = sentence.replace('cell phone', 'cellphone')
 	#rooms
 	sentence = sentence.replace('smelly room', 'smellyroom')
 	sentence = sentence.replace('bath room', 'bathroom')
@@ -443,7 +444,8 @@ def scan(sentence):
 	sentence = sentence.replace('cash register', 'cashregister')
 	sentence = sentence.replace('yellow cabinet', 'yellowcabinet')
 	sentence = sentence.replace('glassware cabinet', 'glasswarecabinet') 
-	sentence = sentence.replace('smalle room', 'smallroom')
+	sentence = sentence.replace('small room', 'smallroom')
+	sentence = sentence.replace('small table', 'smalltable')
 	sentence = sentence.replace('funny smelling room', 'funnysmellingroom') 
 	sentence = sentence.replace('bright hallway', 'brighthallway')
 	sentence = sentence.replace('hallway 1', 'hallway1') 

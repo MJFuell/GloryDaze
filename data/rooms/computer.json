@@ -19,7 +19,7 @@
                     "desk" : "The desks are all empty and tidy.",
                     "desks" : "The desks are all empty and tidy.",
                     "board" : "The days reading, homework, and lab assignments are listed. An example program is written.",
-                    "dry erase board" : "The days reading, homework, and lab assignments are listed. An example program is written."
+                    "dryeraseboard" : "The days reading, homework, and lab assignments are listed. An example program is written."
                  },
     "visited"  : false
 }
