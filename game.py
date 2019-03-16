@@ -24,7 +24,9 @@ import util
 
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
 
-
+DELAY_LESS = 0.005   # make this smaller for a faster scroll
+DELAY = 0.01    # make this smaller for a faster scroll
+MAXLEN = 70     # maximum line length to print
 
 class GameState:
 	#timing
@@ -137,9 +139,10 @@ def GameLoop(GS):
 		uInput = input('("q" to quit) >')
 
 		s = parser.parse_sentence(lexicon.scan(uInput.lower()))
-		print(s.subject)
-		print(s.verb)
-		print(s.object + '\n')
+		# print(s.subject)
+		# print(s.verb)
+		# print(s.object + '\n')
+		print()
 
 		if GS.endGame == 1:
 			GS.win = 1;
@@ -303,11 +306,11 @@ def RunGame(type):
 
     
     #Print room description so user knows where they are and start looping for input
-    print('-' * 70, '\n\n\n')
+    # print('-' * 70, '\n\n\n')
 	#print('Moved to ' + GS.current_room.get_name())
     util.print_ascii_art('./data/artwk/' + gamestate.current_room.get_name())
     print('')
-    util.scroll3(0.01, 60, gamestate.current_room.get_long())
+    util.scroll3(DELAY, MAXLEN, gamestate.current_room.get_long())
     print('')
     #print(gamestate.current_room.get_items())
     #print('')
@@ -315,7 +318,7 @@ def RunGame(type):
         for x in gamestate.item_list:
             if x.name == item:
                 # print("{}".format(x.get_long()))
-                util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+                util.scroll3(DELAY, MAXLEN, "{}".format(x.get_avail()))
     print('')
     #print(gamestate.current_room.get_exits())
     #print('')
@@ -323,7 +326,7 @@ def RunGame(type):
     for exits_dir, exits_room in exits.items():
         for x in gamestate.exit_list:
             if x.name == exits_room and exits_dir in directions:
-                util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
+                util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_long(),exits_dir))
     print('')
 
     gamestate.start = time.time()
@@ -366,23 +369,25 @@ def MainMenu():
             MainMenu()
 
         elif selection == '3':
-            util.scroll3(0.005, 60, 'GloryDaze is a text only adventure.  '+
+            util.scroll3(DELAY_LESS, MAXLEN, 'GloryDaze is a text only adventure.  '+
             'That means there are no graphics! Everything about the game '+
             'will be displayed on the screen. Want to do something? Just '+
             'type it in!')
-            util.scroll3(0.005, 60, '(a ">" symbol means the game is waiting for your '+
+            print('')
+            util.scroll3(DELAY_LESS, MAXLEN, '(a ">" symbol means the game is waiting for your '+
             'input)')
             print('')
-            util.scroll3(0.005, 60, 'The game allows for as much natural language as possible '+
+            util.scroll3(DELAY_LESS, MAXLEN, 'The game allows for as much natural language as possible '+
             'but if you\'re having trouble getting around, try shorter sentences '+
             'like "move south" or "take book".')
             print('')
-            util.scroll3(0.005, 60, 'At any '+
+            util.scroll3(DELAY_LESS, MAXLEN, 'At any '+
             'point during the game, type "save" to save your progress '+
             'or "help" for help.')
             print('')
-            util.scroll3(0.005, 60, 'Finally, your terminal may allow you to scroll up'+
+            util.scroll3(DELAY_LESS, MAXLEN, 'Finally, your terminal may allow you to scroll up '+
             'to see your past actions which may help you. :)')
+            print('')
             print('Have fun!')
             print('')
             MainMenu()
