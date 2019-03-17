@@ -30,14 +30,14 @@ DELAY = 0.01    # make this smaller for a faster scroll
 MAXLEN = 70     # maximum line length to print
 
 class GameState:
+	#Player
+	player = None
+
 	#timing
 	start = None
 	elapsed = 0
 
 	steps = 0
-
-	#Player
-	player = None
 
 	#Map
 	room_list = None
@@ -92,6 +92,7 @@ class GameState:
 	#Initializer
 	def __init__(self):
 		pass
+	
 
 	def print(self):
 		print('start - ' + str(self.start))
@@ -198,11 +199,18 @@ def save_game(GS):
 		#skip endGame
 
 		#-------------------------------- Data ----------------------------------------------
-		# Reminder: dir = './saves/'
+		# Reminder: dir = './data/saves/'
 
 		#rooms - item list and visited changes
+		for x in GS.room_list:
+			#print(x.name)
+			#print(x.visited)
+			#print(x.items)
+			util.save(x)
 
 		#items - FeatBool changes
+		for x in GS.item_list:
+			util.save(x)
 
 		#save chars optional, do not change
 
@@ -216,6 +224,96 @@ def save_game(GS):
 		print('Please enter y or n')
 		save_game(GS)
 
+
+def save_game_silent(GS):
+	#print('Are you sure you want to save?  Any existing save file will be overwritten (y/n)')
+	#uInput = input('>')
+	uInput = 'y'
+	if uInput.lower() == 'n':
+		#print('Save Game cancelled')
+		pass
+	elif uInput.lower() == 'y':
+		#print('saving game....')
+
+		#all in a "save game" directory
+		dir = './data/saves/'
+
+		#gamestate - save everything
+		f = open(dir + 'gamestate.txt', 'w')
+
+		f.write(str(GS.start))
+		f.write('\n')
+		f.write(str(GS.elapsed))
+		f.write('\n')
+
+		f.write(str(GS.steps))
+		f.write('\n')	
+
+		f.write(GS.player.get_name())
+		f.write('\n')
+
+		#skip room list
+		#skip exit list
+		#skip item list
+		#skip char list
+		f.write(GS.current_room.get_name())
+		f.write('\n')
+		#skip current exit 
+
+		if GS.backpack == False:
+			f.write('F')
+			f.write('\n')
+		else:
+			f.write('T')
+			f.write('\n')
+
+		for x in GS.inventory:
+			f.write(x.name)
+			f.write('\n')
+
+		f.write('ENDINV') # call out end of inventory list because we don't know how long it is
+		f.write('\n')
+
+		for y in GS.talk_count:
+			f.write(str(y) + ', ' + str(GS.talk_count.get(y)))
+			f.write('\n')
+
+
+		for z in GS.storyFlags:
+			f.write(str(z) + ', ' + str(GS.storyFlags.get(z)))
+			f.write('\n')
+
+		#skip win
+		#skip lose
+		f.write(str(GS.turnCount))
+		f.write('\n')
+		#skip endGame
+
+		#-------------------------------- Data ----------------------------------------------
+		# Reminder: dir = './data/saves/'
+
+		#rooms - item list and visited changes
+		for x in GS.room_list:
+			#print(x.name)
+			#print(x.visited)
+			#print(x.items)
+			util.save(x)
+
+		#items - FeatBool changes
+		for x in GS.item_list:
+			util.save(x)
+
+		#save chars optional, do not change
+
+		#save exits optional, do not change
+	
+		#-------------------------------------------------------------------------------------
+
+		#tell user game was successfully saved
+		#print('Game successfully saved.')
+	else:
+		#print('Please enter y or n')
+		save_game(GS)
 
 def load_game():
 	print('Are you sure you want to load a game?  Any unsaved progress will be lost (y/n)')
@@ -236,6 +334,7 @@ def load_game():
 
 			#gamestate - Load everything
 			LGS = GameState()
+
 			p = DF.Player()	
 			LGS.player = p	
 
@@ -274,6 +373,7 @@ def load_game():
 				tempItem = lines[idx]
 				inventoryList.append(tempItem)
 				idx = idx + 1
+			#print(inventoryList)
 
 			#Talk counts
 			tempTalks = []
@@ -314,52 +414,58 @@ def load_game():
 			# Reminder: dir = './saves/'
 
 			#rooms - item list and visited changes
+			ROOMS = ["Bathroom","Cafeteria","Chemistry","Computer Lab","Counselor Office","Detention","Gym","Hallway 1","Hallway 2","Hallway 3","Janitor Office","Library","Main Office","Math","Music","Principal Office","Supply Room"]
+			tRooms = []
+			for x in ROOMS:
+				#print(x.name)
+				tRooms.append((util.load(x)))
+			LGS.room_list = tRooms
+			
 
 			#items - FeatBool changes
+			ITEMS = ["backpack","book","water bottle","calculator","camera","cellphone","duct tape","Office Pass","piccolo","SD card"]		
+			tItems = []
+			for x in ITEMS:
+				tItems.append(util.load(x))
+			LGS.item_list = tItems
 
-			#load chars from save file or original
 
-			#load exits from save file or original	
+			#load chars from original
+			char_builder = DF.CharacterBuilder()
+			LGS.char_list = DF.CharacterBuilder.load_char_files(char_builder)
+
+
 
 
 			#-------------------------------------------------------------------------------------
 
-
-			#TEMPORARY - Load regular/default data/files so no crashing
-			#-------------------------------------------------------------------#
-			room_builder = DF.RoomBuilder()										#
-			LGS.room_list = DF.RoomBuilder.load_room_files(room_builder)		#
-			exit_builder = DF.ExitBuilder()										#
-			LGS.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)		#
-			item_builder = DF.ItemBuilder()										#
-			LGS.item_list = DF.ItemBuilder.load_item_files(item_builder)		#
-			char_builder = DF.CharacterBuilder()								#
-			LGS.char_list = DF.CharacterBuilder.load_char_files(char_builder)	#
-			for x in LGS.room_list:												#
-				if x.name == 'Detention':										#
-					LGS.current_room = x										#
-					LGS.current_room.visited = True								#
-			LGS.player.set_name('TEST')											#
-			LGS.start = time.time()												#
-			#-------------------------------------------------------------------#
-
-
 			#More gamestate
     		#load current room based on name
 			for x in LGS.room_list:
+				#print('room name is: ' + x.name)
 				if x.name == lines[4]:
+					#print('room name of ' + x.name + ' matches lines[4] which is ' + lines[4])
 					LGS.current_room = x
 
     		#load items into inventory based on name
 			for x in inventoryList:
 				for y in LGS.item_list:
 					if x == y.name:
-						LGS.inventory.append(y)
+						skip = False
+						for z in LGS.inventory:							
+							if z.name == y.name:
+								skip = True
+						if skip != True:	
+							LGS.inventory.append(y)
+
+			#load exits from original	
+			exit_builder = DF.ExitBuilder()	
+			LGS.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
 
 
 			print('Load Game successful')
+			save_game_silent(LGS)
 			return LGS
-
 
 	else:
 		print('Please enter y or n')
@@ -404,6 +510,8 @@ def GameLoop(GS):
 			elif LGS == 'cancel':
 				print('Returning to current game.')
 			else:
+				#print('In game loop:')
+				#LGS.print()
 				#----------------------------- Start new game with Loaded gamestate -----------------------------
 				#Print room description so user knows where they are and start looping for input
 				print('-' * 70, '\n\n\n')
@@ -429,7 +537,7 @@ def GameLoop(GS):
 							util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
 				print('')
 
-				LGS.start = time.time()
+				LGS.start = time.time() - LGS.elapsed
 				GameLoop(LGS)  
 				return
 
@@ -441,15 +549,14 @@ def GameLoop(GS):
 	
 		print('')		
 
-		elapsed = int(time.time() - GS.start)
+		GS.elapsed = int(time.time() - GS.start)
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
 		
-		# -------------------- RELEVANT TO GAME.  UNCOMMENT AFTER DEBUG -----------------------------------------
-		print('\nelapsed time is {:02d}:{:02d}'.format((elapsed % 3600 // 60), elapsed % 60))
+		print('Elapsed time is {:02d}:{:02d}'.format((GS.elapsed % 3600 // 60), GS.elapsed % 60))
 		print('')
-		# -------------------------------------------------------------------------------------------------------		
+			
 
-		GS.elapsed = elapsed
+		#GS.elapsed = elapsed
 		if (GS.elapsed > 1800):
 			GS.lose = 1
 
@@ -612,7 +719,7 @@ def RunGame(type):
                 util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_long(),exits_dir))
     print('')
 
-    gamestate.start = time.time()
+    gamestate.start = time.time() - gamestate.elapsed
     GameLoop(gamestate)  
 
     
