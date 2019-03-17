@@ -684,6 +684,7 @@ eat_dict = {
 
 	"soap" : "You feel as if you've never said a bad word in your life.",
 	"advil" : "You pop a few pills and feel a little dizzy.",
+	"trophy" : "You chip a tooth on the debate trophy.",
 	"trophies" : "You chip a tooth on the debate trophy.",
 	"paper" : "You make an origami apple then swallow it.",
 	"desk" : "You munch on the wood.  It tastes like filth."
@@ -763,7 +764,8 @@ play_dict = {
 	"soap" : "You make a few bubbles.",
 	"baton" : "You toss the batton and break a light. Oops.",
     "conductorbaton" : "You toss the batton and break a light. Oops.",
-    "instrument" : "If only you had bothered to learn how to play an instrument."
+    "instrument" : "If only you had bothered to learn how to play an instrument.",
+    "instruments" : "If only you had bothered to learn how to play an instrument."
 }
 def verb_play(GS, obj):
 	play = False
