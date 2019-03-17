@@ -30,68 +30,66 @@ DELAY = 0.01    # make this smaller for a faster scroll
 MAXLEN = 70     # maximum line length to print
 
 class GameState:
-	#timing
-	start = None
-	elapsed = 0
-
-	steps = 0
-
-	#Player
-	player = None
-
-	#Map
-	room_list = None
-	exit_list = None
-	item_list = None
-	char_list = None
-	current_room = None
-	current_exit = None
-
-	#items
-	backpack = False
-	inventory = []
-
-	#characters
-	talk_count = {
-		"coach" : 0,
-		"teacher" : 0,
-		"counselor" : 0,
-		"director" : 0,
-		"janitor" : 0,
-		"librarian" : 0,
-		"principal" : 0
-	}
-
-	#Story line specifics
-	storyFlags = {    
-	#rooms
-	"Main Office" : 0,
-	"Hallway 2" : 0,
-	"Supply Room" : 0,
-	"Principal Office" : 0,
-	"Hallway 3" : 1,
-
-	#items
-	"piccolo" : 0,
-	"book" : 0,
-
-	"h3c" : 0,
-	"h3sd" : 0,
-
-	"sdgive" : 0
-	}
-
-
-	#conditions
-	win = 0
-	lose = 0
-	turnCount = 0
-
-	endGame = 0
-
-	#Initializer
 	def __init__(self):
-		pass
+		#timing
+		self.start = None
+		self.elapsed = 0
+
+		self.steps = 0
+
+		#Player
+		self.player = None
+
+		#Map
+		self.room_list = None
+		self.exit_list = None
+		self.item_list = None
+		self.char_list = None
+		self.current_room = None
+		self.current_exit = None
+
+		#items
+		self.backpack = False
+		self.inventory = []
+
+		#characters
+		self.talk_count = {
+			"coach" : 0,
+			"teacher" : 0,
+			"counselor" : 0,
+			"director" : 0,
+			"janitor" : 0,
+			"librarian" : 0,
+			"principal" : 0
+		}
+
+		#Story line specifics
+		self.storyFlags = {    
+		#rooms
+		"Main Office" : 0,
+		"Hallway 2" : 0,
+		"Supply Room" : 0,
+		"Principal Office" : 0,
+		"Hallway 3" : 1,
+
+		#items
+		"piccolo" : 0,
+		"book" : 0,
+
+		"h3c" : 0,
+		"h3sd" : 0,
+
+		"sdgive" : 0
+		}
+
+
+		#conditions
+		self.win = 0
+		self.lose = 0
+		self.turnCount = 0
+
+		self.endGame = 0
+	
 
 	def print(self):
 		print('start - ' + str(self.start))
@@ -198,11 +196,18 @@ def save_game(GS):
 		#skip endGame
 
 		#-------------------------------- Data ----------------------------------------------
-		# Reminder: dir = './saves/'
+		# Reminder: dir = './data/saves/'
 
 		#rooms - item list and visited changes
+		for x in GS.room_list:
+			#print(x.name)
+			#print(x.visited)
+			#print(x.items)
+			util.save(x)
 
 		#items - FeatBool changes
+		for x in GS.item_list:
+			util.save(x)
 
 		#save chars optional, do not change
 
@@ -236,6 +241,46 @@ def load_game():
 
 			#gamestate - Load everything
 			LGS = GameState()
+			'''
+			LGS.start = None
+			LGS.elapsed = 0
+			LGS.steps = 0
+			LGS.player = None
+			LGS.room_list = None
+			LGS.exit_list = None
+			LGS.item_list = None
+			LGS.char_list = None
+			LGS.current_room = None
+			LGS.current_exit = None
+			LGS.backpack = False
+			LGS.inventory = []
+			LGS.talk_count = {
+				"coach" : 0,
+				"teacher" : 0,
+				"counselor" : 0,
+				"director" : 0,
+				"janitor" : 0,
+				"librarian" : 0,
+				"principal" : 0
+			}
+			LGS.storyFlags = {    
+			"Main Office" : 0,
+			"Hallway 2" : 0,
+			"Supply Room" : 0,
+			"Principal Office" : 0,
+			"Hallway 3" : 1,
+			"piccolo" : 0,
+			"book" : 0,
+			"h3c" : 0,
+			"h3sd" : 0,
+			"sdgive" : 0
+			}
+			LGS.win = 0
+			LGS.lose = 0
+			LGS.turnCount = 0
+			LGS.endGame = 0
+			'''
+
 			p = DF.Player()	
 			LGS.player = p	
 
@@ -313,36 +358,36 @@ def load_game():
 			#-------------------------------- Data ----------------------------------------------
 			# Reminder: dir = './saves/'
 
+			ROOMS = ["Bathroom","Cafeteria","Chemistry","Computer Lab","Counselor Office","Detention","Gym","Hallway 1","Hallway 2","Hallway 3","Janitor Office","Library","Main Office","Math","Music","Principal Office","Supply Room"]
 			#rooms - item list and visited changes
+			tRooms = []
+			for x in ROOMS:
+				#print(x.name)
+				tRooms.append((util.load(x)))
 
-			#items - FeatBool changes
+			#for x in tRooms:
+				#print(x.name)
+				#print(x.visited)
+				#print(x.items)
+			LGS.room_list = tRooms
 
-			#load chars from save file or original
+			
+			ITEMS = ["backpack","book","water bottle","calculator","camera","cellphone","duct tape","Office Pass","piccolo","SD card"]
+			#items - FeatBool changes			
+			tItems = []
+			for x in ITEMS:
+				tItems.append(util.load(x))
+			LGS.item_list = tItems
 
-			#load exits from save file or original	
+			#load chars from original
+			char_builder = DF.CharacterBuilder()
+			LGS.char_list = DF.CharacterBuilder.load_char_files(char_builder)
 
+			#load exits from original	
+			exit_builder = DF.ExitBuilder()	
+			LGS.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)
 
 			#-------------------------------------------------------------------------------------
-
-
-			#TEMPORARY - Load regular/default data/files so no crashing
-			#-------------------------------------------------------------------#
-			room_builder = DF.RoomBuilder()										#
-			LGS.room_list = DF.RoomBuilder.load_room_files(room_builder)		#
-			exit_builder = DF.ExitBuilder()										#
-			LGS.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)		#
-			item_builder = DF.ItemBuilder()										#
-			LGS.item_list = DF.ItemBuilder.load_item_files(item_builder)		#
-			char_builder = DF.CharacterBuilder()								#
-			LGS.char_list = DF.CharacterBuilder.load_char_files(char_builder)	#
-			for x in LGS.room_list:												#
-				if x.name == 'Detention':										#
-					LGS.current_room = x										#
-					LGS.current_room.visited = True								#
-			LGS.player.set_name('TEST')											#
-			LGS.start = time.time()												#
-			#-------------------------------------------------------------------#
-
 
 			#More gamestate
     		#load current room based on name
@@ -358,8 +403,18 @@ def load_game():
 
 
 			print('Load Game successful')
+			'''
+			for x in LGS.room_list:
+				print(x.name)
+				for y in x.items:
+					print('items: ' + y)
+			print('Inventory')
+			for x in LGS.inventory:
+				print(x)
+			#print('In load game function:')
+			#LGS.print()
+			'''
 			return LGS
-
 
 	else:
 		print('Please enter y or n')
@@ -404,6 +459,8 @@ def GameLoop(GS):
 			elif LGS == 'cancel':
 				print('Returning to current game.')
 			else:
+				#print('In game loop:')
+				#LGS.print()
 				#----------------------------- Start new game with Loaded gamestate -----------------------------
 				#Print room description so user knows where they are and start looping for input
 				print('-' * 70, '\n\n\n')
@@ -430,6 +487,7 @@ def GameLoop(GS):
 				print('')
 
 				LGS.start = time.time()
+				del GS
 				GameLoop(LGS)  
 				return
 
