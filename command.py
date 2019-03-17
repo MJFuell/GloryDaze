@@ -252,9 +252,18 @@ def verb_go(GS, obj):
 			if x.name == 'backpack':
 				if x.featBool == 'False':
 					if GS.steps == 5:
-						pass
-						#drop a random item
-						#give user a hint about an item falling out
+						Item = None
+						Drop = False
+						for y in GS.inventory:
+							if y.name != 'backpack':
+								Item = y
+								Drop = True
+						if Drop == True:
+							GS.current_room.items.append(Item.name)
+							GS.inventory.remove(Item)
+							GS.steps = 0
+							print('You here something fall on the floor as soon as you enter.')
+						
 						#reset step count
 					else:
 						GS.steps = GS.steps + 1
