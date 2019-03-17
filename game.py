@@ -487,7 +487,6 @@ def GameLoop(GS):
 				print('')
 
 				LGS.start = time.time()
-				del GS
 				GameLoop(LGS)  
 				return
 
