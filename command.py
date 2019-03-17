@@ -882,16 +882,13 @@ def command(GS, s):
 				verb_go(GS, s.subject)
 
 		#direction
-		if s.object in GS.current_room.exits:
-			roomName = GS.current_room.exits.get(s.object)
-			for x in GS.room_list:
-				if x.name == roomName:
-					moved = True
-					verb_go(GS, s.object)
+		if s.object in directions:
+			moved = True
+			verb_go(GS, s.object)
 
 
 		if moved == False:
-			print('Can\'t go that way')
+			print('I Don\'t understand')
 	else:
 		print('I Don\'t understand')
 
