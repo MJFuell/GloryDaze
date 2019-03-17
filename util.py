@@ -75,11 +75,12 @@ def save(object):
 
 ''' load objects in order to resume game '''
 def load(object):
-    filename = "./data/saves/" + object.get_name() + ".pkl"
+    filename = "./data/saves/" + object + ".pkl"
     #print("object = ", object.get_name())
     #print("filename = ", filename)
     with open(filename, 'rb') as input:
-        pickle.load(object, input, pickle.HIGHEST_PROTOCOL)
+        #pickle.load(object, input, pickle.HIGHEST_PROTOCOL)
+        return pickle.load(input)
 
 ''' print title '''
 def print_title():
