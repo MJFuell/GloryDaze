@@ -6,7 +6,7 @@ by: Michael Fuelling
 
 CS467
 Winter 2019
-Team Keld :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
 
 Credits:
 - https://stackoverflow.com/questions/14796323/input-using-backspace-and-arrow-keys
@@ -15,6 +15,7 @@ Credits:
 import time
 import sys
 import readline
+import os
 
 import command
 from parser_files import parser
@@ -24,12 +25,14 @@ import util
 
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
 
-
+DELAY_LESS = 0.005   # make this smaller for a faster scroll
+DELAY = 0.01    # make this smaller for a faster scroll
+MAXLEN = 70     # maximum line length to print
 
 class GameState:
 	#timing
 	start = None
-	elapsed = None
+	elapsed = 0
 
 	steps = 0
 
@@ -90,40 +93,283 @@ class GameState:
 	def __init__(self):
 		pass
 
+	def print(self):
+		print('start - ' + str(self.start))
+		print('elapsed - ' + str(self.elapsed))
+	
+		print('steps - ' + str(self.steps))
+
+		print('player name - ' + self.player.get_name())
+	
+		#skip room list
+		#skip exit list
+		#skip item list
+		#skip char list
+		print('current room - ' + self.current_room.get_name())
+		#skip current exit 
+
+		if self.backpack == False:
+			print('backpack - ' + 'False')
+		else:
+			print('backpack - ' + 'True')
+
+		print('Inventory:')
+		for x in self.inventory:
+			print(x.name)
+		print('')
+
+		print ('talk counts:')
+		for y in self.talk_count:
+			print(y + ' - ' + str(self.talk_count.get(y)))
+		print('')
+
+		print ('story flags:')
+		for z in self.storyFlags:
+			print(z + ' - ' + str(self.storyFlags.get(z)))
+		print('')
+
+		print('win - ' + str(self.win))
+		print('lose - ' + str(self.lose))
+		print('turn count - ' + str(self.turnCount))
+		print('end game - ' + str(self.endGame))
+
 
 
 def save_game(GS):
-	print('SAVE GAME - not implemented yet')
-	#Save everything into files here--------------------------------------------------------------------------------------------
-	#all in a "save game" directory
+	print('Are you sure you want to save?  Any existing save file will be overwritten (y/n)')
+	uInput = input('>')
+	if uInput.lower() == 'n':
+		print('Save Game cancelled')
+	elif uInput.lower() == 'y':
+		print('saving game....')
 
-	#gamestate - save everything
+		#all in a "save game" directory
+		dir = './data/saves/'
 
-	#rooms - only item list changes
+		#gamestate - save everything
+		f = open(dir + 'gamestate.txt', 'w')
 
-	#items - only FeatBool changes
+		f.write(str(GS.start))
+		f.write('\n')
+		f.write(str(GS.elapsed))
+		f.write('\n')
 
-	#don't need to save chars or exits as they don't change
+		f.write(str(GS.steps))
+		f.write('\n')	
+
+		f.write(GS.player.get_name())
+		f.write('\n')
+
+		#skip room list
+		#skip exit list
+		#skip item list
+		#skip char list
+		f.write(GS.current_room.get_name())
+		f.write('\n')
+		#skip current exit 
+
+		if GS.backpack == False:
+			f.write('F')
+			f.write('\n')
+		else:
+			f.write('T')
+			f.write('\n')
+
+		for x in GS.inventory:
+			f.write(x.name)
+			f.write('\n')
+
+		f.write('ENDINV') # call out end of inventory list because we don't know how long it is
+		f.write('\n')
+
+		for y in GS.talk_count:
+			f.write(str(y) + ', ' + str(GS.talk_count.get(y)))
+			f.write('\n')
+
+
+		for z in GS.storyFlags:
+			f.write(str(z) + ', ' + str(GS.storyFlags.get(z)))
+			f.write('\n')
+
+		#skip win
+		#skip lose
+		f.write(str(GS.turnCount))
+		f.write('\n')
+		#skip endGame
+
+		#-------------------------------- Data ----------------------------------------------
+		# Reminder: dir = './saves/'
+
+		#rooms - item list and visited changes
+
+		#items - FeatBool changes
+
+		#save chars optional, do not change
+
+		#save exits optional, do not change
 	
+		#-------------------------------------------------------------------------------------
 
-	#tell user game was successfully saved
+		#tell user game was successfully saved
+		print('Game successfully saved.')
+	else:
+		print('Please enter y or n')
+		save_game(GS)
 
 
 def load_game():
-	print('LOAD GAME - not implemented yet')
-    #Load everything into gamestate here -------------------------------------------------------------------------------------------
+	print('Are you sure you want to load a game?  Any unsaved progress will be lost (y/n)')
+	uInput = input('>')
+	if uInput.lower() == 'n':
+		print('Load Game cancelled')
+		return 'cancel'
+	elif uInput.lower() == 'y':
+		print('Loading game...')
+		#Load everything into gamestate here
+		dir = './data/saves/'
 
-    #gamestate - Load everything
+		exist = os.path.isfile(dir + 'gamestate.txt')
+		if exist == False:
+			print('ERROR: Can\'t find saved game files')
+			return 'error'
+		else:
 
-    #rooms - only change is what items are in there
+			#gamestate - Load everything
+			LGS = GameState()
+			p = DF.Player()	
+			LGS.player = p	
 
-    #items - only change is FeatBool True/False
+			# Gamestate
+			f = open(dir + 'gamestate.txt', 'r')
+			lines = f.readlines()
 
-    #don't need to load chars or exits as they don't change
 
-	
-	#return loaded gamestate
+			#lineCount = 0
+			#for x in lines:
+			#	lineCount = lineCount + 1
 
+			
+			for x in range(len(lines)):
+				lines[x] = lines[x].rstrip()
+			#print(lines)
+			
+
+			LGS.start = float(lines[0])
+			LGS.elapsed = int(lines[1])
+			LGS.steps = int(lines[2])
+			LGS.player.set_name(lines[3])
+
+			#lines[4] is room name.  Set below after rooms loaded in
+
+			if lines[5] == 'F':
+				LGS.backpack = False
+			else:
+				LGS.backpack = True
+
+			#Items
+			idx = 6
+			tempItem = 0
+			inventoryList = []
+			while tempItem != 'ENDINV':
+				tempItem = lines[idx]
+				inventoryList.append(tempItem)
+				idx = idx + 1
+
+			#Talk counts
+			tempTalks = []
+			for x in range(7):
+				tempTalks.append(lines[idx + x])
+			#print(tempTalks)
+
+			for x in tempTalks:
+				tempS = x.split(', ')
+				#print(tempS)
+				for y in LGS.talk_count:
+					if y == tempS[0]:
+						LGS.talk_count[y] = tempS[1]
+						#print('set ' + y + ' to ' + tempS[1])
+
+
+			idx = idx + 7
+
+			#Story flags
+			tempFlags = []
+			for x in range(10):
+				tempFlags.append(lines[idx + x])
+			#print(tempFlags)
+
+			for x in tempFlags:
+				tempS = x.split(', ')
+				#print(tempS)
+				for y in LGS.storyFlags:
+					if y == tempS[0]:
+						LGS.storyFlags[y] = tempS[1]
+						#print('set ' + y + ' to ' + tempS[1])
+
+			idx = idx + 10
+
+			LGS.turnCount = int(lines[idx])
+
+			#-------------------------------- Data ----------------------------------------------
+			# Reminder: dir = './saves/'
+
+			#rooms - item list and visited changes
+
+			#items - FeatBool changes
+
+			#load chars from save file or original
+
+			#load exits from save file or original	
+
+
+			#-------------------------------------------------------------------------------------
+
+
+			#TEMPORARY - Load regular/default data/files so no crashing
+			#-------------------------------------------------------------------#
+			room_builder = DF.RoomBuilder()										#
+			LGS.room_list = DF.RoomBuilder.load_room_files(room_builder)		#
+			exit_builder = DF.ExitBuilder()										#
+			LGS.exit_list = DF.ExitBuilder.load_exit_files(exit_builder)		#
+			item_builder = DF.ItemBuilder()										#
+			LGS.item_list = DF.ItemBuilder.load_item_files(item_builder)		#
+			char_builder = DF.CharacterBuilder()								#
+			LGS.char_list = DF.CharacterBuilder.load_char_files(char_builder)	#
+			for x in LGS.room_list:												#
+				if x.name == 'Detention':										#
+					LGS.current_room = x										#
+					LGS.current_room.visited = True								#
+			LGS.player.set_name('TEST')											#
+			LGS.start = time.time()												#
+			#-------------------------------------------------------------------#
+
+
+			#More gamestate
+    		#load current room based on name
+			for x in LGS.room_list:
+				if x.name == lines[4]:
+					LGS.current_room = x
+
+    		#load items into inventory based on name
+			for x in inventoryList:
+				for y in LGS.item_list:
+					if x == y.name:
+						LGS.inventory.append(y)
+
+
+			print('Load Game successful')
+			return LGS
+
+
+	else:
+		print('Please enter y or n')
+		x = load_game()
+		if x == 'error':
+			return 'error'
+		elif x == 'cancel':
+			return 'cancel'
+		else:
+			return x
 
 
 
@@ -137,9 +383,13 @@ def GameLoop(GS):
 		uInput = input('("q" to quit) >')
 
 		s = parser.parse_sentence(lexicon.scan(uInput.lower()))
-		print(s.subject)
-		print(s.verb)
-		print(s.object + '\n')
+		# print(s.subject)
+		# print(s.verb)
+		# print(s.object + '\n')
+		print()
+
+		if uInput == 'print':
+			GS.print()
 
 		if GS.endGame == 1:
 			GS.win = 1;
@@ -148,7 +398,40 @@ def GameLoop(GS):
 			save_game(GS)
 
 		elif s.verb == 'load':
-			load_game()
+			LGS = load_game()
+			if LGS == 'error':
+				print('Returning to current game.')
+			elif LGS == 'cancel':
+				print('Returning to current game.')
+			else:
+				#----------------------------- Start new game with Loaded gamestate -----------------------------
+				#Print room description so user knows where they are and start looping for input
+				print('-' * 70, '\n\n\n')
+				#print('Moved to ' + GS.current_room.get_name())
+				util.print_ascii_art('./data/artwk/' + LGS.current_room.get_name())
+				print('')
+				util.scroll3(0.01, 60, LGS.current_room.get_long())
+				print('')
+				#print(gamestate.current_room.get_items())
+				#print('')
+				for item in LGS.current_room.get_items():
+					for x in LGS.item_list:
+						if x.name == item:
+							# print("{}".format(x.get_long()))
+							util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+				print('')
+				#print(gamestate.current_room.get_exits())
+				#print('')
+				exits = LGS.current_room.get_exits()
+				for exits_dir, exits_room in exits.items():
+					for x in LGS.exit_list:
+						if x.name == exits_room and exits_dir in directions:
+							util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
+				print('')
+
+				LGS.start = time.time()
+				GameLoop(LGS)  
+				return
 
 		else:
 			command.command(GS, s)
@@ -167,7 +450,7 @@ def GameLoop(GS):
 		# -------------------------------------------------------------------------------------------------------		
 
 		GS.elapsed = elapsed
-		if (GS.elapsed > 1200):
+		if (GS.elapsed > 1800):
 			GS.lose = 1
 
 		# GS.win = 1 # test win condition,  TODO to set it up
@@ -184,7 +467,7 @@ def GameLoop(GS):
 		elif GS.lose == 1:
 			util.print_sorry_you_lost()
 			print('')
-			print('Your elapsed time was more than 20 minutes.')
+			print('Your elapsed time was more than 30 minutes.')
 			print('You got this far in ' + str(GS.turnCount) + ' turns.')
 			print('Load your save game or try again from the start!')
 			print('')
@@ -284,10 +567,11 @@ def RunGame(type):
         print('What? Its 6:30!? My parents are gonna kill me!')
         time.sleep(delay + 1)
 
-        print('"You better be out of here in 20 minutes or you\'ll be stuck here forever!!! Muahahaha....."')
+        print('"You better be out of here in 30 minutes or you\'ll be stuck here forever!!!"') 
+        print('"Mwahahaha....."')
         time.sleep(delay + 1)
 
-        print('What happens in 20 minutes? And who is talking???')
+        print('What happens in 30 minutes? And who is talking???')
         time.sleep(delay + 1)
 
         print('I don\'t like this at all. I better get a move on.')
@@ -297,16 +581,19 @@ def RunGame(type):
 
 
     #LOAD GAME
-    if type == 1:    
-        gamestate = load_game()      
-
+    elif type == 1:    
+        gamestate = load_game()
+        if gamestate == 'cancel':
+        	return 'cancel'    
+        elif gamestate == 'error':
+        	return 'error'
     
     #Print room description so user knows where they are and start looping for input
-    print('-' * 70, '\n\n\n')
+    # print('-' * 70, '\n\n\n')
 	#print('Moved to ' + GS.current_room.get_name())
     util.print_ascii_art('./data/artwk/' + gamestate.current_room.get_name())
     print('')
-    util.scroll3(0.01, 60, gamestate.current_room.get_long())
+    util.scroll3(DELAY, MAXLEN, gamestate.current_room.get_long())
     print('')
     #print(gamestate.current_room.get_items())
     #print('')
@@ -314,7 +601,7 @@ def RunGame(type):
         for x in gamestate.item_list:
             if x.name == item:
                 # print("{}".format(x.get_long()))
-                util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+                util.scroll3(DELAY, MAXLEN, "{}".format(x.get_avail()))
     print('')
     #print(gamestate.current_room.get_exits())
     #print('')
@@ -322,7 +609,7 @@ def RunGame(type):
     for exits_dir, exits_room in exits.items():
         for x in gamestate.exit_list:
             if x.name == exits_room and exits_dir in directions:
-                util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
+                util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_long(),exits_dir))
     print('')
 
     gamestate.start = time.time()
@@ -361,27 +648,33 @@ def MainMenu():
 
         elif selection == '2':
             #RunGame(1)
-            print('LOAD GAME not yet implemented.\n')
-            MainMenu()
+            print('LOADING GAME from save file.\n')
+            x = RunGame(1)
+            if x == 'cancel':
+                MainMenu()
+            elif x == 'error':
+                MainMenu()
 
         elif selection == '3':
-            util.scroll3(0.005, 60, 'GloryDaze is a text only adventure.  '+
+            util.scroll3(DELAY_LESS, MAXLEN, 'GloryDaze is a text only adventure.  '+
             'That means there are no graphics! Everything about the game '+
             'will be displayed on the screen. Want to do something? Just '+
             'type it in!')
-            util.scroll3(0.005, 60, '(a ">" symbol means the game is waiting for your '+
+            print('')
+            util.scroll3(DELAY_LESS, MAXLEN, '(a ">" symbol means the game is waiting for your '+
             'input)')
             print('')
-            util.scroll3(0.005, 60, 'The game allows for as much natural language as possible '+
+            util.scroll3(DELAY_LESS, MAXLEN, 'The game allows for as much natural language as possible '+
             'but if you\'re having trouble getting around, try shorter sentences '+
             'like "move south" or "take book".')
             print('')
-            util.scroll3(0.005, 60, 'At any '+
+            util.scroll3(DELAY_LESS, MAXLEN, 'At any '+
             'point during the game, type "save" to save your progress '+
             'or "help" for help.')
             print('')
-            util.scroll3(0.005, 60, 'Finally, your terminal may allow you to scroll up'+
+            util.scroll3(DELAY_LESS, MAXLEN, 'Finally, your terminal may allow you to scroll up '+
             'to see your past actions which may help you. :)')
+            print('')
             print('Have fun!')
             print('')
             MainMenu()

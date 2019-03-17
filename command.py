@@ -1,6 +1,18 @@
+'''
+command.py
+command processor of the game engine.
+by: Michael Fuelling
 
+CS467
+Winter 2019
+Team Keid :: Michael Fuelling, Richard Ratliff, Jordan Riojas
+'''
 
 import util
+
+DELAY = 0.01    # make this smaller for a faster scroll
+MAXLEN = 70     # maximum line length to print
+
 
 directions = ["north", "south", "east", "west", "northeast", "southeast", "northwest", "southwest"]
 charRoom = {
@@ -36,10 +48,10 @@ err = "Can't do that"
 
 
 def end_game(GS):
-	print('Principal: "Well, well, well.  So you finally found me."')
-	print('Principal: "Let me guess, you\'ve been running around the school unsupervised, talking to teachers and stealing things?!?"')
-	print('Principal: "Give me that backpack!"')
-	print('The principal takes your backpack and begins rummaging through your stuff.')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Well, well, well.  So you finally found me."')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Let me guess, you\'ve been running around the school unsupervised, talking to teachers and stealing things?!?"')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Give me that backpack!"')
+	util.scroll3(DELAY, MAXLEN, 'The principal takes your backpack and begins rummaging through your stuff.')
 	sd = False
 	cam = False
 	for x in GS.inventory:
@@ -48,33 +60,33 @@ def end_game(GS):
 		elif x.name == 'SD card':
 			sd = True
 	if cam == False:
-		print('Principal: "Hmmm you didn\'t find my camera anywhere?  Hang on, let me go grab it real quick."')
-		print('The principal returns after 2 minutes.')		
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Hmmm you didn\'t find my camera anywhere?  Hang on, let me go grab it real quick."')
+		util.scroll3(DELAY, MAXLEN, 'The principal returns after 2 minutes.')		
 		GS.start = GS.start - 120
 	else:
-		print('Principal: "Thanks for finding my camera!"')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Thanks for finding my camera!"')
 
-	print('Principal: "Okay, what else do we have here..."')
+	util.scroll3(DELAY, MAXLEN, 'Principal: "Okay, what else do we have here..."')
 
 	if sd == False:
-		print('Principal: "Darn you don\'t have my SD card?  I\'ll be right back."')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Darn you don\'t have my SD card?  I\'ll be right back."')
 		if GS.storyFlags['sdgive'] == 0:
-			print('The principal returns after 3 minutes.')
-			print('Principal: "Found it!  All good.  Let\'s get you home, ' + GS.player.get_name() + '!"')
+			util.scroll3(DELAY, MAXLEN, 'The principal returns after 3 minutes.')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Found it!  All good.  Let\'s get you home, ' + GS.player.get_name() + '!"')
 			GS.start = GS.start - 180
 		else:
-			print('The principal returns after 5 minutes.')
-			print('Principal: "You gave my SD card to the TEACHER IN THE COMPUTER LAB?!?"')
-			print('Principal: "DO YOU HAVE ANY IDEA WHAT WAS ON THERE!!!!"')
-			print('Principal: "Well, if you do you better keep your mouth shut about it."')
-			print('Principal: "Or else you\'ll have detention for a year!"')
-			print('Principal: "Alright, time to get you out of here, ' + GS.player.get_name() + '."')
+			util.scroll3(DELAY, MAXLEN, 'The principal returns after 5 minutes.')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "You gave my SD card to the TEACHER IN THE COMPUTER LAB?!?"')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "DO YOU HAVE ANY IDEA WHAT WAS ON THERE!!!!"')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Well, if you do you better keep your mouth shut about it."')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Or else you\'ll have detention for a year!"')
+			util.scroll3(DELAY, MAXLEN, 'Principal: "Alright, time to get you out of here, ' + GS.player.get_name() + '."')
 			GS.start = GS.start - 300
 	else:
-		print('Principal: "Oh my SD card! Thank goodness that didn\'t fall into the wrong hands...."')
-		print('Principal: "Alright, let\'s get you out of here, ' + GS.player.get_name() + '."')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Oh my SD card! Thank goodness that didn\'t fall into the wrong hands...."')
+		util.scroll3(DELAY, MAXLEN, 'Principal: "Alright, let\'s get you out of here, ' + GS.player.get_name() + '."')
 
-	print('The principal walks you out of his office and out the main exit of the school!')
+	util.scroll3(DELAY, MAXLEN, 'The principal walks you out of his office and out the main exit of the school!')
 
 	GS.endGame = 1
 
@@ -87,7 +99,7 @@ def verb_help(GS, obj):
 	print('In order to do that you\'ll need to interact with items and people.')
 	print('Here\'s a few verbs to help you get around:')
 	print('')
-	print('save        - save your current progress (only one save file can exist at a time)')
+	print('save        - save your current progress (only one save file exists at a time)')
 	print('load        - end your current game and load from a saved file')
 	print('help        - print this help screen')
 	print('')
@@ -195,42 +207,42 @@ def verb_go(GS, obj):
 	if move == True:
 		if tempRoom.name in GS.storyFlags:
 			if GS.storyFlags.get(tempRoom.name) == 0:
-				print(storyFlagText.get(tempRoom.name))
+				util.scroll3(DELAY, MAXLEN, storyFlagText.get(tempRoom.name))
 				move = False
 
 	#If we successfully moved rooms
 	if move == True:
 		GS.current_room = tempRoom
-		print('-' * 70, '\n\n\n')
+		# print('-' * 70, '\n\n\n')
 		exits = GS.current_room.get_exits()
 		#print('Moved to ' + GS.current_room.get_name())
 		util.print_ascii_art('./data/artwk/' + GS.current_room.get_name())
 		print('')
 		if GS.current_room.visited:
-			util.scroll3(0.01, 60, GS.current_room.get_short())
+			util.scroll3(DELAY, MAXLEN, GS.current_room.get_short())
 			print('')
 			for item in GS.current_room.get_items():
 				for x in GS.item_list:
 					if x.name == item or item in x.altnames:
-						util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+						util.scroll3(DELAY, MAXLEN, "{}".format(x.get_avail()))
 						print('')
 			for exits_dir, exits_room in exits.items():
 				for x in GS.exit_list:
 					if x.name == exits_room and exits_dir in directions:
-						util.scroll3(0.01, 60, "{} {}".format(x.get_short(),exits_dir))
+						util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_short(),exits_dir))
 						print('')
 		else:
-			util.scroll3(0.01, 60, GS.current_room.get_long())
+			util.scroll3(DELAY, MAXLEN, GS.current_room.get_long())
 			print('')
 			for item in GS.current_room.get_items():
 				for x in GS.item_list:
 					if x.name == item or item in x.altnames:
-						util.scroll3(0.01, 60, "{}".format(x.get_avail()))
+						util.scroll3(DELAY, MAXLEN, "{}".format(x.get_avail()))
 						print('')
 			for exits_dir, exits_room in exits.items():
 				for x in GS.exit_list:
 					if x.name == exits_room and exits_dir in directions:
-						util.scroll3(0.01, 60, "{} {}".format(x.get_long(),exits_dir))
+						util.scroll3(DELAY, MAXLEN, "{} {}".format(x.get_long(),exits_dir))
 						print('')
 		GS.current_room.visited = True
 
@@ -257,7 +269,7 @@ def verb_go(GS, obj):
 
 def verb_look(GS, obj):
 	#If no object, print long description of room
-	print(GS.current_room.long)
+	util.scroll3(DELAY, MAXLEN, GS.current_room.long)
 
 
 
@@ -269,25 +281,25 @@ def verb_lookat(GS, obj):
 			look = True
 			for y in GS.current_room.items:
 				if y == x.name:
-					print(x.long)
+					util.scroll3(DELAY, MAXLEN, x.long)
 					if x.featBool == True:
-						print(x.featTrue)
+						util.scroll3(DELAY, MAXLEN, x.featTrue)
 					else:
-						print(x.featFalse)
+						util.scroll3(DELAY, MAXLEN, x.featFalse)
 	#features
 	if obj in GS.current_room.features:
 		look = True
-		print(GS.current_room.features.get(obj))
+		util.scroll3(DELAY, MAXLEN, GS.current_room.features.get(obj))
 
 	#inventory
 	for x in GS.inventory:
 		if obj == x.name.lower() or obj in x.altnames:
 			look = True
-			print(x.long)
+			util.scroll3(DELAY, MAXLEN, x.long)
 			if x.featBool == 'True':
-				print(x.featTrue)
+				util.scroll3(DELAY, MAXLEN, x.featTrue)
 			else:
-				print(x.featFalse)
+				util.scroll3(DELAY, MAXLEN, x.featFalse)
 
 	#characters
 	if GS.current_room.name in charRoom:
@@ -297,7 +309,7 @@ def verb_lookat(GS, obj):
 		#print('tempName is ' + tempName)
 			for x in GS.char_list:
 				if tempName == x.name:
-					print(x.desc)
+					util.scroll3(DELAY, MAXLEN, x.desc)
 
 	if look == False:
 		print('Can\'t see that')
@@ -338,7 +350,7 @@ def verb_take(GS, obj):
 	if take == True:
 		if tempItem.name in GS.storyFlags:
 			if GS.storyFlags.get(tempItem.name) == 0:
-				print(storyFlagText.get(tempItem.name))
+				util.scroll3(DELAY, MAXLEN, storyFlagText.get(tempItem.name))
 				sl = True
 
 	#if no storyline interuption
@@ -370,20 +382,20 @@ def verb_talk(GS, obj):
 			if obj == x.name:
 				if x.name == 'librarian':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 					elif GS.talk_count.get(x.name) == 1:
-						print(x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print(x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 
 				elif x.name == 'counselor':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 						GS.talk_count[x.name] = 1
 					elif GS.talk_count[x.name] == 1:
-						print (x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print (x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 
 				elif x.name == 'principal':
 					end_game(GS)
@@ -392,10 +404,10 @@ def verb_talk(GS, obj):
 					if x.name == 'janitor':
 						GS.storyFlags['Supply Room'] = 1
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 						GS.talk_count[x.name] = 1
 					else:
-						print(x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 	
 	else:
 		print('That person isn\'t in this room')
@@ -409,27 +421,27 @@ def verb_ask(GS, obj):
 			if obj == x.name:
 				if x.name == 'librarian':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 					elif GS.talk_count.get(x.name) == 1:
-						print(x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print(x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 				
 				elif x.name == 'counselor':
 					if GS.talk_count.get(x.name) == 0:
-						print(x.long)
+						util.scroll3(DELAY, MAXLEN, x.long)
 						GS.talk_count[x.name] = 1
 					elif GS.talk_count[x.name] == 1:
-						print (x.short)
+						util.scroll3(DELAY, MAXLEN, x.short)
 					else:
-						print (x.hint)
+						util.scroll3(DELAY, MAXLEN, x.hint)
 
 
 				elif x.name == 'principal':
 					end_game(GS)
 
 				else:
-					print(x.hint)
+					util.scroll3(DELAY, MAXLEN, x.hint)
 	else:
 		print('That person isn\'t in this room')
 
@@ -470,7 +482,7 @@ def verb_give(GS, obj):
 									if y.name == "water bottle":
 										GS.inventory.remove(y)
 								print('You give your water bottle to the coach.')
-								print('Coach: "Thanks! I really needed that.  Now that I\'m feeling better.... DODGEBALL"')
+								print('Coach: "Thanks! I really needed that. Now that I\'m feeling better... DODGEBALL"')
 								GS.storyFlags['h3c'] = 1
 								give = True
 								if GS.storyFlags['h3sd'] == 1:
@@ -487,7 +499,7 @@ def verb_give(GS, obj):
 										GS.inventory.remove(y)
 								print('You give your calculator to the director.')
 								print('Director: "Wow thanks so much! This will help a bunch."')
-								print('Director: "Go ahead and take that piccolo if you want to bang out some sick tunes"')
+								print('Director: "Please take that piccolo if you want to bang out some sick tunes"')
 								GS.storyFlags['piccolo'] = 1
 								give = True
 				elif GS.current_room.name == "Library":
@@ -500,7 +512,7 @@ def verb_give(GS, obj):
 										GS.inventory.remove(y)
 								print('You give your piccolo to the librarian.')
 								print('Librarian: "OOOoooOOooooo for ME?! Thank you so much!!!"')
-								print('Librarian: "Sorry if i\'ve been rude to you before.  Take all the books you like!"')
+								print('Librarian: "Sorry if I was rude to you before. Take all the books you like!"')
 								GS.storyFlags['book'] = 1
 								GS.talk_count['librarian'] = 2
 								give = True
@@ -514,7 +526,7 @@ def verb_give(GS, obj):
 										GS.inventory.remove(y)
 								print('You give your cellphone to the counselor.')
 								print('Counselor: "Wow thank you for finding that! I\'ve been looking everywhere."')
-								print('Counselor: "I just remotely unlocked the principal\'s office.  Go see him and he\'ll help you get out."')
+								util.scroll3(DELAY, MAXLEN, 'Counselor: "I just remotely unlocked the principal\'s office.  Go see him and he\'ll help you get out."')
 								GS.storyFlags['Principal Office'] = 1
 								GS.talk_count["counselor"] = 2
 								give = True
@@ -527,7 +539,7 @@ def verb_give(GS, obj):
 									if y.name == "SD card":
 										GS.inventory.remove(y)
 								print('You give your SD Card to the teacher.')
-								print('Teacher: "Oh wow. Nice find kid. You didn\'t look at what was on there did you?!?"')
+								print('Teacher: "Wow. Nice find kid. You didn\'t look at what was on there did you?!?"')
 								print('Teacher: "Well anyway, thank you. Now get lost!"')
 								GS.storyFlags['sdgive'] = 1
 								give = True
@@ -551,7 +563,7 @@ def verb_use(GS, obj):
 	for x in GS.inventory:
 		if x.name == obj or obj in x.altnames:
 			if x.name == 'book':
-				print('When you open the book you notice a key fob is inside. You press it and hear a door unlock somewhere.')
+				util.scroll3(DELAY, MAXLEN, 'When you open the book you notice a key fob is inside. You press it and hear a door unlock somewhere.')
 				GS.storyFlags["Main Office"] = 1
 				have = True
 
@@ -575,7 +587,7 @@ def verb_use(GS, obj):
 				cam = False
 				for y in GS.inventory:
 					if y.name == 'camera':
-						print('You load the SD card into the camera and find rather scanadlous photos of a man wearing nothing but holding a mug that says "World\'s best principal"')
+						util.scroll3(DELAY, MAXLEN, 'You load the SD card into the camera and find rather scandalous photos of a man wearing nothing but holding a mug that says "World\'s best principal"')
 						cam = True
 				if cam == False:
 					print('You have nothing to view that with')
