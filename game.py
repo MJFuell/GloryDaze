@@ -373,7 +373,7 @@ def load_game():
 				tempItem = lines[idx]
 				inventoryList.append(tempItem)
 				idx = idx + 1
-			print(inventoryList)
+			#print(inventoryList)
 
 			#Talk counts
 			tempTalks = []
