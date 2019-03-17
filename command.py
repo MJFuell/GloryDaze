@@ -102,9 +102,10 @@ def verb_help(GS, obj):
 	print('save        - save your current progress (only one save file exists at a time)')
 	print('load        - end your current game and load from a saved file')
 	print('help        - print this help screen')
+	print('quit        - quit your current game (without saving)')
 	print('')
 	print('inventory   - view the items currently in your inventory')
-	print('items       - view the items currently in your current room')
+	print('items       - view the items in your current room')
 	print('exits       - view the exits from your current room')	
 	print('people      - view the people in your current room')
 	print('look        - view a description of the current room')
@@ -116,7 +117,11 @@ def verb_help(GS, obj):
 	print('talk ___    - talk to someone')
 	print('ask ___     - ask someone for help')
 	print('give ___    - give something to whoever is in the room')
-	print('use ___     - use an item you are holding or in the room')
+	print('use ___     - use an item you are holding or feature in the room')
+	print('')
+	print('eat ___     - eat an item you are holding or feature in the room')
+	print('drink ___   - drink an item you are holding or feature in the room')
+	print('play ___    - play an item you are holding or feature in the room')
 	
 
 	
@@ -362,8 +367,11 @@ def verb_take(GS, obj):
 				util.scroll3(DELAY, MAXLEN, storyFlagText.get(tempItem.name))
 				sl = True
 
+	if obj in GS.current_room.features:
+		print("Can't take that.")
+
 	#if no storyline interuption
-	if sl == False:
+	elif sl == False:
 		#Item wasn't found in this room
 		if take == False:
 			print('Can\'t find that here.')
@@ -588,7 +596,7 @@ def verb_use(GS, obj):
 
 			elif x.name == 'camera':
 				have = True
-				print('You turn on the camera but it says there is no SD card')
+				print('You turn on the camera but it says there is no SD card.')
 
 			
 			elif x.name == 'SD card':
@@ -599,10 +607,14 @@ def verb_use(GS, obj):
 						util.scroll3(DELAY, MAXLEN, 'You load the SD card into the camera and find rather scandalous photos of a man wearing nothing but holding a mug that says "World\'s best principal"')
 						cam = True
 				if cam == False:
-					print('You have nothing to view that with')
+					print('You have nothing to view that with.')
+
+			elif x.name == 'cellphone':
+				have = True
+				print("It's password protected.")
 			
 			else:
-				print('There\'s nothing you can do with that right now')
+				print('There\'s nothing you can do with that right now.')
 
 	if have == False:
 		for y in GS.current_room.features:
@@ -616,6 +628,40 @@ def verb_use(GS, obj):
 					print('You wash your hands.  Although this water almost makes them feel dirtier...')
 					GS.storyFlags['Hallway 3'] = 1;
 					have = True
+
+				if obj == 'register' or obj == 'cashregister':
+					print('You open the drawer but unfortunately there is no money inside.')
+					have = True
+
+				if obj == 'dryeraseboard' or obj == 'board':
+					print('You doodle a stick figure and a house.')
+					have = True
+
+				if obj == 'PC' or obj == 'Mac':
+					print("You don't have a password to log in.")
+					have = True
+
+				if obj == 'printer':
+					print('Teacher :"Get away from that!  I need those instructions for something."')
+					have = True
+
+				if obj == 'kleenex':
+					print('You blow your nose only to find all these tissues are used.')
+					have = True
+
+				if obj == 'mop' or obj == 'bucket':
+					print('You clean the floors a bit. Good for you! Gold star.')
+					have = True
+
+				if obj == 'baton' or obj == 'conductorbaton':
+					print('You toss the batton and break a light. Oops.')
+					have = True
+
+
+	if obj in charRoom.values():
+		print("You can't use people.")
+		have = True
+
 	if have == False:
 		print('You can\'t use that')
 
@@ -625,16 +671,131 @@ def verb_debug(GS, obj):
 		if obj == x.name or obj in x.altnames:
 			GS.current_room = x	
 
+
+
+eat_dict = {
+	"backpack": "You nibble on the straps. MMMmmmmm leather.",
+	"book": "The book tastes quite magical!",
+	"water bottle": "You chew aggressively on the water while it falls out of your mouth.",
+	"calculator": "I don't think that will make you smarter....",
+	"camera": "Your teeth bump the flash button which makes a few cockroaches scatter.",
+	"cellphone": "You accidentally dial your ex and quickly hang up.",
+	"duct tape": "The tape sticks to your teeth and they get straighter!",
+
+	"soap" : "You feel as if you've never said a bad word in your life.",
+	"advil" : "You pop a few pills and feel a little dizzy.",
+	"trophy" : "You chip a tooth on the debate trophy.",
+	"trophies" : "You chip a tooth on the debate trophy.",
+	"paper" : "You make an origami apple then swallow it.",
+	"desk" : "You munch on the wood.  It tastes like filth."
+}
 def verb_eat(GS, obj):
+	eat = False
+	found = False
 	for x in GS.inventory:
 		if x.name == obj or obj in x.altnames:
-			pass #------------------------------------------------------------------------------
+			found = True
+			if x.name in eat_dict:
+				eat = True
+				print(eat_dict.get(x.name))
+
+	if obj in GS.current_room.features:
+		found = True
+		if obj in eat_dict:
+			eat = True
+			print(eat_dict.get(obj))
+
+	if obj in charRoom.values():
+		print("You can't eat people.")
+		found = True
+		eat = True
+
+	if found == False:
+		print("Can't find that")
+	elif eat == False:
+		print("Can't eat that")
 
 
+
+drink_dict = {
+	"water bottle": "You take a refreshing sip of room temperature water.",
+	"sink" : "You take a not so refreshing sip of quite warm water.",
+	"toilet" : "You throw back up everything you just drank.",
+	"waterfountain" : "You take a refreshing GULP of decently chilled water."
+}
 def verb_drink(GS, obj):
+	drink = False
+	found = False
 	for x in GS.inventory:
 		if x.name == obj or obj in x.altnames:
-			pass #-------------------------------------------------------------------------------
+			found = True
+			if x.name in drink_dict:
+				drink = True
+				print(drink_dict.get(x.name))
+
+	if obj in GS.current_room.features:
+		found = True
+		if obj in drink_dict:
+			drink = True
+			print(drink_dict.get(obj))
+
+	if obj in charRoom.values():
+		print("You can't drink people.")
+		found = True
+		drink = True
+
+	if found == False:
+		print("Can't find that")
+	elif drink == False:
+		print("Can't eat that")
+
+
+
+
+play_dict = {
+	"backpack": "You idly play with the straps and zippers.",
+	"water bottle": "You toss the bottle in the air and it lands upright on your head. Bravo.",
+	"calculator": "You enter '5318008' then flip the calculator upside down. Nice",
+	"camera": "This thing is far too complicated to figure out.",
+	"cellphone": "You play snake and brick breaker for a bit.",
+	"duct tape": "The tape sticks to your teeth and they get straighter!",
+	"piccolo" : "You blow hopelessly into the mouthpiece, leaving slobber everywhere.",
+
+	"soap" : "You make a few bubbles.",
+	"baton" : "You toss the batton and break a light. Oops.",
+    "conductorbaton" : "You toss the batton and break a light. Oops.",
+    "instrument" : "If only you had bothered to learn how to play an instrument.",
+    "instruments" : "If only you had bothered to learn how to play an instrument."
+}
+def verb_play(GS, obj):
+	play = False
+	found = False
+	for x in GS.inventory:
+		if x.name == obj or obj in x.altnames:
+			found = True
+			if x.name in play_dict:
+				play = True
+				print(play_dict.get(x.name))
+				if x.name == 'cellphone':
+					print('You lose track of time and a minute goes by.')
+					GS.start = GS.start - 60
+
+	if obj in GS.current_room.features:
+		found = True
+		if obj in play_dict:
+			play = True
+			print(play_dict.get(obj))
+
+	if obj in charRoom.values():
+		print("Adults don't like to play.")
+		found = True
+		play = True
+
+	if found == False:
+		print("Can't find that")
+	elif play == False:
+		print("Can't play that")
+
 
 
 def command(GS, s):
@@ -700,12 +861,20 @@ def command(GS, s):
 		if s.verb == 'drink':
 			verb_drink(GS, s.object)
 
+		if s.verb == 'play':
+			verb_play(GS, s.object)
 
 
 
 	#movement without verb
 	elif s.verb == 'e':
 		moved = False
+
+		#quitting
+		if s.subject == 'q' or s.subject == 'quit' or s.object == 'q' or s.object == 'quit':
+			moved = True
+
+		#moving--------
 		#room name
 		for x in GS.room_list:
 			if s.subject == x.name or s.subject in x.altnames:
@@ -722,7 +891,7 @@ def command(GS, s):
 
 
 		if moved == False:
-			print('I Don\'t understand')
+			print('Can\'t go that way')
 	else:
 		print('I Don\'t understand')
 

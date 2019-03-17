@@ -70,6 +70,7 @@ WORD_TYPES = {
 	"people" : "verb", 
 	"pickup":"verb",
 	"debug":"verb",
+	"play":"verb",
 	
 	
 	#Stop words
@@ -296,6 +297,7 @@ WORD_TYPES = {
 	"cashregister" : "noun",
 	"banner" : "noun", 
 	"event" : "noun", 
+	"trophy" : "noun", 
 	"trophies" : "noun", 
 	"trophycase" : "noun", 
 	"awards" : "noun", 
@@ -321,6 +323,7 @@ WORD_TYPES = {
 	"poster" : "noun", 
 	"piccolo" : "noun", 
 	"conductorbaton" : "noun", 
+	"baton" : "noun", 
 	"instrument" : "noun", 
 	"instruments" : "noun", 
 	"diplomas" : "noun", 

@@ -485,8 +485,8 @@ def GameLoop(GS):
 	"""
 	#start = time.time() #Moved to before gameloop is called
 	uInput = 0
-	while uInput != 'q':
-		uInput = input('("q" to quit) >')
+	while uInput != 'q' and uInput != 'quit':
+		uInput = input('>')
 
 		s = parser.parse_sentence(lexicon.scan(uInput.lower()))
 		# print(s.subject)
@@ -494,8 +494,8 @@ def GameLoop(GS):
 		# print(s.object + '\n')
 		print()
 
-		if uInput == 'print':
-			GS.print()
+		#if uInput == 'print':
+		#	GS.print()
 
 		if GS.endGame == 1:
 			GS.win = 1;
@@ -553,6 +553,7 @@ def GameLoop(GS):
 		# print('elapsed time is {:02d}:{:02d}:{:02d}'.format(elapsed // 3600, (elapsed % 3600 // 60), elapsed % 60))
 		
 		print('Elapsed time is {:02d}:{:02d}'.format((GS.elapsed % 3600 // 60), GS.elapsed % 60))
+		print('')
 		print('')
 			
 
