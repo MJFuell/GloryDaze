@@ -70,6 +70,7 @@ WORD_TYPES = {
 	"people" : "verb", 
 	"pickup":"verb",
 	"debug":"verb",
+	"play":"verb",
 	
 	
 	#Stop words
